@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolRegio | Cotizador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+</head>
+<body class="theme-light">
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <img src="logo-solregio-claro.jpg" alt="SolRegio" class="brand-logo">
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="index.html">Volver al sitio</a>
+        <a class="btn btn-primary" href="presentacion.html">Abrir presentación</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="builder-shell">
+    <div class="builder-grid">
+      <aside class="builder-panel">
+        <div class="panel-title-block">
+          <div class="eyebrow">Panel interno</div>
+          <h1>Cotizador SolRegio</h1>
+          <p>Esta parte es solo para captura y cálculo. La presentación se ve aparte.</p>
+        </div>
+
+        <section class="panel-block">
+          <h2>Datos del cliente</h2>
+          <div class="form-grid two">
+            <label class="field wide">
+              <span>Nombre del cliente</span>
+              <input id="clienteNombre" type="text" placeholder="Nombre completo">
+            </label>
+            <label class="field">
+              <span>Fecha</span>
+              <input id="clienteFecha" type="date">
+            </label>
+            <label class="field">
+              <span>Tipo de propiedad</span>
+              <input id="tipoPropiedad" type="text" placeholder="Casa, negocio, etc.">
+            </label>
+            <label class="field wide">
+              <span>Ubicación</span>
+              <input id="clienteUbicacion" type="text" placeholder="Ciudad, colonia o dirección">
+            </label>
+            <label class="field">
+              <span>Tarifa CFE</span>
+              <select id="clienteTarifa">
+                <option value="1">Tarifa 1</option>
+                <option value="1A">Tarifa 1A</option>
+                <option value="1B">Tarifa 1B</option>
+                <option value="1C" selected>Tarifa 1C</option>
+                <option value="1D">Tarifa 1D</option>
+                <option value="1E">Tarifa 1E</option>
+                <option value="1F">Tarifa 1F</option>
+                <option value="DAC">DAC</option>
+                <option value="PDBT">PDBT</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Tipo de análisis</span>
+              <select id="modoCalculo">
+                <option value="recibos">Con 6 recibos</option>
+                <option value="estimado">Estimado rápido</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel-block">
+          <h2>Tarifa y escalones</h2>
+          <div class="form-grid two">
+            <label class="field"><span>Límite básico</span><input id="limiteBasico" type="number" value="150"></label>
+            <label class="field"><span>Límite intermedio</span><input id="limiteIntermedio" type="number" value="280"></label>
+            <label class="field"><span>Precio básico</span><input id="precioBasico" type="number" step="0.01" value="1.10"></label>
+            <label class="field"><span>Precio intermedio</span><input id="precioIntermedio" type="number" step="0.01" value="1.35"></label>
+            <label class="field"><span>Precio excedente</span><input id="precioExcedente" type="number" step="0.01" value="3.95"></label>
+            <label class="field"><span>Incremento anual (%)</span><input id="incrementoAnual" type="number" step="0.1" value="4"></label>
+          </div>
+        </section>
+
+        <section class="panel-block" id="bloqueRecibos">
+          <h2>Consumos y costos de 6 bimestres</h2>
+          <div class="form-grid two">
+            <label class="field"><span>B1 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B1 costo</span><input class="costo-recibo" type="number"></label>
+            <label class="field"><span>B2 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B2 costo</span><input class="costo-recibo" type="number"></label>
+            <label class="field"><span>B3 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B3 costo</span><input class="costo-recibo" type="number"></label>
+            <label class="field"><span>B4 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B4 costo</span><input class="costo-recibo" type="number"></label>
+            <label class="field"><span>B5 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B5 costo</span><input class="costo-recibo" type="number"></label>
+            <label class="field"><span>B6 consumo</span><input class="consumo-recibo" type="number"></label>
+            <label class="field"><span>B6 costo</span><input class="costo-recibo" type="number"></label>
+          </div>
+        </section>
+
+        <section class="panel-block hidden" id="bloqueEstimado">
+          <h2>Estimado rápido</h2>
+          <div class="form-grid two">
+            <label class="field"><span>Consumo bimestral estimado</span><input id="consumoBimestralEstimado" type="number"></label>
+            <label class="field"><span>Costo bimestral estimado</span><input id="costoBimestralEstimado" type="number"></label>
+          </div>
+        </section>
+
+        <section class="panel-block">
+          <h2>Datos del sistema</h2>
+          <div class="form-grid two">
+            <label class="field"><span>Número de MFV</span><input id="numMFV" type="number"></label>
+            <label class="field"><span>Potencia por módulo (W)</span><input id="potenciaModulo" type="number" value="550"></label>
+            <label class="field"><span>Horas sol pico</span><input id="hsp" type="number" step="0.1" value="5.5"></label>
+            <label class="field"><span>Factor de desempeño</span><input id="factorDesempeno" type="number" step="0.01" value="0.80"></label>
+            <label class="field"><span>Costo total del sistema</span><input id="costoSistema" type="number"></label>
+            <label class="field"><span>Generación bimestral estimada</span><input id="generacionBimestral" type="number"></label>
+          </div>
+          <div class="inline-actions">
+            <button class="btn btn-secondary" id="btnGeneracion" type="button">Calcular generación</button>
+            <button class="btn btn-primary" id="btnActualizar" type="button">Guardar y actualizar</button>
+          </div>
+        </section>
+
+        <section class="panel-block">
+          <h2>Observaciones</h2>
+          <label class="field">
+            <span>Texto editable</span>
+            <textarea id="observacionesProyecto"></textarea>
+          </label>
+        </section>
+      </aside>
+
+      <section class="builder-preview">
+        <div class="preview-head">
+          <div>
+            <div class="eyebrow">Vista rápida</div>
+            <h2>Resumen del cálculo</h2>
+          </div>
+          <a class="btn btn-primary" href="presentacion.html">Ir a presentación</a>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card"><span>Consumo anual</span><strong id="quickConsumo">-</strong></div>
+          <div class="stat-card"><span>Pago anual actual</span><strong id="quickPago">-</strong></div>
+          <div class="stat-card"><span>Generación anual</span><strong id="quickGeneracion">-</strong></div>
+          <div class="stat-card"><span>Ahorro anual</span><strong id="quickAhorro">-</strong></div>
+          <div class="stat-card"><span>ROI</span><strong id="quickRoi">-</strong></div>
+          <div class="stat-card"><span>Cobertura</span><strong id="quickCobertura">-</strong></div>
+        </div>
+
+        <div class="chart-grid">
+          <article class="chart-card">
+            <h3>Consumo vs generación</h3>
+            <div class="chart-box"><canvas id="quickChartConsumo"></canvas></div>
+          </article>
+          <article class="chart-card">
+            <h3>Costo actual vs costo con paneles</h3>
+            <div class="chart-box"><canvas id="quickChartCostos"></canvas></div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="cotizador.js"></script>
+</body>
+</html>
