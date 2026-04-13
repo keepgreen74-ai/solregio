@@ -648,3 +648,39 @@ input:focus,select:focus,textarea:focus{
   .btn{width:100%}
   .form-grid.two{grid-template-columns:1fr}
 }
+@media print {
+  body {
+    width: 210mm;
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  .container {
+    width: 190mm;
+    margin: auto;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .grid {
+    display: block !important;
+  }
+
+  .grid > * {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+}
