@@ -783,3 +783,47 @@ input:focus,select:focus,textarea:focus{
 .mantenimiento li {
   margin-bottom: 10px;
 }
+@media print {
+
+  /* Fuerza layout tipo escritorio */
+  body {
+    width: 1200px !important;
+    margin: 0 auto !important;
+  }
+
+  .container {
+    max-width: 1100px !important;
+    width: 100% !important;
+  }
+
+  /* Evita que se active diseño móvil */
+  .grid,
+  .row,
+  .cards {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+
+  .grid > *,
+  .cards > * {
+    width: 48% !important;
+    margin: 1% !important;
+  }
+
+  /* Títulos bien posicionados */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Evita cortes feos */
+  section, .card {
+    page-break-inside: avoid;
+  }
+
+  /* Gráficas */
+  canvas {
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+}
