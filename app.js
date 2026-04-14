@@ -9,3 +9,18 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
+function guardarCliente(data) {
+
+  let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+  clientes.push({
+    id: Date.now(),
+    fecha: new Date().toLocaleDateString(),
+    ...data,
+    estatus: "nuevo"
+  });
+
+  localStorage.setItem("clientes", JSON.stringify(clientes));
+
+  alert("Cliente guardado correctamente");
+}

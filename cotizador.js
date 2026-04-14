@@ -130,6 +130,21 @@ function calcularCostoEscalonado(kwh) {
   return total;
 }
 
+function guardarActual() {
+
+  const data = {
+    nombre: document.getElementById("nombre")?.value || "",
+    telefono: document.getElementById("telefono")?.value || "",
+    ubicacion: document.getElementById("ubicacion")?.value || "",
+    consumo: document.getElementById("consumo")?.value || "",
+    paneles: document.getElementById("paneles")?.innerText || "",
+    kwp: document.getElementById("kwp")?.innerText || "",
+    total: document.getElementById("total")?.innerText || ""
+  };
+
+  guardarCliente(data);
+}
+
 function getData() {
   const modo = refs.modoCalculo.value;
   const generacionBimestral = Number(refs.generacionBimestral.value || 0);

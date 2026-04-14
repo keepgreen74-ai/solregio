@@ -894,3 +894,45 @@ input:focus,select:focus,textarea:focus{
   }
 
 }
+@media print {
+
+  /* Quitar sombras y efectos que generan cuadros fantasma */
+  .summary-grid .metric-card,
+  .summary-grid .card,
+  .summary-card,
+  .metric-card,
+  .resume-card,
+  .stat-card {
+    box-shadow: none !important;
+    filter: none !important;
+    background-image: none !important;
+    isolation: isolate !important;
+  }
+
+  .summary-grid .metric-card::before,
+  .summary-grid .metric-card::after,
+  .summary-grid .card::before,
+  .summary-grid .card::after,
+  .summary-card::before,
+  .summary-card::after,
+  .metric-card::before,
+  .metric-card::after,
+  .resume-card::before,
+  .resume-card::after,
+  .stat-card::before,
+  .stat-card::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Fondo totalmente limpio en tarjetas del resumen */
+  .summary-grid .metric-card,
+  .summary-grid .card,
+  .summary-card,
+  .metric-card,
+  .resume-card,
+  .stat-card {
+    background: #ffffff !important;
+    border: 1px solid #e8e8e8 !important;
+  }
+}
