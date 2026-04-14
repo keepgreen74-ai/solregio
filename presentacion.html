@@ -19,7 +19,10 @@
       </a>
       <div class="nav-actions">
         <a class="btn btn-secondary" href="cotizador.html">Volver al cotizador</a>
-        <button class="btn btn-primary" id="btnPrint" type="button">Exportar PDF</button>
+        <button class="btn btn-primary" id="btnPrint" type="button" onclick="prepararPDF()">
+  Exportar PDF
+</button>
+
       </div>
     </div>
   </header>
@@ -77,18 +80,24 @@
         </div>
       </div>
 
-      <h2 class="page-title mt-28">Proyección de ahorro acumulado</h2>
-      <table class="projection-table">
-        <thead><tr><th>Horizonte</th><th>Ahorro estimado</th></tr></thead>
-        <tbody>
-          <tr><td>5 años</td><td id="sum5">-</td></tr>
-          <tr><td>10 años</td><td id="sum10">-</td></tr>
-          <tr><td>15 años</td><td id="sum15">-</td></tr>
-          <tr><td>20 años</td><td id="sum20">-</td></tr>
-          <tr><td>25 años</td><td id="sum25">-</td></tr>
-        </tbody>
-      </table>
-    </article>
+      <article class="pdf-page page-break-before">
+
+  <h2 class="page-title">Proyección de ahorro acumulado</h2>
+
+  <table class="projection-table">
+    <thead>
+      <tr><th>Horizonte</th><th>Ahorro estimado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>5 años</td><td id="sum5">-</td></tr>
+      <tr><td>10 años</td><td id="sum10">-</td></tr>
+      <tr><td>15 años</td><td id="sum15">-</td></tr>
+      <tr><td>20 años</td><td id="sum20">-</td></tr>
+      <tr><td>25 años</td><td id="sum25">-</td></tr>
+    </tbody>
+  </table>
+
+</article>
 
     <article class="pdf-page">
       <h2 class="page-title">Propuesta técnica</h2>
@@ -140,5 +149,34 @@
   </main>
 
   <script src="presentacion.js"></script>
+  <script>
+function prepararPDF() {
+  document.querySelectorAll("canvas").forEach(canvas => {
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
+    img.style.width = "100%";
+    img.style.maxHeight = "300px";
+    img.style.objectFit = "contain";
+
+    canvas.parentNode.replaceChild(img, canvas);
+  });
+
+  window.print();
+}
+</script>
 </body>
 </html>
+<script>
+function prepararPDF() {
+  document.querySelectorAll("canvas").forEach(canvas => {
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
+    img.style.width = "100%";
+    img.style.maxHeight = "300px";
+
+    canvas.parentNode.replaceChild(img, canvas);
+  });
+
+  window.print();
+}
+</script>

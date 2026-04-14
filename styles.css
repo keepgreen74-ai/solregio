@@ -826,4 +826,71 @@ input:focus,select:focus,textarea:focus{
     height: 300px !important;
   }
 
+}@media print {
+
+  body {
+    zoom: 0.95;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+}
+@media print {
+
+  /* 1. Portada blanca */
+  .presentation-hero,
+  .proposal-hero,
+  .hero,
+  .cover-page {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #111 !important;
+  }
+
+  .presentation-hero *,
+  .proposal-hero *,
+  .hero *,
+  .cover-page * {
+    color: #111 !important;
+  }
+
+  /* 2. Salto de página */
+  .page-break-before {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* 3. Gráficas controladas */
+  .chart-card,
+  .chart-box,
+  .chart-panel {
+    height: 260px !important;
+    overflow: hidden !important;
+  }
+
+  .chart-card img,
+  .chart-box img,
+  .chart-panel img,
+  .chart-card canvas,
+  .chart-box canvas,
+  .chart-panel canvas {
+    width: 100% !important;
+    height: 220px !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  /* Evitar que se rompan bloques */
+  .analysis-section,
+  .visual-analysis {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
 }
