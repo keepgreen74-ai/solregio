@@ -105,6 +105,22 @@ function calcularGeneracion() {
   refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
 }
 
+function guardarCliente(data) {
+
+  let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+  clientes.push({
+    id: Date.now(),
+    fecha: new Date().toLocaleDateString(),
+    ...data,
+    estatus: "nuevo"
+  });
+
+  localStorage.setItem("clientes", JSON.stringify(clientes));
+
+  alert("Cliente guardado correctamente");
+}
+
 function calcularCostoEscalonado(kwh) {
   const tarifa = refs.clienteTarifa.value;
   const b = Number(refs.limiteBasico.value || 0);
