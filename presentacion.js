@@ -164,10 +164,26 @@ function render(data) {
   renderCharts(data);
 }
 
+function prepararPDF() {
+  document.querySelectorAll('.chart-box canvas').forEach((canvas) => {
+    if (canvas.dataset.exported === 'true') return;
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png', 1.0);
+    img.alt = 'Gráfica exportada';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'contain';
+    img.className = 'chart-export';
+    canvas.replaceWith(img);
+  });
+
+  window.print();
+}
+
 function init() {
   const raw = localStorage.getItem(STORAGE_KEY);
   const btnPrint = document.getElementById('btnPrint');
-  btnPrint.addEventListener('click', () => window.print());
+  if (btnPrint) btnPrint.addEventListener('click', prepararPDF);
 
   if (!raw) return;
   try {
@@ -177,3 +193,4 @@ function init() {
 }
 
 init();
+window.prepararPDF = prepararPDF;

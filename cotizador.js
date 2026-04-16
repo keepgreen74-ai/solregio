@@ -70,6 +70,16 @@ function money(value) {
 function numberFmt(value, digits = 0) {
   return new Intl.NumberFormat('es-MX', { maximumFractionDigits: digits }).format(Number(value || 0));
 }
+function setInversorSugerido(value) {
+  document.querySelectorAll('.inversor-sugerido').forEach((el) => {
+    el.textContent = value || '-';
+  });
+}
+
+function getInversorSugerido() {
+  return document.querySelector('.inversor-sugerido')?.textContent || '-';
+}
+
 
 function setToday() {
   const d = new Date();
@@ -106,19 +116,29 @@ function calcularGeneracion() {
 }
 
 function guardarCliente(data) {
+  const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
-  let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+  const clave = [data.nombre, data.telefono, data.ubicacion]
+    .map(v => String(v || '').trim().toLowerCase())
+    .join('|');
+  const nuevoRegistro = {
+    id: data.id || Date.now(),
+    fecha: new Date().toLocaleDateString('es-MX'),
+    estatus: data.estatus || 'nuevo',
+    clave,
+    ...data
+  };
 
-  clientes.push({
-    id: Date.now(),
-    fecha: new Date().toLocaleDateString(),
-    ...data,
-    estatus: "nuevo"
-  });
+  const indexExistente = clientes.findIndex(cliente => cliente.clave && cliente.clave === clave && clave !== '|||');
+  if (indexExistente >= 0) {
+    clientes[indexExistente] = { ...clientes[indexExistente], ...nuevoRegistro, id: clientes[indexExistente].id };
+  } else {
+    clientes.push(nuevoRegistro);
+  }
 
-  localStorage.setItem("clientes", JSON.stringify(clientes));
-
-  alert("Cliente guardado correctamente");
+  localStorage.setItem('clientes', JSON.stringify(clientes));
+  mostrarClientes();
+  alert('Cliente guardado correctamente');
 }
 
 function calcularCostoEscalonado(kwh) {
@@ -147,15 +167,28 @@ function calcularCostoEscalonado(kwh) {
 }
 
 function guardarActual() {
+  const calculo = getData();
+  const interno = calcularCotizadorInterno();
+  const inversor = getInversorSugerido();
 
   const data = {
-    nombre: document.getElementById("nombre")?.value || "",
-    telefono: document.getElementById("telefono")?.value || "",
-    ubicacion: document.getElementById("ubicacion")?.value || "",
-    consumo: document.getElementById("consumo")?.value || "",
-    paneles: document.getElementById("paneles")?.innerText || "",
-    kwp: document.getElementById("kwp")?.innerText || "",
-    total: document.getElementById("total")?.innerText || ""
+    nombre: refs.clienteNombre.value || '',
+    telefono: document.getElementById('clienteTelefono')?.value || '',
+    ubicacion: refs.clienteUbicacion.value || '',
+    tipoPropiedad: refs.tipoPropiedad.value || '',
+    tarifa: refs.clienteTarifa.value || '',
+    tipoAnalisis: refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido',
+    fechaCotizacion: refs.clienteFecha.value || '',
+    consumo: `${numberFmt(calculo.consumoAnual)} kWh/año`,
+    paneles: String(refs.numMFV.value || 0),
+    kwp: `${numberFmt(calculo.potenciaSistemaKW, 2)} kW`,
+    inversor,
+    total: money(calculo.costoSistema),
+    ahorroAnual: money(calculo.ahorroAnual),
+    roi: calculo.roiYears > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
+    costoReal: money(interno.costoReal),
+    utilidadInterna: money(interno.utilidad),
+    precioCliente: money(interno.precioFinal)
   };
 
   guardarCliente(data);
@@ -330,7 +363,10 @@ function renderQuickCharts(data) {
 }
 
 function updateAll() {
+  calcularCotizadorInterno();
   const data = getData();
+  const inversor = sugerirInversor(Number(refs.numMFV.value || 0));
+  setInversorSugerido(inversor);
   saveData(data);
   renderQuickStats(data);
   renderQuickCharts(data);
@@ -418,7 +454,18 @@ function init() {
     refs.generacionBimestral, refs.observacionesProyecto,
     document.getElementById('consumoBimestralEstimado'),
     document.getElementById('costoBimestralEstimado'),
-    ...refs.consumos, ...refs.costos
+    ...refs.consumos, ...refs.costos,
+    document.getElementById('costoPanelUnitario'),
+    document.getElementById('costoInversor'),
+    document.getElementById('manoObra'),
+    document.getElementById('costoEstructura'),
+    document.getElementById('costoProtecciones'),
+    document.getElementById('costoCableado'),
+    document.getElementById('tramiteCfe'),
+    document.getElementById('seguroSistema'),
+    document.getElementById('mantenimiento'),
+    document.getElementById('utilidadPorcentaje'),
+    document.getElementById('descuentoProyecto')
   ].filter(Boolean);
 
   inputs.forEach(el => {
@@ -427,4 +474,147 @@ function init() {
   });
 }
 
+
+function eliminarCliente(id) {
+  const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+  const actualizados = clientes.filter(cliente => cliente.id !== id);
+  localStorage.setItem('clientes', JSON.stringify(actualizados));
+  mostrarClientes();
+}
+
+function cargarCliente(id) {
+  const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+  const cliente = clientes.find(item => item.id === id);
+  if (!cliente) return;
+
+  refs.clienteNombre.value = cliente.nombre || '';
+  const tel = document.getElementById('clienteTelefono');
+  if (tel) tel.value = cliente.telefono || '';
+  refs.clienteUbicacion.value = cliente.ubicacion || '';
+  refs.tipoPropiedad.value = cliente.tipoPropiedad || '';
+  refs.clienteTarifa.value = cliente.tarifa || refs.clienteTarifa.value;
+  refs.clienteFecha.value = cliente.fechaCotizacion || refs.clienteFecha.value;
+  refs.modoCalculo.value = cliente.tipoAnalisis === 'Estimado rápido' ? 'estimado' : 'recibos';
+  setInversorSugerido(cliente.inversor || sugerirInversor(Number(refs.numMFV.value || 0)));
+
+  updateModeUI();
+  debounceUpdate();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mostrarClientes() {
+  const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+  const contenedor = document.getElementById('clientesLista');
+
+  if (!contenedor) return;
+
+  if (clientes.length === 0) {
+    contenedor.innerHTML = '<p class="crm-empty">No hay clientes guardados todavía.</p>';
+    return;
+  }
+
+  contenedor.innerHTML = clientes.slice().reverse().map(cliente => `
+    <article class="cliente-card">
+      <div class="cliente-card-head">
+        <div>
+          <h3>${cliente.nombre || 'Sin nombre'}</h3>
+          <p>${cliente.ubicacion || 'Ubicación no capturada'}</p>
+        </div>
+        <span class="cliente-status">${cliente.estatus || 'nuevo'}</span>
+      </div>
+      <div class="cliente-card-grid">
+        <p><strong>Teléfono:</strong> ${cliente.telefono || '-'}</p>
+        <p><strong>Fecha:</strong> ${cliente.fechaCotizacion || cliente.fecha || '-'}</p>
+        <p><strong>Propiedad:</strong> ${cliente.tipoPropiedad || '-'}</p>
+        <p><strong>Tarifa:</strong> ${cliente.tarifa || '-'}</p>
+        <p><strong>Análisis:</strong> ${cliente.tipoAnalisis || '-'}</p>
+        <p><strong>Consumo:</strong> ${cliente.consumo || '-'}</p>
+        <p><strong>Paneles:</strong> ${cliente.paneles || '-'}</p>
+        <p><strong>Potencia:</strong> ${cliente.kwp || '-'}</p>
+        <p><strong>Inversor:</strong> ${cliente.inversor || '-'}</p>
+        <p><strong>Ahorro anual:</strong> ${cliente.ahorroAnual || '-'}</p>
+        <p><strong>ROI:</strong> ${cliente.roi || '-'}</p>
+        <p><strong>Total:</strong> ${cliente.total || '-'}</p>
+      </div>
+      <div class="cliente-card-actions">
+        <button class="btn btn-secondary btn-crm" type="button" onclick="cargarCliente(${cliente.id})">Cargar al cotizador</button>
+        <button class="btn btn-secondary btn-crm btn-crm-danger" type="button" onclick="eliminarCliente(${cliente.id})">Eliminar</button>
+      </div>
+    </article>
+  `).join('');
+}
+
 init();
+mostrarClientes();
+
+function calcularMFVautomatico() {
+  const data = getData();
+  const consumoAnual = data.consumoAnual;
+  const hsp = Number(refs.hsp.value || 5.5);
+  const factor = Number(refs.factorDesempeno.value || 0.8);
+  const potenciaPanel = Number(refs.potenciaModulo.value || 710) / 1000;
+
+  if (!consumoAnual || !hsp || !factor || !potenciaPanel) return;
+
+  const energiaPorPanelAnual = potenciaPanel * hsp * 365 * factor;
+  const paneles = Math.ceil(consumoAnual / energiaPorPanelAnual);
+
+  refs.numMFV.value = paneles;
+
+  if (refs.generacionBimestral) {
+    const generacionDiaria = paneles * potenciaPanel * hsp * factor;
+    refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
+  }
+
+  setInversorSugerido(sugerirInversor(paneles));
+  updateAll();
+}
+
+function sugerirInversor(paneles) {
+  if (paneles <= 0) return '-';
+  if (paneles <= 4) return 'Microinversor básico';
+  if (paneles <= 8) return '2 microinversores o micro dual';
+  if (paneles <= 12) return 'Inversor string residencial';
+  return 'Sistema escalable con múltiples inversores';
+}
+
+function calcularCotizadorInterno() {
+  const paneles = Number(refs.numMFV.value || 0);
+  const costoPanelUnitario = Number(document.getElementById('costoPanelUnitario')?.value || 0);
+  const costoInversor = Number(document.getElementById('costoInversor')?.value || 0);
+  const manoObra = Number(document.getElementById('manoObra')?.value || 0);
+  const costoEstructura = Number(document.getElementById('costoEstructura')?.value || 0);
+  const costoProtecciones = Number(document.getElementById('costoProtecciones')?.value || 0);
+  const costoCableado = Number(document.getElementById('costoCableado')?.value || 0);
+  const tramiteCfe = Number(document.getElementById('tramiteCfe')?.value || 0);
+  const seguroSistema = Number(document.getElementById('seguroSistema')?.value || 0);
+  const mantenimiento = Number(document.getElementById('mantenimiento')?.value || 0);
+  const utilidadPorcentaje = Number(document.getElementById('utilidadPorcentaje')?.value || 0);
+  const descuentoProyecto = Number(document.getElementById('descuentoProyecto')?.value || 0);
+
+  const costoPaneles = paneles * costoPanelUnitario;
+  const costoReal = costoPaneles + costoInversor + manoObra + costoEstructura + costoProtecciones + costoCableado + tramiteCfe + seguroSistema + mantenimiento;
+  const utilidad = costoReal * (utilidadPorcentaje / 100);
+  const precioFinal = Math.max(costoReal + utilidad - descuentoProyecto, 0);
+
+  const costoRealEl = document.getElementById('internoCostoReal');
+  const utilidadEl = document.getElementById('internoUtilidad');
+  const precioFinalEl = document.getElementById('internoPrecioFinal');
+
+  if (costoRealEl) costoRealEl.textContent = money(costoReal);
+  if (utilidadEl) utilidadEl.textContent = money(utilidad);
+  if (precioFinalEl) precioFinalEl.textContent = money(precioFinal);
+
+  if (precioFinal > 0 && refs.costoSistema) {
+    refs.costoSistema.value = Math.round(precioFinal);
+  }
+
+  return { costoReal, utilidad, precioFinal };
+}
+
+let modoInterno = true;
+
+function toggleModo() {
+  modoInterno = !modoInterno;
+  document.body.classList.toggle('modo-cliente', !modoInterno);
+}

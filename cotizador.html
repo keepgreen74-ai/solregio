@@ -18,7 +18,10 @@
         <img src="logo-solregio-claro.jpg" alt="SolRegio" class="brand-logo">
       </a>
       <div class="nav-actions">
-        <button onclick="guardarActual()">Guardar cliente</button>
+        <div class="top-actions">
+  <button class="btn btn-primary" type="button" onclick="guardarActual()">Guardar cliente</button>
+  <button class="btn btn-secondary" type="button" onclick="toggleModo()">Modo cliente</button>
+</div>
         <a class="btn btn-secondary" href="index.html">Volver al sitio</a>
         <a class="btn btn-primary" href="presentacion.html">Abrir presentación</a>
       </div>
@@ -37,9 +40,13 @@
         <section class="panel-block">
           <h2>Datos del cliente</h2>
           <div class="form-grid two">
-            <label class="field wide">
+            <label class="field">
               <span>Nombre del cliente</span>
               <input id="clienteNombre" type="text" placeholder="Nombre completo">
+            </label>
+            <label class="field">
+              <span>Teléfono</span>
+              <input id="clienteTelefono" type="text" placeholder="81 0000 0000">
             </label>
             <label class="field">
               <span>Fecha</span>
@@ -125,9 +132,95 @@
             <label class="field"><span>Costo total del sistema</span><input id="costoSistema" type="number"></label>
             <label class="field"><span>Generación bimestral estimada</span><input id="generacionBimestral" type="number"></label>
           </div>
-          <div class="inline-actions">
+          <div class="stat-card">
+            <span>Inversor sugerido</span>
+            <strong class="inversor-sugerido">-</strong>
+          </div>
+          <div class="actions-row">
             <button class="btn btn-secondary" id="btnGeneracion" type="button">Calcular generación</button>
-            <button class="btn btn-primary" id="btnActualizar" type="button">Guardar y actualizar</button>
+            <button class="btn btn-secondary" type="button" onclick="calcularMFVautomatico()">Calcular sistema automático</button>
+            <button class="btn btn-primary" id="btnActualizar" type="button">Actualizar análisis</button>
+          </div>
+        </section>
+
+        <section class="panel-block interno" id="bloqueEconomicoInterno">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Uso interno</span>
+              <h2>Cotizador económico</h2>
+            </div>
+          </div>
+
+          <div class="form-grid two">
+            <label class="field">
+              <span>Costo por panel</span>
+              <input type="number" id="costoPanelUnitario" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Costo inversor</span>
+              <input type="number" id="costoInversor" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Mano de obra</span>
+              <input type="number" id="manoObra" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Estructura</span>
+              <input type="number" id="costoEstructura" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Protecciones</span>
+              <input type="number" id="costoProtecciones" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Cableado</span>
+              <input type="number" id="costoCableado" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Trámite CFE</span>
+              <input type="number" id="tramiteCfe" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Seguro</span>
+              <input type="number" id="seguroSistema" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Mantenimiento</span>
+              <input type="number" id="mantenimiento" placeholder="0" min="0" step="0.01">
+            </label>
+
+            <label class="field">
+              <span>Utilidad %</span>
+              <input type="number" id="utilidadPorcentaje" placeholder="30" min="0" step="0.01">
+            </label>
+
+            <label class="field wide">
+              <span>Descuento</span>
+              <input type="number" id="descuentoProyecto" placeholder="0" min="0" step="0.01">
+            </label>
+          </div>
+
+          <div class="stats-grid internal-summary">
+            <div class="stat-card">
+              <span>Costo real</span>
+              <strong id="internoCostoReal">$0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Utilidad</span>
+              <strong id="internoUtilidad">$0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Precio final</span>
+              <strong id="internoPrecioFinal">$0</strong>
+            </div>
           </div>
         </section>
 
@@ -146,7 +239,7 @@
             <div class="eyebrow">Vista rápida</div>
             <h2>Resumen del cálculo</h2>
           </div>
-          <button onclick="guardarActual()">Guardar cliente</button>
+          <button class="btn btn-secondary btn-save" type="button" onclick="guardarActual()">Guardar cliente</button>
           <a class="btn btn-primary" href="presentacion.html">Ir a presentación</a>
         </div>
 
@@ -157,6 +250,7 @@
           <div class="stat-card"><span>Ahorro anual</span><strong id="quickAhorro">-</strong></div>
           <div class="stat-card"><span>ROI</span><strong id="quickRoi">-</strong></div>
           <div class="stat-card"><span>Cobertura</span><strong id="quickCobertura">-</strong></div>
+          <div class="stat-card"><span>Inversor sugerido</span><strong class="inversor-sugerido">-</strong></div>
         </div>
 
         <div class="chart-grid">
@@ -171,6 +265,12 @@
         </div>
       </section>
     </div>
+    
+<section class="crm-panel">
+  <h2>Clientes guardados</h2>
+  <div id="clientesLista"></div>
+</section>
+
   </main>
 
   <script src="cotizador.js"></script>
