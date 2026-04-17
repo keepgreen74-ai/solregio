@@ -999,3 +999,301 @@ input:focus,select:focus,textarea:focus{
   }
 }
 
+
+
+.gdmth-note{
+  margin:0 0 12px;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:.92rem;
+}
+
+
+.gdmth-note{margin:0 0 10px;color:var(--muted);font-size:.82rem;line-height:1.5}
+#bloqueGDMTH .form-grid.two{gap:10px 12px}
+#bloqueGDMTH .field span{font-size:.78rem}
+.stats-grid{gap:12px;margin-bottom:14px}
+.stat-card,.metric-card,.summary-card,.info-card{padding:16px;min-height:112px}
+.chart-card,.graph-card{padding:16px}
+.chart-box{height:280px}
+@media (max-width:700px){#bloqueGDMTH .form-grid.two{grid-template-columns:1fr}}
+
+
+#bloqueEconomicoInterno .internal-summary-pro {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+#bloqueEconomicoInterno .gdmth-note,
+.gdmth-note {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+@media (max-width:980px){
+  #bloqueEconomicoInterno .internal-summary-pro{grid-template-columns:1fr;}
+}
+
+
+.investment-layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+  align-items:start;
+}
+
+.closing-grid.compact{
+  grid-template-columns:1fr;
+  margin:0;
+}
+
+.financial-card,
+.benefit-card,
+.contact-card-large,
+.contact-side-visual{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
+
+.financial-card{
+  padding:24px;
+}
+
+.financial-card h3{
+  margin:0 0 18px;
+  font-size:1.2rem;
+  letter-spacing:-.03em;
+}
+
+.financial-lines{
+  display:grid;
+  gap:12px;
+}
+
+.financial-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  font-size:1.02rem;
+}
+
+.financial-line span{
+  color:var(--muted);
+  font-weight:700;
+}
+
+.financial-line strong{
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.financial-divider{
+  height:1px;
+  background:var(--line);
+  margin:4px 0;
+}
+
+.financial-line.total strong{
+  font-size:1.6rem;
+  color:#0e7a45;
+}
+
+.benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.benefit-card{
+  padding:22px;
+}
+
+.benefit-card h3{
+  margin:0 0 10px;
+  font-size:1.1rem;
+  letter-spacing:-.02em;
+}
+
+.benefit-card p{
+  margin:0;
+  color:#475467;
+  line-height:1.75;
+}
+
+.benefit-icon{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,230,118,.12);
+  font-size:1.5rem;
+  margin-bottom:14px;
+}
+
+.terms-grid,
+.contact-page-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.compact-list{
+  font-size:1rem;
+  line-height:1.8;
+}
+
+.contact-card-large,
+.contact-side-visual{
+  padding:26px;
+  min-height:280px;
+}
+
+.contact-card-large{
+  display:grid;
+  gap:14px;
+}
+
+.contact-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  width:max-content;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(0,230,118,.10);
+  color:#0e7a45;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.contact-card-large h3,
+.contact-side-copy h3{
+  margin:0;
+  font-size:1.4rem;
+  letter-spacing:-.03em;
+}
+
+.contact-text,
+.contact-side-copy p{
+  margin:0;
+  color:#475467;
+  line-height:1.8;
+}
+
+.contact-lines{
+  display:grid;
+  gap:10px;
+  color:#101828;
+  line-height:1.7;
+}
+
+.contact-side-visual{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.88) 100%),
+    url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+}
+
+.contact-side-copy{
+  max-width:360px;
+}
+
+@media (max-width:980px){
+  .investment-layout,
+  .benefits-grid,
+  .terms-grid,
+  .contact-page-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media print{
+  .financial-line strong{font-size:1.15rem !important;}
+  .financial-line.total strong{font-size:1.4rem !important;}
+  .contact-side-visual{background:#f8fafc !important;}
+}
+
+
+/* ===== Ajustes finales propuesta premium ===== */
+.proposal-pro .pdf-page{padding:28px 30px;margin-bottom:14px}
+.compact-page{min-height:auto}
+.cover-pro-page{padding:26px 28px 24px !important; min-height:960px; display:block; background:#fff !important}
+.cover-pro-grid{display:grid;grid-template-columns:minmax(0,1.02fr) 0.98fr;gap:24px;align-items:stretch}
+.cover-copy-block{display:grid;grid-template-rows:auto auto 1fr;gap:18px}
+.cover-top-pro{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.cover-copy-main{padding-top:8px}
+.cover-copy-main .cover-title{font-size:3rem;line-height:.96;max-width:520px;margin-bottom:12px}
+.cover-copy-main .cover-sub{font-size:1rem;max-width:520px;margin-top:0}
+.cover-meta-layout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-content:start}
+.cover-meta-layout .info-card{min-height:unset;padding:16px 18px;border-radius:18px}
+.cover-meta-layout .label{margin-bottom:8px}
+.cover-meta-layout .value{font-size:1.02rem;line-height:1.45;word-break:normal;overflow-wrap:anywhere}
+.info-wide{grid-column:1 / span 3}
+.info-small{grid-column:4 / span 1}
+.info-full{grid-column:1 / -1}
+.triple-meta-row{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#cardCliente .value{font-size:1.18rem;font-weight:800}
+.cover-visual-block{display:flex;align-items:stretch}
+.cover-main-image{width:100%;height:100%;min-height:860px;object-fit:cover;border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.compact-metrics-grid{gap:12px}
+.compact-metrics-grid .metric-card{min-height:108px;padding:16px}
+.charts-page .graphs-grid{gap:14px}
+.compact-chart{height:250px}
+.compact-chart-tall{height:300px}
+.projection-finance-layout{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;align-items:start}
+.projection-card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:10px 14px 12px}
+.compact-table{margin-top:0}
+.compact-table th,.compact-table td{padding:12px 14px}
+.projection-side{display:grid;gap:14px}
+.projection-side .summary-card{min-height:unset;padding:18px}
+.compact-tech-layout{gap:14px}
+.compact-tech-stack{gap:14px}
+.compact-note-box{margin-top:14px;padding:16px}
+.compact-note-box p{line-height:1.7}
+.compact-benefits-grid .benefit-card{padding:20px}
+.compact-benefits-grid .benefit-card p{line-height:1.65}
+.compact-terms-grid .summary-card{padding:20px}
+.compact-list{line-height:1.65;font-size:.98rem}
+.compact-list-tight{line-height:1.8;font-size:1rem}
+.contact-grid-pro{align-items:stretch}
+.contact-card-large,.contact-side-visual-pro{min-height:320px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);background:#fff;overflow:hidden}
+.contact-card-large{padding:24px}
+.contact-side-visual-pro{position:relative;display:flex;align-items:flex-end}
+.contact-side-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.contact-side-visual-pro::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,24,40,.18) 0%, rgba(16,24,40,.38) 100%)}
+.contact-overlay-card{position:relative;z-index:2;margin:18px;background:rgba(255,255,255,.94);padding:22px;border-radius:18px;max-width:340px;box-shadow:0 12px 28px rgba(16,24,40,.10)}
+.contact-overlay-card p{margin-top:8px}
+@media (max-width:980px){
+  .cover-pro-grid,.projection-finance-layout,.compact-tech-layout,.contact-grid-pro{grid-template-columns:1fr}
+  .cover-main-image{min-height:420px}
+  .cover-copy-main .cover-title{font-size:2.35rem;max-width:none}
+  .cover-meta-layout{grid-template-columns:1fr 1fr}
+  .info-wide,.info-full,.info-small,.triple-meta-row{grid-column:auto}
+  .triple-meta-row{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .proposal-pro .pdf-page{padding:20px 22px !important;margin:0 0 7mm 0 !important;box-shadow:none !important;border:0 !important;border-radius:0 !important}
+  .cover-pro-page{min-height:auto !important}
+  .cover-pro-grid{grid-template-columns:1fr 0.95fr !important;gap:16px !important}
+  .cover-copy-main .cover-title{font-size:2.55rem !important;max-width:none !important}
+  .cover-main-image{min-height:0 !important;height:100% !important;border-radius:24px !important}
+  .cover-meta-layout .info-card{padding:12px 14px !important}
+  .cover-meta-layout .value{font-size:.96rem !important;line-height:1.35 !important;word-break:normal !important;overflow-wrap:anywhere !important}
+  .compact-metrics-grid .metric-card{min-height:86px !important;padding:12px !important}
+  .charts-page .compact-chart{height:170px !important}
+  .charts-page .compact-chart-tall{height:210px !important}
+  .projection-finance-layout{grid-template-columns:1fr 1fr !important;gap:14px !important}
+  .projection-card,.financial-card,.summary-card,.tech-card,.benefit-card,.contact-card-large,.contact-side-visual-pro{box-shadow:none !important}
+  .contact-side-visual-pro{background:#f3f5f8 !important}
+  .contact-side-image{display:block !important;filter:none !important}
+  .contact-side-visual-pro::after{display:none !important}
+  .contact-overlay-card{background:rgba(255,255,255,.96) !important}
+}

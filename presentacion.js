@@ -1,4 +1,3 @@
-
 Chart.register(ChartDataLabels);
 const STORAGE_KEY = 'solregioProposalData';
 
@@ -14,15 +13,28 @@ function numberFmt(value, digits = 0) {
 }
 function formatDate(value) {
   if (!value) return '-';
-  return new Date(value + 'T12:00:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
+  const date = new Date(value + 'T12:00:00');
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
 }
 
 function chartOptions(currency = false) {
   return {
     responsive: true,
     maintainAspectRatio: false,
+    animation: false,
     plugins: {
-      legend: { labels: { color: '#101828', font: { family: 'Inter', size: 11 } } },
+      legend: {
+        labels: {
+          color: '#101828',
+          font: { family: 'Inter', size: 11 }
+        }
+      },
       datalabels: {
         color: '#344054',
         anchor: 'end',
@@ -35,37 +47,74 @@ function chartOptions(currency = false) {
       }
     },
     scales: {
-      x: { ticks: { color: '#667085' }, grid: { color: 'rgba(16,24,40,.05)' } },
+      x: {
+        ticks: { color: '#667085', maxRotation: 45, minRotation: 0 },
+        grid: { color: 'rgba(16,24,40,.05)' }
+      },
       y: {
-        ticks: { color: '#667085', callback: (value) => currency ? money(value) : numberFmt(value) },
+        ticks: {
+          color: '#667085',
+          callback: (value) => currency ? money(value) : numberFmt(value)
+        },
         grid: { color: 'rgba(16,24,40,.05)' }
       }
     }
   };
 }
 
+function destroyCharts() {
+  [chartConsumo, chartCostos, chartRoi].forEach((chart, index) => {
+    if (chart) chart.destroy();
+    if (index === 0) chartConsumo = null;
+    if (index === 1) chartCostos = null;
+    if (index === 2) chartRoi = null;
+  });
+}
+
+function buildCanvasesIfMissing() {
+  const defs = [
+    ['presChartConsumo', 'Consumo vs generación'],
+    ['presChartCostos', 'Costo actual vs costo con paneles'],
+    ['presChartRoi', 'Retorno de inversión']
+  ];
+
+  defs.forEach(([id]) => {
+    const box = document.getElementById(id)?.closest('.chart-box');
+    const existing = document.getElementById(id);
+    if (box && !existing) {
+      const canvas = document.createElement('canvas');
+      canvas.id = id;
+      box.prepend(canvas);
+    }
+  });
+}
+
 function renderCharts(data) {
-  if (chartConsumo) chartConsumo.destroy();
-  if (chartCostos) chartCostos.destroy();
-  if (chartRoi) chartRoi.destroy();
+  buildCanvasesIfMissing();
+  destroyCharts();
+
+  const consumoCanvas = document.getElementById('presChartConsumo');
+  const costosCanvas = document.getElementById('presChartCostos');
+  const roiCanvas = document.getElementById('presChartRoi');
+  if (!consumoCanvas || !costosCanvas || !roiCanvas) return;
 
   const labels = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'];
-  const generacionSerie = labels.map(() => data.generacionBimestral);
+  const generacionSerie = labels.map(() => Number(data.generacionBimestral || 0));
   const years = Array.from({ length: 25 }, (_, i) => `Año ${i + 1}`);
 
-  chartConsumo = new Chart(document.getElementById('presChartConsumo'), {
+  chartConsumo = new Chart(consumoCanvas, {
     type: 'line',
     data: {
       labels,
       datasets: [
         {
           label: 'Consumo',
-          data: data.consumos,
+          data: data.consumos || [],
           borderColor: '#101828',
           backgroundColor: 'rgba(16,24,40,.08)',
           borderWidth: 3,
           pointRadius: 4,
-          tension: .28,
+          tension: 0.28,
           datalabels: { display: false }
         },
         {
@@ -75,7 +124,7 @@ function renderCharts(data) {
           backgroundColor: 'rgba(0,200,83,.12)',
           borderWidth: 3,
           pointRadius: 4,
-          tension: .28,
+          tension: 0.28,
           datalabels: { display: false }
         }
       ]
@@ -83,37 +132,37 @@ function renderCharts(data) {
     options: chartOptions(false)
   });
 
-  chartCostos = new Chart(document.getElementById('presChartCostos'), {
+  chartCostos = new Chart(costosCanvas, {
     type: 'bar',
     data: {
       labels,
       datasets: [
-        { label: 'Costo actual', data: data.costosActuales, backgroundColor: '#1f2937', borderRadius: 10 },
-        { label: 'Costo con paneles', data: data.costosConSolar, backgroundColor: '#00E676', borderRadius: 10 }
+        { label: 'Costo actual', data: data.costosActuales || [], backgroundColor: '#1f2937', borderRadius: 10 },
+        { label: 'Costo con paneles', data: data.costosConSolar || [], backgroundColor: '#00E676', borderRadius: 10 }
       ]
     },
     options: chartOptions(true)
   });
 
-  chartRoi = new Chart(document.getElementById('presChartRoi'), {
+  chartRoi = new Chart(roiCanvas, {
     type: 'line',
     data: {
       labels: years,
       datasets: [
         {
           label: 'Ahorro acumulado',
-          data: data.cumulative,
+          data: data.cumulative || [],
           borderColor: '#00C853',
           backgroundColor: 'rgba(0,200,83,.12)',
           borderWidth: 3,
           fill: true,
           pointRadius: 0,
-          tension: .2,
+          tension: 0.2,
           datalabels: { display: false }
         },
         {
           label: 'Costo del sistema',
-          data: years.map(() => data.costoSistema),
+          data: years.map(() => Number(data.costoSistema || 0)),
           borderColor: '#F4B400',
           borderWidth: 2,
           borderDash: [8, 6],
@@ -128,69 +177,89 @@ function renderCharts(data) {
 }
 
 function render(data) {
-  document.getElementById('outCliente').textContent = data.clienteNombre || '-';
-  document.getElementById('outUbicacion').textContent = data.clienteUbicacion || '-';
-  document.getElementById('outFecha').textContent = formatDate(data.clienteFecha);
-  document.getElementById('outTarifa').textContent = data.clienteTarifa || '-';
-  document.getElementById('outPropiedad').textContent = data.tipoPropiedad || '-';
-  document.getElementById('outModo').textContent = data.modoCalculo === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido';
+  setText('outCliente', data.clienteNombre || '-');
+  setText('outUbicacion', data.clienteUbicacion || '-');
+  setText('outFecha', formatDate(data.clienteFecha));
+  setText('outTarifa', data.clienteTarifa || '-');
+  setText('outPropiedad', data.tipoPropiedad || '-');
+  setText('outModo', data.modoCalculo === 'gdmth' ? 'GDMTH 12 meses' : (data.modoCalculo === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'));
 
-  document.getElementById('metricConsumo').textContent = `${numberFmt(data.consumoAnual)} kWh`;
-  document.getElementById('metricPago').textContent = money(data.pagoAnualActual);
-  document.getElementById('metricGeneracion').textContent = `${numberFmt(data.generacionAnual)} kWh`;
-  document.getElementById('metricPotencia').textContent = `${numberFmt(data.potenciaSistemaKW, 2)} kW`;
-  document.getElementById('metricPaneles').textContent = `${numberFmt(data.numMFV)} paneles`;
-  document.getElementById('metricCobertura').textContent = `${numberFmt(data.cobertura, 1)} %`;
-  document.getElementById('metricAhorro').textContent = money(data.ahorroAnual);
-  document.getElementById('metricRoi').textContent = data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A';
+  setText('metricConsumo', `${numberFmt(data.consumoAnual)} kWh`);
+  setText('metricPago', money(data.pagoAnualActual));
+  setText('metricGeneracion', `${numberFmt(data.generacionAnual)} kWh`);
+  setText('metricPotencia', `${numberFmt(data.potenciaSistemaKW, 2)} kW`);
+  setText('metricPaneles', `${numberFmt(data.numMFV)} paneles`);
+  setText('metricCobertura', `${numberFmt(data.cobertura, 1)} %`);
+  setText('metricAhorro', money(data.ahorroAnual));
+  setText('metricRoi', data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A');
 
-  document.getElementById('sum5').textContent = money(data.cumulative[4] || 0);
-  document.getElementById('sum10').textContent = money(data.cumulative[9] || 0);
-  document.getElementById('sum15').textContent = money(data.cumulative[14] || 0);
-  document.getElementById('sum20').textContent = money(data.cumulative[19] || 0);
-  document.getElementById('sum25').textContent = money(data.cumulative[24] || 0);
+  setText('sum5', money((data.cumulative || [])[4] || 0));
+  setText('sum10', money((data.cumulative || [])[9] || 0));
+  setText('sum15', money((data.cumulative || [])[14] || 0));
+  setText('sum20', money((data.cumulative || [])[19] || 0));
+  setText('sum25', money((data.cumulative || [])[24] || 0));
 
-  document.getElementById('techPotencia').textContent = `${numberFmt(data.potenciaSistemaKW, 2)} kW`;
-  document.getElementById('techMfvs').textContent = `${numberFmt(data.numMFV)} módulos`;
-  document.getElementById('techPotenciaModulo').textContent = `${numberFmt(data.potenciaModulo)} W`;
-  document.getElementById('techConsumoAnual').textContent = `${numberFmt(data.consumoAnual)} kWh`;
-  document.getElementById('techProduccionAnual').textContent = `${numberFmt(data.generacionAnual)} kWh`;
-  document.getElementById('techObservaciones').textContent = data.observacionesProyecto || '-';
+  setText('pdfSubtotal', money(data?.interno?.subtotalSinIva || 0));
+  setText('pdfIva', money(data?.interno?.iva || 0));
+  setText('pdfTotal', money(data?.interno?.precioFinalConIva || data.costoSistema || 0));
+  setText('invAhorro', money(data.ahorroAnual || 0));
+  setText('invRoi', data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A');
 
-  document.getElementById('invCosto').textContent = money(data.costoSistema);
-  document.getElementById('invAhorro').textContent = money(data.ahorroAnual);
-  document.getElementById('invRoi').textContent = data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A';
+  setText('techPotencia', `${numberFmt(data.potenciaSistemaKW, 2)} kW`);
+  setText('techMfvs', `${numberFmt(data.numMFV)} módulos`);
+  setText('techPotenciaModulo', `${numberFmt(data.potenciaModulo)} W`);
+  setText('techConsumoAnual', `${numberFmt(data.consumoAnual)} kWh`);
+  setText('techProduccionAnual', `${numberFmt(data.generacionAnual)} kWh`);
+  setText('techObservaciones', data.observacionesProyecto || '-');
 
   renderCharts(data);
 }
 
-function prepararPDF() {
-  document.querySelectorAll('.chart-box canvas').forEach((canvas) => {
-    if (canvas.dataset.exported === 'true') return;
+function replaceChartsWithImages() {
+  document.querySelectorAll('.chart-box').forEach((box) => {
+    const oldImg = box.querySelector('img.chart-export');
+    if (oldImg) oldImg.remove();
+    const canvas = box.querySelector('canvas');
+    if (!canvas) return;
     const img = document.createElement('img');
     img.src = canvas.toDataURL('image/png', 1.0);
     img.alt = 'Gráfica exportada';
+    img.className = 'chart-export';
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'contain';
-    img.className = 'chart-export';
-    canvas.replaceWith(img);
+    canvas.style.display = 'none';
+    box.appendChild(img);
   });
+}
 
+function restoreCanvases() {
+  document.querySelectorAll('.chart-box').forEach((box) => {
+    const img = box.querySelector('img.chart-export');
+    if (img) img.remove();
+    const canvas = box.querySelector('canvas');
+    if (canvas) canvas.style.display = '';
+  });
+}
+
+function prepararPDF() {
+  replaceChartsWithImages();
   window.print();
+  setTimeout(restoreCanvases, 1000);
 }
 
 function init() {
   const raw = localStorage.getItem(STORAGE_KEY);
   const btnPrint = document.getElementById('btnPrint');
   if (btnPrint) btnPrint.addEventListener('click', prepararPDF);
-
   if (!raw) return;
   try {
     const data = JSON.parse(raw);
     render(data);
-  } catch (e) {}
+  } catch (e) {
+    console.warn('No se pudo cargar la presentación', e);
+  }
 }
 
-init();
 window.prepararPDF = prepararPDF;
+window.addEventListener('load', init);
