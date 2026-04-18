@@ -1297,3 +1297,63 @@ input:focus,select:focus,textarea:focus{
   .contact-side-visual-pro::after{display:none !important}
   .contact-overlay-card{background:rgba(255,255,255,.96) !important}
 }
+
+
+/* ===== portada y ajustes finos v5.4.2 ===== */
+.cover-pro-page{padding:24px 26px 24px !important; min-height:auto !important; display:block; background:#fff !important;}
+.cover-pro-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:20px;align-items:end;}
+.cover-copy-block{display:grid;grid-template-rows:auto auto 1fr;gap:16px;min-height:0;}
+.cover-copy-main{padding-top:4px;}
+.cover-copy-main .cover-title{font-size:3rem;line-height:.95;max-width:560px;margin:0 0 12px;}
+.cover-copy-main .cover-sub{margin:0;max-width:560px;line-height:1.7;}
+.cover-meta-layout{display:grid;grid-template-columns:2fr 1.25fr;gap:12px;align-content:end;}
+.cover-meta-layout .info-card{min-height:auto;padding:14px 16px;border-radius:18px;}
+.cover-meta-layout .label{margin-bottom:6px;}
+.cover-meta-layout .value{font-size:1.02rem;line-height:1.4;word-break:normal;overflow-wrap:anywhere;}
+.info-wide{grid-column:1 / 2;}
+.info-small{grid-column:2 / 3;}
+.info-full{grid-column:1 / -1;}
+.triple-meta-row{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+#cardCliente .value{font-size:1.16rem;font-weight:800;}
+.cover-visual-block{display:flex;justify-content:flex-end;align-items:flex-end;}
+.cover-main-frame{width:100%;max-width:390px;aspect-ratio:1 / 1;border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;background:#f6f8fb;}
+.cover-main-image{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:30px;display:block;}
+.compact-page .page-sub{margin-bottom:18px;}
+.compact-page .page-title{margin-bottom:8px;}
+.pdf-page.compact-page{padding-top:26px;padding-bottom:24px;}
+.contact-grid-pro{gap:14px;}
+.contact-card-large{min-height:260px;}
+.contact-side-visual-pro{min-height:260px;}
+.contact-overlay-card{margin:16px;max-width:320px;}
+@media (max-width:980px){
+  .cover-pro-grid{grid-template-columns:1fr;gap:16px;}
+  .cover-main-frame{max-width:none;width:100%;}
+  .cover-copy-main .cover-title{font-size:2.5rem;max-width:none;}
+  .cover-meta-layout{grid-template-columns:1fr 1fr;}
+  .info-wide,.info-small,.info-full{grid-column:auto;}
+  .info-full{grid-column:1 / -1;}
+  .triple-meta-row{grid-template-columns:1fr;}
+}
+@media print{
+  body{background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .proposal-pro .pdf-page{padding:18px 20px !important;margin:0 0 6mm 0 !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;page-break-after:always;break-after:page;}
+  .proposal-pro .pdf-page:last-child{page-break-after:auto !important;break-after:auto !important;}
+  .cover-pro-page{padding:18px 20px !important;}
+  .cover-pro-grid{grid-template-columns:1.08fr .92fr !important;gap:14px !important;align-items:end !important;}
+  .cover-copy-main .cover-title{font-size:2.45rem !important;line-height:.96 !important;max-width:none !important;margin-bottom:10px !important;}
+  .cover-copy-main .cover-sub{font-size:.98rem !important;line-height:1.6 !important;max-width:none !important;}
+  .cover-meta-layout{grid-template-columns:2fr 1.15fr !important;gap:10px !important;}
+  .cover-meta-layout .info-card{padding:11px 12px !important;border-radius:16px !important;}
+  .cover-meta-layout .value{font-size:.94rem !important;line-height:1.3 !important;}
+  .triple-meta-row{grid-template-columns:repeat(3,1fr) !important;gap:10px !important;}
+  .cover-main-frame{max-width:320px !important;aspect-ratio:1 / 1 !important;border-radius:24px !important;overflow:hidden !important;box-shadow:none !important;}
+  .cover-main-image{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important;border-radius:24px !important;}
+  .compact-page .page-sub{margin-bottom:14px !important;}
+  .pdf-page.compact-page{padding-top:20px !important;padding-bottom:18px !important;}
+  .compact-page .page-title{margin-bottom:6px !important;}
+  .contact-side-visual-pro,.contact-card-large,.projection-card,.financial-card,.summary-card,.tech-card,.benefit-card{box-shadow:none !important;}
+  .contact-side-visual-pro{min-height:230px !important;background:#fff !important;}
+  .contact-side-image{display:block !important;position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;filter:none !important;}
+  .contact-side-visual-pro::after{display:none !important;}
+  .contact-overlay-card{background:rgba(255,255,255,.96) !important;box-shadow:none !important;}
+}
