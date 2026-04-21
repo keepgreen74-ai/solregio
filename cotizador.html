@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SolRegio | Cotizador</title>
+  <title>SolRegio | Cotizador interno</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,11 +19,11 @@
       </a>
       <div class="nav-actions">
         <div class="top-actions">
-  <button class="btn btn-primary" type="button" onclick="guardarActual()">Guardar cliente</button>
-  <button class="btn btn-secondary" type="button" onclick="toggleModo()">Modo cliente</button>
+  <button class="btn btn-secondary" type="button" onclick="guardarActual()">Guardar cliente</button>
+  <button class="btn btn-secondary" type="button" onclick="toggleModo()">Vista limpia</button>
 </div>
         <a class="btn btn-secondary" href="index.html">Volver al sitio</a>
-        <a class="btn btn-primary" href="presentacion.html">Abrir presentación</a>
+        <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta</button>
       </div>
     </div>
   </header>
@@ -169,10 +169,12 @@
             <span>Inversor sugerido</span>
             <strong class="inversor-sugerido">-</strong>
           </div>
+          <div class="auto-note">
+            El sistema se actualiza automáticamente al capturar datos. Solo usa el cálculo automático cuando quieras sugerir paneles desde el consumo.
+          </div>
           <div class="actions-row">
-            <button class="btn btn-secondary" id="btnGeneracion" type="button">Calcular generación</button>
-            <button class="btn btn-secondary" type="button" onclick="calcularMFVautomatico()">Calcular sistema automático</button>
-            <button class="btn btn-primary" id="btnActualizar" type="button">Actualizar análisis</button>
+            <button class="btn btn-secondary" type="button" onclick="calcularMFVautomatico()">Sugerir sistema automático</button>
+            <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta lista para cliente</button>
           </div>
         </section>
 
@@ -305,7 +307,7 @@
         </section>
 
         <section class="panel-block">
-          <h2>Observaciones</h2>
+          <h2>Observaciones para la propuesta</h2>
           <label class="field">
             <span>Texto editable</span>
             <textarea id="observacionesProyecto"></textarea>
@@ -320,7 +322,12 @@
             <h2>Resumen del cálculo</h2>
           </div>
           <button class="btn btn-secondary btn-save" type="button" onclick="guardarActual()">Guardar cliente</button>
-          <a class="btn btn-primary" href="presentacion.html">Ir a presentación</a>
+          <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta</button>
+        </div>
+        <div class="decision-box">
+          <div class="decision-eyebrow">Lectura comercial</div>
+          <strong id="decisionTexto">Captura datos para ver recomendación.</strong>
+          <span id="decisionSubtexto">Aquí verás si el proyecto se ve fuerte, sano o si conviene revisar el dimensionamiento.</span>
         </div>
 
         <div class="stats-grid">

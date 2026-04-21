@@ -28,6 +28,9 @@ function chartOptions(currency = false) {
     responsive: true,
     maintainAspectRatio: false,
     animation: false,
+    layout: {
+      padding: { top: 8, right: 8, bottom: 4, left: 4 }
+    },
     plugins: {
       legend: {
         labels: {
@@ -129,7 +132,16 @@ function renderCharts(data) {
         }
       ]
     },
-    options: chartOptions(false)
+    options: {
+      ...chartOptions(false),
+      plugins: {
+        ...chartOptions(false).plugins,
+        legend: {
+          ...chartOptions(false).plugins.legend,
+          position: 'bottom'
+        }
+      }
+    }
   });
 
   chartCostos = new Chart(costosCanvas, {
@@ -141,7 +153,20 @@ function renderCharts(data) {
         { label: 'Costo con paneles', data: data.costosConSolar || [], backgroundColor: '#00E676', borderRadius: 10 }
       ]
     },
-    options: chartOptions(true)
+    options: {
+      ...chartOptions(true),
+      plugins: {
+        ...chartOptions(true).plugins,
+        legend: {
+          ...chartOptions(true).plugins.legend,
+          position: 'bottom'
+        },
+        datalabels: {
+          ...chartOptions(true).plugins.datalabels,
+          display: false
+        }
+      }
+    }
   });
 
   chartRoi = new Chart(roiCanvas, {
@@ -176,6 +201,20 @@ function renderCharts(data) {
   });
 }
 
+function deriveFinancials(data) {
+  const total = Number(data?.interno?.precioFinalConIva || data?.costoSistema || 0);
+  const subtotal = Number(data?.interno?.subtotalSinIva || (total ? (total / 1.16) : 0));
+  const iva = Number(data?.interno?.iva || (total - subtotal));
+  return { total, subtotal, iva };
+}
+
+function getDecisionText(data) {
+  if ((data?.roiYears || 0) > 0 && data.roiYears <= 5) return 'Proyecto con retorno sólido y alto potencial de ahorro.';
+  if ((data?.roiYears || 0) > 0 && data.roiYears <= 7) return 'Proyecto conveniente con buen equilibrio entre inversión y ahorro.';
+  if ((data?.roiYears || 0) > 0) return 'Proyecto viable, sujeto a validación final para optimizar configuración.';
+  return 'Pendiente de validar configuración final del sistema.';
+}
+
 function render(data) {
   setText('outCliente', data.clienteNombre || '-');
   setText('outUbicacion', data.clienteUbicacion || '-');
@@ -189,7 +228,10 @@ function render(data) {
   setText('metricGeneracion', `${numberFmt(data.generacionAnual)} kWh`);
   setText('metricPotencia', `${numberFmt(data.potenciaSistemaKW, 2)} kW`);
   setText('metricPaneles', `${numberFmt(data.numMFV)} paneles`);
-  setText('metricCobertura', `${numberFmt(data.cobertura, 1)} %`);
+  const financials = deriveFinancials(data);
+  const coberturaMostrada = Math.min(Number(data.cobertura || 0), 100);
+
+  setText('metricCobertura', `Hasta ${numberFmt(coberturaMostrada, 1)} %`);
   setText('metricAhorro', money(data.ahorroAnual));
   setText('metricRoi', data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A');
 
@@ -199,11 +241,12 @@ function render(data) {
   setText('sum20', money((data.cumulative || [])[19] || 0));
   setText('sum25', money((data.cumulative || [])[24] || 0));
 
-  setText('pdfSubtotal', money(data?.interno?.subtotalSinIva || 0));
-  setText('pdfIva', money(data?.interno?.iva || 0));
-  setText('pdfTotal', money(data?.interno?.precioFinalConIva || data.costoSistema || 0));
+  setText('pdfSubtotal', money(financials.subtotal || 0));
+  setText('pdfIva', money(financials.iva || 0));
+  setText('pdfTotal', money(financials.total || 0));
   setText('invAhorro', money(data.ahorroAnual || 0));
   setText('invRoi', data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A');
+  setText('decisionText', getDecisionText(data));
 
   setText('techPotencia', `${numberFmt(data.potenciaSistemaKW, 2)} kW`);
   setText('techMfvs', `${numberFmt(data.numMFV)} módulos`);

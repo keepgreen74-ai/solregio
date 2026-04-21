@@ -1357,3 +1357,242 @@ input:focus,select:focus,textarea:focus{
   .contact-side-visual-pro::after{display:none !important;}
   .contact-overlay-card{background:rgba(255,255,255,.96) !important;box-shadow:none !important;}
 }
+
+/* ===== Presentación V7 compacta ===== */
+.impact-copy{
+  margin:18px 0 0;
+  max-width:620px;
+  color:#1d2939;
+  line-height:1.75;
+  font-weight:600;
+}
+.page-balanced{
+  display:grid;
+  gap:22px;
+}
+.page-section-tight{
+  display:grid;
+  gap:14px;
+}
+.metrics-grid-tight .metric-card{
+  min-height:108px;
+  padding:16px;
+}
+.financial-section-combined{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+  align-items:start;
+}
+.section-mini-title{
+  margin:0;
+  font-size:1.35rem;
+  letter-spacing:-.04em;
+}
+.section-mini-sub{
+  margin:6px 0 0;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.97rem;
+}
+.compact-table-tight{
+  margin-top:12px;
+}
+.compact-table-tight th,
+.compact-table-tight td{
+  padding:12px 14px;
+}
+.compact-side-stack{
+  display:grid;
+  gap:12px;
+}
+.financial-card,
+.summary-card-compact,
+.compact-card-block{
+  padding:18px;
+}
+.financial-card h3{
+  margin:0 0 14px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.financial-lines{
+  display:grid;
+  gap:12px;
+}
+.financial-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:10px;
+}
+.financial-line span{
+  color:var(--muted);
+  font-weight:700;
+}
+.financial-line strong{
+  font-size:1.1rem;
+}
+.financial-line.total strong{
+  font-size:1.3rem;
+}
+.financial-divider{
+  height:1px;
+  background:var(--line);
+}
+.emphasis-card{
+  background:linear-gradient(135deg, rgba(0,230,118,.10), rgba(0,200,83,.05));
+  border-color:rgba(0,200,83,.28);
+}
+.chart-page-balanced .graph-card{
+  padding:16px;
+}
+.chart-page-balanced .chart-box{
+  height:240px;
+}
+.chart-page-balanced .chart-tall{
+  height:280px;
+}
+.tech-layout-tight{
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.compact-list-sm{
+  font-size:.95rem;
+  line-height:1.75;
+  padding-left:18px;
+}
+.note-box-tight{
+  margin-top:14px;
+  padding:16px;
+}
+.note-box-tight p{
+  font-size:.96rem;
+  line-height:1.7;
+}
+.final-page-grid-shell{
+  gap:16px;
+}
+.final-two-column-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.terms-grid-tight .summary-card,
+.final-two-column-grid .summary-card{
+  min-height:unset;
+}
+.contact-strip-pro{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:18px;
+  align-items:start;
+}
+.contact-strip-pro h3{
+  margin:10px 0 8px;
+  font-size:1.3rem;
+  letter-spacing:-.03em;
+}
+.contact-strip-pro p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.compact-contact-lines{
+  display:grid;
+  gap:8px;
+  color:#344054;
+  font-size:.98rem;
+  align-self:center;
+}
+.compact-contact-lines strong{
+  color:#101828;
+}
+@media print{
+  .page-balanced,
+  .page-section-tight{
+    gap:14px !important;
+  }
+  .financial-section-combined,
+  .final-two-column-grid,
+  .contact-strip-pro,
+  .tech-layout-tight{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .chart-page-balanced .chart-box{
+    height:190px !important;
+  }
+  .chart-page-balanced .chart-tall{
+    height:220px !important;
+  }
+}
+@media (max-width:980px){
+  .financial-section-combined,
+  .final-two-column-grid,
+  .contact-strip-pro,
+  .tech-layout-tight{
+    grid-template-columns:1fr;
+  }
+}
+
+
+.chart-page-balanced .graph-card h3{
+  margin-bottom:10px;
+}
+.chart-page-balanced .graph-card{
+  overflow:hidden;
+}
+.chart-page-balanced .chart-box canvas,
+.chart-page-balanced .chart-box img.chart-export{
+  max-width:100%;
+}
+.final-page-tech .page-sub{
+  margin-bottom:18px;
+}
+.benefits-next-grid{
+  margin-top:14px;
+}
+.final-page-close{
+  display:grid;
+  gap:16px;
+  align-content:start;
+}
+.close-top-grid{
+  margin-top:0;
+}
+.contact-strip-pro-final{
+  margin-top:4px;
+}
+@media print{
+  .final-page-tech,
+  .final-page-close{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .contact-strip-pro-final,
+  .close-top-grid,
+  .benefits-next-grid,
+  .tech-layout-tight,
+  .note-box-tight{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .chart-page-balanced .graph-card{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+
+/* Ajustes V10 */
+@media print{
+  .final-page-tech{
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+}

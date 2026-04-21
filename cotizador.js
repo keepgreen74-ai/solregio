@@ -69,6 +69,48 @@ let quickChartCostos;
 let debounceTimer;
 let modoInterno = true;
 
+function guardarYabrir() {
+  const data = getData();
+  saveData(data);
+  guardarDefaultsInternos();
+  window.open('presentacion.html', '_blank');
+}
+
+function getDecisionComercial(data) {
+  if (!data || !data.consumoAnual) {
+    return {
+      titulo: 'Captura datos para ver recomendación.',
+      detalle: 'La lectura comercial aparecerá cuando exista consumo, costo y configuración del sistema.'
+    };
+  }
+
+  if (data.cobertura > 115) {
+    return {
+      titulo: '⚠️ Sistema sobrado',
+      detalle: 'La generación está muy por encima del consumo. Puede convenir bajar paneles o revisar objetivo del proyecto.'
+    };
+  }
+
+  if (data.roiYears > 0 && data.roiYears <= 5.5) {
+    return {
+      titulo: '🔥 Proyecto fuerte para cierre',
+      detalle: 'La relación entre ahorro, cobertura y retorno se ve comercialmente atractiva.'
+    };
+  }
+
+  if (data.roiYears > 0 && data.roiYears <= 7) {
+    return {
+      titulo: '👍 Proyecto sano',
+      detalle: 'Hace sentido, aunque quizá convenga ajustar inversión o cobertura según el objetivo del cliente.'
+    };
+  }
+
+  return {
+    titulo: '🛠️ Revisar configuración',
+    detalle: 'El retorno luce alto o la cobertura todavía no está fina. Conviene ajustar el sistema o el costo.'
+  };
+}
+
 function money(value) {
   return new Intl.NumberFormat('es-MX', {
     style: 'currency',
@@ -840,12 +882,6 @@ function init() {
     debounceUpdate();
   });
 
-  refs.btnGeneracion?.addEventListener('click', () => {
-    calcularGeneracion();
-    updateAll();
-  });
-
-  refs.btnActualizar?.addEventListener('click', updateAll);
 
   const cantidadInversoresEl = document.getElementById('cantidadInversores');
   const capacidadInversorEl = document.getElementById('capacidadInversor');
@@ -932,3 +968,4 @@ function toggleModo() {
 
 init();
 mostrarClientes();
+window.guardarYabrir = guardarYabrir;
