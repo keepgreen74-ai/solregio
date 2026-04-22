@@ -7,7 +7,1607 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+:root{
+  --bg:#f3f5f8;
+  --paper:#ffffff;
+  --paper-soft:#fafbfc;
+  --text:#101828;
+  --muted:#667085;
+  --line:#e4e7ec;
+  --green:#00E676;
+  --green-deep:#00C853;
+  --shadow:0 18px 40px rgba(16,24,40,.08);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Inter",sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#f8fafc 0%,#eef2f6 100%);
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.hidden{display:none !important}
+.mt-28{margin-top:28px}
+.label-block{display:block;margin-bottom:14px}
+
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.container{
+  width:min(1320px, calc(100% - 28px));
+  margin:0 auto;
+}
+.nav{
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.brand-logo{
+  height:76px;
+  width:auto;
+  object-fit:contain;
+}
+.nav-links{
+  display:flex;
+  gap:24px;
+  color:var(--muted);
+  font-weight:600;
+}
+.nav-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  min-height:46px;
+  padding:0 18px;
+  border-radius:14px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:.22s ease;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--green),var(--green-deep));
+  color:#062111;
+  box-shadow:0 10px 24px rgba(0,200,83,.14);
+}
+.btn-secondary{
+  background:#fff;
+  border-color:var(--line);
+  color:var(--text);
+}
+
+.eyebrow{
+  display:inline-flex;
+  min-height:34px;
+  padding:0 14px;
+  align-items:center;
+  border-radius:999px;
+  background:rgba(0,230,118,.10);
+  color:#0e7a45;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.hero{
+  padding:62px 0;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:26px;
+  align-items:center;
+}
+.hero-copy h1{
+  margin:18px 0 14px;
+  font-size:clamp(2.3rem, 5vw, 4rem);
+  line-height:.98;
+  letter-spacing:-.06em;
+}
+.hero-copy p{
+  color:var(--muted);
+  max-width:680px;
+  line-height:1.8;
+  font-size:1.05rem;
+}
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+.hero-points{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-top:18px;
+  color:var(--muted);
+  font-weight:600;
+}
+.card-glass{
+  min-height:420px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(255,255,255,.5);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.58) 0%, rgba(255,255,255,.80) 34%, rgba(255,255,255,.94) 68%, rgba(255,255,255,.98) 100%),
+    url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+}
+.hero-visual-content{
+  position:absolute;
+  bottom:32px;
+  left:32px;
+  right:32px;
+}
+.hero-visual-content h2{
+  margin:12px 0 10px;
+  font-size:2rem;
+  letter-spacing:-.04em;
+}
+.hero-visual-content p{
+  color:#475467;
+  line-height:1.75;
+}
+.visual-kicker{
+  display:inline-flex;
+  min-height:34px;
+  padding:0 14px;
+  align-items:center;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(16,24,40,.08);
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:.76rem;
+}
+
+.section{
+  padding:60px 0;
+}
+.section-soft{
+  background:#fff;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.section-head h2,
+.process-grid h2,
+.contact-strip h2{
+  font-size:2.1rem;
+  letter-spacing:-.04em;
+  margin:14px 0 0;
+}
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:24px;
+}
+.feature-card,
+.process-item,
+.contact-strip{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.feature-card h3{
+  margin:0 0 10px;
+  letter-spacing:-.03em;
+}
+.feature-card p,
+.process-item,
+.contact-strip p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.process-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:22px;
+  align-items:start;
+}
+.process-list{
+  display:grid;
+  gap:14px;
+}
+.contact-strip{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.builder-shell{
+  width:min(1440px, calc(100% - 28px));
+  margin:0 auto;
+  padding:20px 0 50px;
+}
+.builder-grid{
+  display:grid;
+  grid-template-columns:420px minmax(760px, 1fr);
+  gap:22px;
+  align-items:start;
+}
+.builder-panel{
+  background:var(--paper);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:22px;
+  padding:22px;
+  position:sticky;
+  top:102px;
+  max-height:calc(100vh - 122px);
+  overflow:auto;
+}
+.panel-title-block h1{
+  margin:14px 0 8px;
+  font-size:1.6rem;
+  letter-spacing:-.04em;
+}
+.panel-title-block p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.panel-block{
+  margin-top:22px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+.panel-block:first-of-type{
+  margin-top:18px;
+  padding-top:0;
+  border-top:0;
+}
+.panel-block h2{
+  margin:0 0 12px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.form-grid{
+  display:grid;
+  gap:12px;
+}
+.form-grid.two{
+  grid-template-columns:repeat(2,1fr);
+}
+.field{
+  display:grid;
+  gap:7px;
+}
+.field.wide{
+  grid-column:1 / -1;
+}
+.field span{
+  font-size:.83rem;
+  color:var(--muted);
+  font-weight:700;
+}
+input,select,textarea{
+  width:100%;
+  min-height:48px;
+  border-radius:12px;
+  border:1px solid #d0d5dd;
+  background:#fff;
+  padding:12px 14px;
+  outline:none;
+  color:var(--text);
+}
+textarea{
+  min-height:120px;
+  resize:vertical;
+  line-height:1.6;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:rgba(0,200,83,.6);
+  box-shadow:0 0 0 4px rgba(0,230,118,.12);
+}
+.inline-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.builder-preview{
+  min-width:0;
+}
+.preview-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:18px;
+  margin-bottom:18px;
+}
+.preview-head h2{
+  margin:14px 0 0;
+  font-size:2rem;
+  letter-spacing:-.04em;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:16px;
+}
+.stat-card,
+.metric-card,
+.summary-card,
+.info-card,
+.graph-card,
+.tech-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+.stat-card,
+.metric-card,
+.summary-card,
+.info-card{
+  padding:18px;
+  min-height:126px;
+}
+.stat-card span,
+.label{
+  display:block;
+  margin-bottom:10px;
+  color:var(--muted);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.stat-card strong,
+.value{
+  display:block;
+  color:var(--text);
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:1.35;
+  word-break:break-word;
+}
+.value-name{
+  font-size:1.08rem;
+  line-height:1.45;
+}
+.chart-grid,
+.graphs-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.chart-card,
+.graph-card{
+  padding:18px;
+}
+.chart-card h3,
+.graph-card h3{
+  margin:0 0 14px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.chart-box{
+  position:relative;
+  width:100%;
+  height:300px;
+}
+.chart-tall{
+  height:340px;
+}
+.presentation-shell{
+  width:min(980px, calc(100% - 28px));
+  margin:20px auto 60px;
+}
+.pdf-page{
+  width:100%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:34px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+.cover-page{
+  min-height:1040px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.58) 0%, rgba(255,255,255,.80) 34%, rgba(255,255,255,.94) 68%, rgba(255,255,255,.98) 100%),
+    url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+}
+.cover-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+}
+.cover-logo{
+  height:76px;
+  width:auto;
+}
+.cover-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(16,24,40,.08);
+  font-size:.82rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.cover-bottom{
+  max-width:760px;
+}
+.cover-title{
+  margin:0;
+  font-size:3.5rem;
+  line-height:.96;
+  letter-spacing:-.07em;
+  color:#0f172a;
+  max-width:700px;
+}
+.cover-sub{
+  margin:18px 0 0;
+  color:#475467;
+  font-size:1.08rem;
+  line-height:1.8;
+  max-width:640px;
+}
+.meta-grid,
+.metrics-grid,
+.closing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.metrics-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.page-title{
+  margin:0 0 10px;
+  font-size:2rem;
+  letter-spacing:-.05em;
+}
+.page-sub{
+  margin:0 0 24px;
+  color:var(--muted);
+  line-height:1.75;
+  max-width:760px;
+  font-size:1.02rem;
+}
+.graph-card.wide{
+  grid-column:1 / -1;
+}
+.projection-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:18px;
+  border:1px solid var(--line);
+  overflow:hidden;
+  border-radius:18px;
+}
+.projection-table th,
+.projection-table td{
+  padding:14px 16px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:.98rem;
+}
+.projection-table th{
+  background:#fafbfc;
+  color:#475467;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-size:.78rem;
+}
+.projection-table tr:last-child td{
+  border-bottom:0;
+}
+.projection-table td:last-child{
+  font-weight:800;
+}
+.tech-layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+}
+.tech-card{
+  padding:22px;
+}
+.tech-stack{
+  display:grid;
+  gap:16px;
+}
+.tech-item strong{
+  display:block;
+  color:var(--muted);
+  font-size:.8rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.tech-item span{
+  display:block;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:1.35;
+}
+.clean-list{
+  margin:0;
+  padding-left:22px;
+  line-height:1.95;
+  font-size:1.05rem;
+}
+.note-box{
+  margin-top:18px;
+  background:#fbfcfd;
+  border:1px dashed #d0d5dd;
+  border-radius:18px;
+  padding:18px;
+}
+.note-box h3{
+  margin:0 0 12px;
+  font-size:1rem;
+}
+.note-box p{
+  margin:0;
+  color:#475467;
+  line-height:1.8;
+  white-space:pre-line;
+}
+.closing-copy{
+  margin-top:26px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+.closing-copy p{
+  margin:0 0 14px;
+  color:#475467;
+  line-height:1.8;
+  font-size:1.04rem;
+  max-width:720px;
+}
+.small-note{
+  color:#667085;
+  font-size:.95rem;
+}
+
+@page{
+  size:A4;
+  margin:12mm;
+}
+@media print{
+  body{background:#fff !important}
+  .operator-only,.site-header{display:none !important}
+  .presentation-shell{
+    width:100% !important;
+    margin:0 !important;
+  }
+  .pdf-page{
+    border:0 !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    margin:0 0 10mm 0 !important;
+    page-break-after:always;
+    break-after:page;
+    min-height:auto !important;
+  }
+  .pdf-page:last-child{
+    page-break-after:auto;
+    break-after:auto;
+  }
+  .chart-box{height:220px !important}
+  .chart-tall{height:250px !important}
+}
+@media (max-width:1300px){
+  .builder-grid{grid-template-columns:1fr}
+  .builder-panel{position:static;max-height:none}
+}
+@media (max-width:980px){
+  .hero-grid,
+  .feature-grid,
+  .process-grid,
+  .stats-grid,
+  .chart-grid,
+  .graphs-grid,
+  .meta-grid,
+  .metrics-grid,
+  .tech-layout,
+  .closing-grid{
+    grid-template-columns:1fr;
+  }
+  .pdf-page{padding:22px}
+  .cover-title{font-size:2.5rem}
+}
+@media (max-width:700px){
+  .nav{flex-direction:column;padding:12px 0}
+  .brand-logo,.cover-logo{height:62px}
+  .nav-links,.nav-actions,.hero-actions,.toolbar,.inline-actions{width:100%;flex-direction:column}
+  .btn{width:100%}
+  .form-grid.two{grid-template-columns:1fr}
+}
+
+.testimonios {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.testimonios h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.testimonios .sub {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.testimonio-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.testimonio-card p {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.testimonio-card span {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+.cta-buttons a.btn-whatsapp-main,
+.cta-buttons a.btn-whatsapp-main:link,
+.cta-buttons a.btn-whatsapp-main:visited {
+  display: inline-block !important;
+  background: #00E676 !important;
+  color: #000 !important;
+  padding: 14px 22px !important;
+  border-radius: 10px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border: none !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12) !important;
+  cursor: pointer !important;
+  line-height: 1.2 !important;
+}
+
+.cta-buttons a.btn-whatsapp-main:hover {
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
+
+.cta-buttons a.btn-whatsapp-secondary,
+.cta-buttons a.btn-whatsapp-secondary:link,
+.cta-buttons a.btn-whatsapp-secondary:visited {
+  display: inline-block !important;
+  color: #222 !important;
+  text-decoration: underline !important;
+  background: transparent !important;
+  padding: 6px 2px !important;
+  font-size: 14px !important;
+}
+
+.mantenimiento {
+  padding: 60px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.mantenimiento h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.mantenimiento p {
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.mantenimiento ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.mantenimiento li {
+  margin-bottom: 10px;
+}
+
+.btn-save {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--text);
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .22s ease;
+  box-shadow: 0 10px 24px rgba(16,24,40,.06);
+}
+
+.btn-save:hover {
+  transform: translateY(-1px);
+  border-color: #cfd6e1;
+}
+
+.crm-panel {
+  margin-top: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.crm-panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.6rem;
+  letter-spacing: -.04em;
+}
+
+.crm-empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+#clientesLista {
+  display: grid;
+  gap: 14px;
+}
+
+.cliente-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(16,24,40,.05);
+}
+
+.cliente-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.cliente-card-head h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.cliente-card-head p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.cliente-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(0,230,118,.10);
+  color: #0e7a45;
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.cliente-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+}
+
+.cliente-card-grid p {
+  margin: 0;
+  color: #344054;
+  line-height: 1.55;
+}
+
+@media (max-width:700px) {
+  .cliente-card-head,
+  .cliente-card-grid {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .cliente-card-head {
+    gap: 10px;
+  }
+}
+
+
+.cliente-card-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+.btn-crm{
+  min-height:42px;
+  border-radius:12px;
+  box-shadow:none;
+}
+.btn-crm-danger{
+  border-color:#fecaca;
+  color:#b42318;
+  background:#fff5f5;
+}
+.btn-crm-danger:hover{
+  border-color:#fca5a5;
+  background:#ffeaea;
+}
+
+.internal-summary {
+  margin-top: 20px;
+}
+
+#bloqueEconomicoInterno .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#bloqueEconomicoInterno label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: .83rem;
+  font-weight: 700;
+}
+
+#bloqueEconomicoInterno h2 {
+  margin: 6px 0 0;
+  letter-spacing: -.02em;
+}
+
+.btn-save {
+  margin-left: auto;
+}
+
+.modo-cliente .interno {
+  display: none !important;
+}
+
+@media print{
+  .cover-page{
+    background:#ffffff !important;
+    background-image:none !important;
+    color:#101828 !important;
+  }
+  .cover-badge{
+    background:#ffffff !important;
+  }
+  .graphs-grid{
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .graph-card.wide{
+    grid-column:auto !important;
+  }
+  .chart-box{
+    height:190px !important;
+  }
+  .chart-tall{
+    height:220px !important;
+  }
+  .projection-table{
+    margin-top:12px !important;
+  }
+}
+
+@media print {
+  .pdf-page {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .graphs-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    align-items: start !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .graph-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+
+  .graph-card.wide {
+    grid-column: 1 / -1 !important;
+  }
+
+  .chart-box {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+  }
+
+  .chart-box.chart-tall {
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+  }
+
+  .chart-box canvas,
+  .chart-box img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .page-title,
+  .page-sub,
+  .graph-card h3 {
+    page-break-after: avoid !important;
+  }
+}
+
+
+
+.gdmth-note{
+  margin:0 0 12px;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:.92rem;
+}
+
+
+.gdmth-note{margin:0 0 10px;color:var(--muted);font-size:.82rem;line-height:1.5}
+#bloqueGDMTH .form-grid.two{gap:10px 12px}
+#bloqueGDMTH .field span{font-size:.78rem}
+.stats-grid{gap:12px;margin-bottom:14px}
+.stat-card,.metric-card,.summary-card,.info-card{padding:16px;min-height:112px}
+.chart-card,.graph-card{padding:16px}
+.chart-box{height:280px}
+@media (max-width:700px){#bloqueGDMTH .form-grid.two{grid-template-columns:1fr}}
+
+
+#bloqueEconomicoInterno .internal-summary-pro {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+#bloqueEconomicoInterno .gdmth-note,
+.gdmth-note {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+@media (max-width:980px){
+  #bloqueEconomicoInterno .internal-summary-pro{grid-template-columns:1fr;}
+}
+
+
+.investment-layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+  align-items:start;
+}
+
+.closing-grid.compact{
+  grid-template-columns:1fr;
+  margin:0;
+}
+
+.financial-card,
+.benefit-card,
+.contact-card-large,
+.contact-side-visual{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
+
+.financial-card{
+  padding:24px;
+}
+
+.financial-card h3{
+  margin:0 0 18px;
+  font-size:1.2rem;
+  letter-spacing:-.03em;
+}
+
+.financial-lines{
+  display:grid;
+  gap:12px;
+}
+
+.financial-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  font-size:1.02rem;
+}
+
+.financial-line span{
+  color:var(--muted);
+  font-weight:700;
+}
+
+.financial-line strong{
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.financial-divider{
+  height:1px;
+  background:var(--line);
+  margin:4px 0;
+}
+
+.financial-line.total strong{
+  font-size:1.6rem;
+  color:#0e7a45;
+}
+
+.benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.benefit-card{
+  padding:22px;
+}
+
+.benefit-card h3{
+  margin:0 0 10px;
+  font-size:1.1rem;
+  letter-spacing:-.02em;
+}
+
+.benefit-card p{
+  margin:0;
+  color:#475467;
+  line-height:1.75;
+}
+
+.benefit-icon{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,230,118,.12);
+  font-size:1.5rem;
+  margin-bottom:14px;
+}
+
+.terms-grid,
+.contact-page-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.compact-list{
+  font-size:1rem;
+  line-height:1.8;
+}
+
+.contact-card-large,
+.contact-side-visual{
+  padding:26px;
+  min-height:280px;
+}
+
+.contact-card-large{
+  display:grid;
+  gap:14px;
+}
+
+.contact-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  width:max-content;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(0,230,118,.10);
+  color:#0e7a45;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.contact-card-large h3,
+.contact-side-copy h3{
+  margin:0;
+  font-size:1.4rem;
+  letter-spacing:-.03em;
+}
+
+.contact-text,
+.contact-side-copy p{
+  margin:0;
+  color:#475467;
+  line-height:1.8;
+}
+
+.contact-lines{
+  display:grid;
+  gap:10px;
+  color:#101828;
+  line-height:1.7;
+}
+
+.contact-side-visual{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.88) 100%),
+    url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+}
+
+.contact-side-copy{
+  max-width:360px;
+}
+
+@media (max-width:980px){
+  .investment-layout,
+  .benefits-grid,
+  .terms-grid,
+  .contact-page-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media print{
+  .financial-line strong{font-size:1.15rem !important;}
+  .financial-line.total strong{font-size:1.4rem !important;}
+  .contact-side-visual{background:#f8fafc !important;}
+}
+
+
+/* ===== Ajustes finales propuesta premium ===== */
+.proposal-pro .pdf-page{padding:28px 30px;margin-bottom:14px}
+.compact-page{min-height:auto}
+.cover-pro-page{padding:26px 28px 24px !important; min-height:960px; display:block; background:#fff !important}
+.cover-pro-grid{display:grid;grid-template-columns:minmax(0,1.02fr) 0.98fr;gap:24px;align-items:stretch}
+.cover-copy-block{display:grid;grid-template-rows:auto auto 1fr;gap:18px}
+.cover-top-pro{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.cover-copy-main{padding-top:8px}
+.cover-copy-main .cover-title{font-size:3rem;line-height:.96;max-width:520px;margin-bottom:12px}
+.cover-copy-main .cover-sub{font-size:1rem;max-width:520px;margin-top:0}
+.cover-meta-layout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-content:start}
+.cover-meta-layout .info-card{min-height:unset;padding:16px 18px;border-radius:18px}
+.cover-meta-layout .label{margin-bottom:8px}
+.cover-meta-layout .value{font-size:1.02rem;line-height:1.45;word-break:normal;overflow-wrap:anywhere}
+.info-wide{grid-column:1 / span 3}
+.info-small{grid-column:4 / span 1}
+.info-full{grid-column:1 / -1}
+.triple-meta-row{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#cardCliente .value{font-size:1.18rem;font-weight:800}
+.cover-visual-block{display:flex;align-items:stretch}
+.cover-main-image{width:100%;height:100%;min-height:860px;object-fit:cover;border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.compact-metrics-grid{gap:12px}
+.compact-metrics-grid .metric-card{min-height:108px;padding:16px}
+.charts-page .graphs-grid{gap:14px}
+.compact-chart{height:250px}
+.compact-chart-tall{height:300px}
+.projection-finance-layout{display:grid;grid-template-columns:1.02fr .98fr;gap:18px;align-items:start}
+.projection-card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:10px 14px 12px}
+.compact-table{margin-top:0}
+.compact-table th,.compact-table td{padding:12px 14px}
+.projection-side{display:grid;gap:14px}
+.projection-side .summary-card{min-height:unset;padding:18px}
+.compact-tech-layout{gap:14px}
+.compact-tech-stack{gap:14px}
+.compact-note-box{margin-top:14px;padding:16px}
+.compact-note-box p{line-height:1.7}
+.compact-benefits-grid .benefit-card{padding:20px}
+.compact-benefits-grid .benefit-card p{line-height:1.65}
+.compact-terms-grid .summary-card{padding:20px}
+.compact-list{line-height:1.65;font-size:.98rem}
+.compact-list-tight{line-height:1.8;font-size:1rem}
+.contact-grid-pro{align-items:stretch}
+.contact-card-large,.contact-side-visual-pro{min-height:320px;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);background:#fff;overflow:hidden}
+.contact-card-large{padding:24px}
+.contact-side-visual-pro{position:relative;display:flex;align-items:flex-end}
+.contact-side-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.contact-side-visual-pro::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,24,40,.18) 0%, rgba(16,24,40,.38) 100%)}
+.contact-overlay-card{position:relative;z-index:2;margin:18px;background:rgba(255,255,255,.94);padding:22px;border-radius:18px;max-width:340px;box-shadow:0 12px 28px rgba(16,24,40,.10)}
+.contact-overlay-card p{margin-top:8px}
+@media (max-width:980px){
+  .cover-pro-grid,.projection-finance-layout,.compact-tech-layout,.contact-grid-pro{grid-template-columns:1fr}
+  .cover-main-image{min-height:420px}
+  .cover-copy-main .cover-title{font-size:2.35rem;max-width:none}
+  .cover-meta-layout{grid-template-columns:1fr 1fr}
+  .info-wide,.info-full,.info-small,.triple-meta-row{grid-column:auto}
+  .triple-meta-row{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .proposal-pro .pdf-page{padding:20px 22px !important;margin:0 0 7mm 0 !important;box-shadow:none !important;border:0 !important;border-radius:0 !important}
+  .cover-pro-page{min-height:auto !important}
+  .cover-pro-grid{grid-template-columns:1fr 0.95fr !important;gap:16px !important}
+  .cover-copy-main .cover-title{font-size:2.55rem !important;max-width:none !important}
+  .cover-main-image{min-height:0 !important;height:100% !important;border-radius:24px !important}
+  .cover-meta-layout .info-card{padding:12px 14px !important}
+  .cover-meta-layout .value{font-size:.96rem !important;line-height:1.35 !important;word-break:normal !important;overflow-wrap:anywhere !important}
+  .compact-metrics-grid .metric-card{min-height:86px !important;padding:12px !important}
+  .charts-page .compact-chart{height:170px !important}
+  .charts-page .compact-chart-tall{height:210px !important}
+  .projection-finance-layout{grid-template-columns:1fr 1fr !important;gap:14px !important}
+  .projection-card,.financial-card,.summary-card,.tech-card,.benefit-card,.contact-card-large,.contact-side-visual-pro{box-shadow:none !important}
+  .contact-side-visual-pro{background:#f3f5f8 !important}
+  .contact-side-image{display:block !important;filter:none !important}
+  .contact-side-visual-pro::after{display:none !important}
+  .contact-overlay-card{background:rgba(255,255,255,.96) !important}
+}
+
+
+/* ===== portada y ajustes finos v5.4.2 ===== */
+.cover-pro-page{padding:24px 26px 24px !important; min-height:auto !important; display:block; background:#fff !important;}
+.cover-pro-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:20px;align-items:end;}
+.cover-copy-block{display:grid;grid-template-rows:auto auto 1fr;gap:16px;min-height:0;}
+.cover-copy-main{padding-top:4px;}
+.cover-copy-main .cover-title{font-size:3rem;line-height:.95;max-width:560px;margin:0 0 12px;}
+.cover-copy-main .cover-sub{margin:0;max-width:560px;line-height:1.7;}
+.cover-meta-layout{display:grid;grid-template-columns:2fr 1.25fr;gap:12px;align-content:end;}
+.cover-meta-layout .info-card{min-height:auto;padding:14px 16px;border-radius:18px;}
+.cover-meta-layout .label{margin-bottom:6px;}
+.cover-meta-layout .value{font-size:1.02rem;line-height:1.4;word-break:normal;overflow-wrap:anywhere;}
+.info-wide{grid-column:1 / 2;}
+.info-small{grid-column:2 / 3;}
+.info-full{grid-column:1 / -1;}
+.triple-meta-row{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+#cardCliente .value{font-size:1.16rem;font-weight:800;}
+.cover-visual-block{display:flex;justify-content:flex-end;align-items:flex-end;}
+.cover-main-frame{width:100%;max-width:390px;aspect-ratio:1 / 1;border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;background:#f6f8fb;}
+.cover-main-image{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:30px;display:block;}
+.compact-page .page-sub{margin-bottom:18px;}
+.compact-page .page-title{margin-bottom:8px;}
+.pdf-page.compact-page{padding-top:26px;padding-bottom:24px;}
+.contact-grid-pro{gap:14px;}
+.contact-card-large{min-height:260px;}
+.contact-side-visual-pro{min-height:260px;}
+.contact-overlay-card{margin:16px;max-width:320px;}
+@media (max-width:980px){
+  .cover-pro-grid{grid-template-columns:1fr;gap:16px;}
+  .cover-main-frame{max-width:none;width:100%;}
+  .cover-copy-main .cover-title{font-size:2.5rem;max-width:none;}
+  .cover-meta-layout{grid-template-columns:1fr 1fr;}
+  .info-wide,.info-small,.info-full{grid-column:auto;}
+  .info-full{grid-column:1 / -1;}
+  .triple-meta-row{grid-template-columns:1fr;}
+}
+@media print{
+  body{background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .proposal-pro .pdf-page{padding:18px 20px !important;margin:0 0 6mm 0 !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;page-break-after:always;break-after:page;}
+  .proposal-pro .pdf-page:last-child{page-break-after:auto !important;break-after:auto !important;}
+  .cover-pro-page{padding:18px 20px !important;}
+  .cover-pro-grid{grid-template-columns:1.08fr .92fr !important;gap:14px !important;align-items:end !important;}
+  .cover-copy-main .cover-title{font-size:2.45rem !important;line-height:.96 !important;max-width:none !important;margin-bottom:10px !important;}
+  .cover-copy-main .cover-sub{font-size:.98rem !important;line-height:1.6 !important;max-width:none !important;}
+  .cover-meta-layout{grid-template-columns:2fr 1.15fr !important;gap:10px !important;}
+  .cover-meta-layout .info-card{padding:11px 12px !important;border-radius:16px !important;}
+  .cover-meta-layout .value{font-size:.94rem !important;line-height:1.3 !important;}
+  .triple-meta-row{grid-template-columns:repeat(3,1fr) !important;gap:10px !important;}
+  .cover-main-frame{max-width:320px !important;aspect-ratio:1 / 1 !important;border-radius:24px !important;overflow:hidden !important;box-shadow:none !important;}
+  .cover-main-image{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important;border-radius:24px !important;}
+  .compact-page .page-sub{margin-bottom:14px !important;}
+  .pdf-page.compact-page{padding-top:20px !important;padding-bottom:18px !important;}
+  .compact-page .page-title{margin-bottom:6px !important;}
+  .contact-side-visual-pro,.contact-card-large,.projection-card,.financial-card,.summary-card,.tech-card,.benefit-card{box-shadow:none !important;}
+  .contact-side-visual-pro{min-height:230px !important;background:#fff !important;}
+  .contact-side-image{display:block !important;position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;filter:none !important;}
+  .contact-side-visual-pro::after{display:none !important;}
+  .contact-overlay-card{background:rgba(255,255,255,.96) !important;box-shadow:none !important;}
+}
+
+/* ===== Presentación V7 compacta ===== */
+.impact-copy{
+  margin:18px 0 0;
+  max-width:620px;
+  color:#1d2939;
+  line-height:1.75;
+  font-weight:600;
+}
+.page-balanced{
+  display:grid;
+  gap:22px;
+}
+.page-section-tight{
+  display:grid;
+  gap:14px;
+}
+.metrics-grid-tight .metric-card{
+  min-height:108px;
+  padding:16px;
+}
+.financial-section-combined{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+  align-items:start;
+}
+.section-mini-title{
+  margin:0;
+  font-size:1.35rem;
+  letter-spacing:-.04em;
+}
+.section-mini-sub{
+  margin:6px 0 0;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.97rem;
+}
+.compact-table-tight{
+  margin-top:12px;
+}
+.compact-table-tight th,
+.compact-table-tight td{
+  padding:12px 14px;
+}
+.compact-side-stack{
+  display:grid;
+  gap:12px;
+}
+.financial-card,
+.summary-card-compact,
+.compact-card-block{
+  padding:18px;
+}
+.financial-card h3{
+  margin:0 0 14px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.financial-lines{
+  display:grid;
+  gap:12px;
+}
+.financial-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:10px;
+}
+.financial-line span{
+  color:var(--muted);
+  font-weight:700;
+}
+.financial-line strong{
+  font-size:1.1rem;
+}
+.financial-line.total strong{
+  font-size:1.3rem;
+}
+.financial-divider{
+  height:1px;
+  background:var(--line);
+}
+.emphasis-card{
+  background:linear-gradient(135deg, rgba(0,230,118,.10), rgba(0,200,83,.05));
+  border-color:rgba(0,200,83,.28);
+}
+.chart-page-balanced .graph-card{
+  padding:16px;
+}
+.chart-page-balanced .chart-box{
+  height:240px;
+}
+.chart-page-balanced .chart-tall{
+  height:280px;
+}
+.tech-layout-tight{
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.compact-list-sm{
+  font-size:.95rem;
+  line-height:1.75;
+  padding-left:18px;
+}
+.note-box-tight{
+  margin-top:14px;
+  padding:16px;
+}
+.note-box-tight p{
+  font-size:.96rem;
+  line-height:1.7;
+}
+.final-page-grid-shell{
+  gap:16px;
+}
+.final-two-column-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.terms-grid-tight .summary-card,
+.final-two-column-grid .summary-card{
+  min-height:unset;
+}
+.contact-strip-pro{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:18px;
+  align-items:start;
+}
+.contact-strip-pro h3{
+  margin:10px 0 8px;
+  font-size:1.3rem;
+  letter-spacing:-.03em;
+}
+.contact-strip-pro p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.compact-contact-lines{
+  display:grid;
+  gap:8px;
+  color:#344054;
+  font-size:.98rem;
+  align-self:center;
+}
+.compact-contact-lines strong{
+  color:#101828;
+}
+@media print{
+  .page-balanced,
+  .page-section-tight{
+    gap:14px !important;
+  }
+  .financial-section-combined,
+  .final-two-column-grid,
+  .contact-strip-pro,
+  .tech-layout-tight{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .chart-page-balanced .chart-box{
+    height:190px !important;
+  }
+  .chart-page-balanced .chart-tall{
+    height:220px !important;
+  }
+}
+@media (max-width:980px){
+  .financial-section-combined,
+  .final-two-column-grid,
+  .contact-strip-pro,
+  .tech-layout-tight{
+    grid-template-columns:1fr;
+  }
+}
+
+
+.chart-page-balanced .graph-card h3{
+  margin-bottom:10px;
+}
+.chart-page-balanced .graph-card{
+  overflow:hidden;
+}
+.chart-page-balanced .chart-box canvas,
+.chart-page-balanced .chart-box img.chart-export{
+  max-width:100%;
+}
+.final-page-tech .page-sub{
+  margin-bottom:18px;
+}
+.benefits-next-grid{
+  margin-top:14px;
+}
+.final-page-close{
+  display:grid;
+  gap:16px;
+  align-content:start;
+}
+.close-top-grid{
+  margin-top:0;
+}
+.contact-strip-pro-final{
+  margin-top:4px;
+}
+@media print{
+  .final-page-tech,
+  .final-page-close{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .contact-strip-pro-final,
+  .close-top-grid,
+  .benefits-next-grid,
+  .tech-layout-tight,
+  .note-box-tight{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .chart-page-balanced .graph-card{
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+
+/* Ajustes V10 */
+@media print{
+  .final-page-tech{
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+}
+
+</style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 </head>
@@ -20,7 +1620,10 @@
       <div class="nav-actions">
         <div class="top-actions">
   <button class="btn btn-secondary" type="button" onclick="guardarActual()">Guardar cliente</button>
+  <button class="btn btn-secondary" type="button" onclick="exportarRespaldoClientes()">Exportar respaldo</button>
+  <button class="btn btn-secondary" type="button" onclick="document.getElementById('importarRespaldoInput').click()">Importar respaldo</button>
   <button class="btn btn-secondary" type="button" onclick="toggleModo()">Vista limpia</button>
+  <input id="importarRespaldoInput" type="file" accept="application/json" class="hidden" onchange="importarRespaldoClientes(event)">
 </div>
         <a class="btn btn-secondary" href="index.html">Volver al sitio</a>
         <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta</button>
@@ -322,6 +1925,7 @@
             <h2>Resumen del cálculo</h2>
           </div>
           <button class="btn btn-secondary btn-save" type="button" onclick="guardarActual()">Guardar cliente</button>
+          <button class="btn btn-secondary btn-save" type="button" onclick="exportarRespaldoClientes()">Exportar respaldo</button>
           <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta</button>
         </div>
         <div class="decision-box">
@@ -360,6 +1964,1249 @@
 
   </main>
 
-  <script src="cotizador.js"></script>
+  <script>
+Chart.register(ChartDataLabels);
+
+const STORAGE_KEY = 'solregioProposalData';
+const DEFAULTS_KEY = 'solregioInternalDefaults';
+const CLIENTS_KEY = 'clientes';
+const BACKUP_VERSION = 2;
+
+const tariffPresets = {
+  "1":   { limiteBasico: 75,  limiteIntermedio: 140, precioBasico: 1.08, precioIntermedio: 1.30, precioExcedente: 3.90 },
+  "1A":  { limiteBasico: 100, limiteIntermedio: 185, precioBasico: 1.08, precioIntermedio: 1.30, precioExcedente: 3.90 },
+  "1B":  { limiteBasico: 125, limiteIntermedio: 225, precioBasico: 1.08, precioIntermedio: 1.30, precioExcedente: 3.90 },
+  "1C":  { limiteBasico: 150, limiteIntermedio: 280, precioBasico: 1.10, precioIntermedio: 1.35, precioExcedente: 3.95 },
+  "1D":  { limiteBasico: 175, limiteIntermedio: 320, precioBasico: 1.10, precioIntermedio: 1.38, precioExcedente: 3.98 },
+  "1E":  { limiteBasico: 200, limiteIntermedio: 400, precioBasico: 1.10, precioIntermedio: 1.40, precioExcedente: 4.05 },
+  "1F":  { limiteBasico: 250, limiteIntermedio: 500, precioBasico: 1.12, precioIntermedio: 1.42, precioExcedente: 4.10 },
+  "DAC": { limiteBasico: 0, limiteIntermedio: 0, precioBasico: 0, precioIntermedio: 0, precioExcedente: 6.25 },
+  "PDBT": { limiteBasico: 0, limiteIntermedio: 0, precioBasico: 0, precioIntermedio: 0, precioExcedente: 4.85 }
+};
+
+const refs = {
+  clienteNombre: document.getElementById('clienteNombre'),
+  clienteFecha: document.getElementById('clienteFecha'),
+  clienteUbicacion: document.getElementById('clienteUbicacion'),
+  clienteTarifa: document.getElementById('clienteTarifa'),
+  tipoPropiedad: document.getElementById('tipoPropiedad'),
+  modoCalculo: document.getElementById('modoCalculo'),
+
+  limiteBasico: document.getElementById('limiteBasico'),
+  limiteIntermedio: document.getElementById('limiteIntermedio'),
+  precioBasico: document.getElementById('precioBasico'),
+  precioIntermedio: document.getElementById('precioIntermedio'),
+  precioExcedente: document.getElementById('precioExcedente'),
+  incrementoAnual: document.getElementById('incrementoAnual'),
+
+  numMFV: document.getElementById('numMFV'),
+  potenciaModulo: document.getElementById('potenciaModulo'),
+  hsp: document.getElementById('hsp'),
+  factorDesempeno: document.getElementById('factorDesempeno'),
+  costoSistema: document.getElementById('costoSistema'),
+  generacionBimestral: document.getElementById('generacionBimestral'),
+
+  consumoBimestralEstimado: document.getElementById('consumoBimestralEstimado'),
+  costoBimestralEstimado: document.getElementById('costoBimestralEstimado'),
+
+  observacionesProyecto: document.getElementById('observacionesProyecto'),
+  bloqueTarifaEscalones: document.getElementById('bloqueTarifaEscalones'),
+  bloqueRecibos: document.getElementById('bloqueRecibos'),
+  bloqueEstimado: document.getElementById('bloqueEstimado'),
+  bloqueGDMTH: document.getElementById('bloqueGDMTH'),
+
+  consumos: [...document.querySelectorAll('.consumo-recibo')],
+  costos: [...document.querySelectorAll('.costo-recibo')],
+  consumosGDMTH: [...document.querySelectorAll('.consumo-gdmth')],
+  preciosGDMTH: [...document.querySelectorAll('.precio-gdmth')],
+
+  btnGeneracion: document.getElementById('btnGeneracion'),
+  btnActualizar: document.getElementById('btnActualizar')
+};
+
+const quickOut = {
+  consumo: document.getElementById('quickConsumo'),
+  pago: document.getElementById('quickPago'),
+  generacion: document.getElementById('quickGeneracion'),
+  ahorro: document.getElementById('quickAhorro'),
+  roi: document.getElementById('quickRoi'),
+  cobertura: document.getElementById('quickCobertura')
+};
+
+let quickChartConsumo;
+let quickChartCostos;
+let debounceTimer;
+let modoInterno = true;
+
+function guardarYabrir() {
+  const data = getData();
+  saveData(data);
+  guardarDefaultsInternos();
+  window.open('presentacion.html', '_blank');
+}
+
+function getDecisionComercial(data) {
+  if (!data || !data.consumoAnual) {
+    return {
+      titulo: 'Captura datos para ver recomendación.',
+      detalle: 'La lectura comercial aparecerá cuando exista consumo, costo y configuración del sistema.'
+    };
+  }
+
+  if (data.cobertura > 115) {
+    return {
+      titulo: '⚠️ Sistema sobrado',
+      detalle: 'La generación está muy por encima del consumo. Puede convenir bajar paneles o revisar objetivo del proyecto.'
+    };
+  }
+
+  if (data.roiYears > 0 && data.roiYears <= 5.5) {
+    return {
+      titulo: '🔥 Proyecto fuerte para cierre',
+      detalle: 'La relación entre ahorro, cobertura y retorno se ve comercialmente atractiva.'
+    };
+  }
+
+  if (data.roiYears > 0 && data.roiYears <= 7) {
+    return {
+      titulo: '👍 Proyecto sano',
+      detalle: 'Hace sentido, aunque quizá convenga ajustar inversión o cobertura según el objetivo del cliente.'
+    };
+  }
+
+  return {
+    titulo: '🛠️ Revisar configuración',
+    detalle: 'El retorno luce alto o la cobertura todavía no está fina. Conviene ajustar el sistema o el costo.'
+  };
+}
+
+function money(value) {
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+    maximumFractionDigits: 0
+  }).format(Number(value || 0));
+}
+
+function numberFmt(value, digits = 0) {
+  return new Intl.NumberFormat('es-MX', {
+    maximumFractionDigits: digits
+  }).format(Number(value || 0));
+}
+
+function setInversorSugerido(value) {
+  document.querySelectorAll('.inversor-sugerido').forEach((el) => {
+    el.textContent = value || '-';
+  });
+}
+
+function getInversorSugerido() {
+  return document.querySelector('.inversor-sugerido')?.textContent || '-';
+}
+
+function setToday() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  refs.clienteFecha.value = `${yyyy}-${mm}-${dd}`;
+}
+
+function applyTariffPreset() {
+  const preset = tariffPresets[refs.clienteTarifa.value];
+  if (!preset) return;
+
+  refs.limiteBasico.value = preset.limiteBasico;
+  refs.limiteIntermedio.value = preset.limiteIntermedio;
+  refs.precioBasico.value = preset.precioBasico;
+  refs.precioIntermedio.value = preset.precioIntermedio;
+  refs.precioExcedente.value = preset.precioExcedente;
+}
+
+function updateModeUI() {
+  const modo = refs.modoCalculo.value;
+
+  refs.bloqueRecibos?.classList.toggle('hidden', modo !== 'recibos');
+  refs.bloqueEstimado?.classList.toggle('hidden', modo !== 'estimado');
+  refs.bloqueGDMTH?.classList.toggle('hidden', modo !== 'gdmth');
+
+  if (refs.bloqueTarifaEscalones) {
+    refs.bloqueTarifaEscalones.classList.toggle('hidden', modo === 'gdmth');
+  }
+}
+
+function calcularGeneracion() {
+  const mfv = Number(refs.numMFV.value || 0);
+  const potenciaKW = Number(refs.potenciaModulo.value || 0) / 1000;
+  const hsp = Number(refs.hsp.value || 0);
+  const factor = Number(refs.factorDesempeno.value || 0);
+
+  if (!mfv || !potenciaKW || !hsp || !factor) return;
+
+  const generacionDiaria = mfv * potenciaKW * hsp * factor;
+  refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
+}
+
+function calcularCostoEscalonado(kwh) {
+  const tarifa = refs.clienteTarifa.value;
+  const b = Number(refs.limiteBasico.value || 0);
+  const i = Number(refs.limiteIntermedio.value || 0);
+  const pb = Number(refs.precioBasico.value || 0);
+  const pi = Number(refs.precioIntermedio.value || 0);
+  const pe = Number(refs.precioExcedente.value || 0);
+
+  if (tarifa === 'DAC' || tarifa === 'PDBT') return kwh * pe;
+
+  let total = 0;
+  let restante = kwh;
+
+  const tramoBasico = Math.min(restante, b);
+  total += tramoBasico * pb;
+  restante -= tramoBasico;
+
+  const tramoIntermedio = Math.min(restante, Math.max(i - b, 0));
+  total += tramoIntermedio * pi;
+  restante -= tramoIntermedio;
+
+  if (restante > 0) total += restante * pe;
+  return total;
+}
+
+function agruparEnBimestres(values) {
+  const out = [];
+  for (let i = 0; i < values.length; i += 2) {
+    out.push((Number(values[i] || 0)) + (Number(values[i + 1] || 0)));
+  }
+  return out;
+}
+
+function sugerirConfiguracionInversor(paneles, kwp, preferencia = '') {
+  const tipo = preferencia || (paneles <= 8 ? 'micro' : 'string');
+
+  if (tipo === 'micro') {
+    const cantidad = Math.max(Math.ceil(paneles / 4), 1);
+    return {
+      tipo,
+      cantidad,
+      capacidad: 'Micro 4 entradas',
+      texto: `${cantidad} microinversor(es) de 4 entradas`
+    };
+  }
+
+  if (tipo === 'hibrido') {
+    const capacidad = `${Math.max(Math.ceil(kwp), 1)} kW`;
+    return {
+      tipo,
+      cantidad: 1,
+      capacidad,
+      texto: `1 inversor híbrido de ${capacidad}`
+    };
+  }
+
+  const capacidad = `${Math.max(Math.ceil(kwp), 1)} kW`;
+  return {
+    tipo: 'string',
+    cantidad: 1,
+    capacidad,
+    texto: `1 inversor string de ${capacidad}`
+  };
+}
+
+function sincronizarConfiguracionInversor(paneles) {
+  const kwp = (paneles * Number(refs.potenciaModulo.value || 0)) / 1000;
+  const tipoEl = document.getElementById('tipoInversor');
+  const cantidadEl = document.getElementById('cantidadInversores');
+  const capacidadEl = document.getElementById('capacidadInversor');
+
+  if (!tipoEl || !cantidadEl || !capacidadEl) return;
+
+  const config = sugerirConfiguracionInversor(paneles, kwp, tipoEl.value || '');
+
+  if (cantidadEl.dataset.manual !== 'true') {
+    cantidadEl.value = config.cantidad;
+  }
+
+  if (capacidadEl.dataset.manual !== 'true') {
+    capacidadEl.value = config.capacidad;
+  }
+
+  setInversorSugerido(config.texto);
+}
+
+function sugerirInversor(paneles) {
+  const kwp = (paneles * Number(refs.potenciaModulo.value || 0)) / 1000;
+  const tipo = document.getElementById('tipoInversor')?.value || '';
+  return sugerirConfiguracionInversor(paneles, kwp, tipo).texto;
+}
+
+function calcularMFVautomatico() {
+  const data = getData();
+  const consumoAnual = data.consumoAnual;
+  const hsp = Number(refs.hsp.value || 5.5);
+  const factor = Number(refs.factorDesempeno.value || 0.8);
+  const potenciaPanel = Number(refs.potenciaModulo.value || 710) / 1000;
+
+  if (!consumoAnual || !hsp || !factor || !potenciaPanel) return;
+
+  const energiaPorPanelAnual = potenciaPanel * hsp * 365 * factor;
+  const paneles = Math.ceil(consumoAnual / energiaPorPanelAnual);
+
+  refs.numMFV.value = paneles;
+
+  if (refs.generacionBimestral) {
+    const generacionDiaria = paneles * potenciaPanel * hsp * factor;
+    refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
+  }
+
+  sincronizarConfiguracionInversor(paneles);
+  updateAll();
+}
+
+function getData() {
+  const modo = refs.modoCalculo.value;
+  const generacionBimestral = Number(refs.generacionBimestral.value || 0);
+  const costoSistema = Number(refs.costoSistema.value || 0);
+  const incrementoAnual = Number(refs.incrementoAnual.value || 4) / 100;
+
+  let consumos = [];
+  let costosActuales = [];
+  let costosConSolar = [];
+  let gdmthConsumos = [];
+  let gdmthPrecios = [];
+
+  if (modo === 'gdmth') {
+    gdmthConsumos = refs.consumosGDMTH.map(i => Number(i.value || 0));
+    gdmthPrecios = refs.preciosGDMTH.map(i => Number(i.value || 0));
+
+    const costosMensuales = gdmthConsumos.map((kwh, idx) => kwh * Number(gdmthPrecios[idx] || 0));
+    const generacionMensual = generacionBimestral / 2;
+
+    const costosConSolarMensuales = gdmthConsumos.map((kwh, idx) => {
+      const precio = Number(gdmthPrecios[idx] || 0);
+      return Math.max(kwh - generacionMensual, 0) * precio;
+    });
+
+    consumos = agruparEnBimestres(gdmthConsumos);
+    costosActuales = agruparEnBimestres(costosMensuales);
+    costosConSolar = agruparEnBimestres(costosConSolarMensuales);
+  } else if (modo === 'recibos') {
+    consumos = refs.consumos.map(i => Number(i.value || 0));
+    const costosCapturados = refs.costos.map(i => Number(i.value || 0));
+
+    costosActuales = consumos.map((kwh, idx) => {
+      const real = costosCapturados[idx];
+      return real > 0 ? real : calcularCostoEscalonado(kwh);
+    });
+
+    costosConSolar = consumos.map(kwh => calcularCostoEscalonado(Math.max(kwh - generacionBimestral, 0)));
+  } else {
+    const consumoEstimado = Number(refs.consumoBimestralEstimado.value || 0);
+    const costoEstimado = Number(refs.costoBimestralEstimado.value || 0);
+
+    consumos = Array(6).fill(consumoEstimado);
+    costosActuales = Array(6).fill(costoEstimado > 0 ? costoEstimado : calcularCostoEscalonado(consumoEstimado));
+    costosConSolar = consumos.map(kwh => calcularCostoEscalonado(Math.max(kwh - generacionBimestral, 0)));
+  }
+
+  const consumoAnual = modo === 'gdmth'
+    ? gdmthConsumos.reduce((a, b) => a + b, 0)
+    : consumos.reduce((a, b) => a + b, 0);
+
+  const pagoAnualActual = costosActuales.reduce((a, b) => a + b, 0);
+  const pagoAnualConSolar = costosConSolar.reduce((a, b) => a + b, 0);
+  const ahorroAnual = Math.max(pagoAnualActual - pagoAnualConSolar, 0);
+  const generacionAnual = generacionBimestral * 6;
+  const potenciaSistemaKW = (Number(refs.numMFV.value || 0) * Number(refs.potenciaModulo.value || 0)) / 1000;
+  const cobertura = consumoAnual > 0 ? Math.min((generacionAnual / consumoAnual) * 100, 100) : 0;
+  const roiYears = ahorroAnual > 0 ? costoSistema / ahorroAnual : 0;
+
+  const cumulative = [];
+  let acumulado = 0;
+  let ahorroEscalado = ahorroAnual;
+
+  for (let year = 1; year <= 25; year++) {
+    acumulado += ahorroEscalado;
+    cumulative.push(acumulado);
+    ahorroEscalado *= 1 + incrementoAnual;
+  }
+
+  return {
+    clienteNombre: refs.clienteNombre.value || '',
+    clienteFecha: refs.clienteFecha.value || '',
+    clienteUbicacion: refs.clienteUbicacion.value || '',
+    clienteTarifa: refs.clienteTarifa.value || '',
+    tipoPropiedad: refs.tipoPropiedad.value || '',
+    modoCalculo: refs.modoCalculo.value,
+    limiteBasico: Number(refs.limiteBasico.value || 0),
+    limiteIntermedio: Number(refs.limiteIntermedio.value || 0),
+    precioBasico: Number(refs.precioBasico.value || 0),
+    precioIntermedio: Number(refs.precioIntermedio.value || 0),
+    precioExcedente: Number(refs.precioExcedente.value || 0),
+    incrementoAnual: Number(refs.incrementoAnual.value || 0),
+    numMFV: Number(refs.numMFV.value || 0),
+    potenciaModulo: Number(refs.potenciaModulo.value || 0),
+    hsp: Number(refs.hsp.value || 0),
+    factorDesempeno: Number(refs.factorDesempeno.value || 0),
+    costoSistema,
+    generacionBimestral,
+    observacionesProyecto: refs.observacionesProyecto.value || '',
+    consumos,
+    costosActuales,
+    costosConSolar,
+    gdmthConsumos,
+    gdmthPrecios,
+    consumoAnual,
+    pagoAnualActual,
+    pagoAnualConSolar,
+    ahorroAnual,
+    generacionAnual,
+    potenciaSistemaKW,
+    cobertura,
+    roiYears,
+    cumulative
+  };
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+
+function getClientesGuardados() {
+  try {
+    return JSON.parse(localStorage.getItem(CLIENTS_KEY)) || [];
+  } catch (error) {
+    console.warn('No se pudo leer la base local de clientes', error);
+    return [];
+  }
+}
+
+function setClientesGuardados(clientes) {
+  localStorage.setItem(CLIENTS_KEY, JSON.stringify(clientes));
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .toLowerCase();
+}
+
+function buildClientKey(data) {
+  return [data.nombre, data.telefono, data.ubicacion]
+    .map(normalizeText)
+    .join('|');
+}
+
+function getInternoFormData() {
+  const ids = [
+    'costoPanelUnitario',
+    'tipoInversor',
+    'cantidadInversores',
+    'capacidadInversor',
+    'costoInversor',
+    'manoObra',
+    'costoEstructura',
+    'costoProtecciones',
+    'costoCableado',
+    'tramiteCfe',
+    'seguroSistema',
+    'mantenimiento',
+    'utilidadPorcentaje',
+    'descuentoProyecto'
+  ];
+
+  return ids.reduce((acc, id) => {
+    const el = document.getElementById(id);
+    acc[id] = el ? el.value : '';
+    return acc;
+  }, {});
+}
+
+function applyInternoFormData(values = {}) {
+  Object.entries(values || {}).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el && value !== undefined && value !== null) {
+      el.value = value;
+    }
+  });
+}
+
+function applyCotizacionToForm(data = {}) {
+  refs.clienteNombre.value = data.clienteNombre || '';
+
+  const tel = document.getElementById('clienteTelefono');
+  if (tel) tel.value = data.clienteTelefono || '';
+
+  refs.clienteFecha.value = data.clienteFecha || refs.clienteFecha.value || '';
+  refs.clienteUbicacion.value = data.clienteUbicacion || '';
+  refs.clienteTarifa.value = data.clienteTarifa || refs.clienteTarifa.value || '1C';
+  refs.tipoPropiedad.value = data.tipoPropiedad || '';
+  refs.modoCalculo.value = data.modoCalculo || 'recibos';
+
+  refs.limiteBasico.value = data.limiteBasico ?? refs.limiteBasico.value;
+  refs.limiteIntermedio.value = data.limiteIntermedio ?? refs.limiteIntermedio.value;
+  refs.precioBasico.value = data.precioBasico ?? refs.precioBasico.value;
+  refs.precioIntermedio.value = data.precioIntermedio ?? refs.precioIntermedio.value;
+  refs.precioExcedente.value = data.precioExcedente ?? refs.precioExcedente.value;
+  refs.incrementoAnual.value = data.incrementoAnual ?? refs.incrementoAnual.value;
+
+  refs.numMFV.value = data.numMFV ?? '';
+  refs.potenciaModulo.value = data.potenciaModulo ?? refs.potenciaModulo.value;
+  refs.hsp.value = data.hsp ?? refs.hsp.value;
+  refs.factorDesempeno.value = data.factorDesempeno ?? refs.factorDesempeno.value;
+  refs.costoSistema.value = data.costoSistema ?? '';
+  refs.generacionBimestral.value = data.generacionBimestral ?? '';
+  refs.observacionesProyecto.value = data.observacionesProyecto || refs.observacionesProyecto.value || '';
+
+  refs.consumos.forEach((input, i) => {
+    input.value = data.consumos?.[i] ?? '';
+  });
+
+  refs.costos.forEach((input, i) => {
+    input.value = data.costosActuales?.[i] ?? '';
+  });
+
+  if (refs.consumoBimestralEstimado) {
+    refs.consumoBimestralEstimado.value = data.modoCalculo === 'estimado' ? (data.consumos?.[0] ?? '') : '';
+  }
+
+  if (refs.costoBimestralEstimado) {
+    refs.costoBimestralEstimado.value = data.modoCalculo === 'estimado' ? (data.costosActuales?.[0] ?? '') : '';
+  }
+
+  refs.consumosGDMTH.forEach((input, i) => {
+    input.value = data.gdmthConsumos?.[i] ?? '';
+  });
+
+  refs.preciosGDMTH.forEach((input, i) => {
+    input.value = data.gdmthPrecios?.[i] ?? '';
+  });
+
+  applyTariffPreset();
+
+  if (data.limiteBasico !== undefined) refs.limiteBasico.value = data.limiteBasico;
+  if (data.limiteIntermedio !== undefined) refs.limiteIntermedio.value = data.limiteIntermedio;
+  if (data.precioBasico !== undefined) refs.precioBasico.value = data.precioBasico;
+  if (data.precioIntermedio !== undefined) refs.precioIntermedio.value = data.precioIntermedio;
+  if (data.precioExcedente !== undefined) refs.precioExcedente.value = data.precioExcedente;
+
+  updateModeUI();
+}
+
+function exportarRespaldoClientes() {
+  const payload = {
+    version: BACKUP_VERSION,
+    exportedAt: new Date().toISOString(),
+    origin: window.location.origin,
+    clientes: getClientesGuardados(),
+    borradorActual: JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'),
+    defaultsInternos: JSON.parse(localStorage.getItem(DEFAULTS_KEY) || 'null')
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `solregio-respaldo-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function importarRespaldoClientes(event) {
+  const file = event?.target?.files?.[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const payload = JSON.parse(reader.result);
+      const importados = Array.isArray(payload?.clientes) ? payload.clientes : [];
+      const actuales = getClientesGuardados();
+      const mapa = new Map();
+
+      [...actuales, ...importados].forEach((cliente) => {
+        const key = cliente?.clave || buildClientKey(cliente || {});
+        const safeKey = key && key !== '||' ? key : `id:${cliente?.id || Date.now()}`;
+        mapa.set(safeKey, { ...cliente, clave: safeKey });
+      });
+
+      setClientesGuardados(Array.from(mapa.values()));
+
+      if (payload?.defaultsInternos) {
+        localStorage.setItem(DEFAULTS_KEY, JSON.stringify(payload.defaultsInternos));
+        cargarDefaultsInternos();
+      }
+
+      if (payload?.borradorActual) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload.borradorActual));
+        applyCotizacionToForm(payload.borradorActual);
+      }
+
+      mostrarClientes();
+      updateAll();
+      alert(`Respaldo importado correctamente. Clientes cargados: ${importados.length}.`);
+    } catch (error) {
+      console.error(error);
+      alert('No se pudo importar el respaldo. Revisa que sea un archivo JSON válido de SolRegio.');
+    } finally {
+      event.target.value = '';
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function guardarDefaultsInternos() {
+  const defaults = {
+    costoPanelUnitario: document.getElementById('costoPanelUnitario')?.value || '',
+    tipoInversor: document.getElementById('tipoInversor')?.value || '',
+    cantidadInversores: document.getElementById('cantidadInversores')?.value || '',
+    capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
+    costoInversor: document.getElementById('costoInversor')?.value || '',
+    manoObra: document.getElementById('manoObra')?.value || '',
+    costoEstructura: document.getElementById('costoEstructura')?.value || '',
+    costoProtecciones: document.getElementById('costoProtecciones')?.value || '',
+    costoCableado: document.getElementById('costoCableado')?.value || '',
+    tramiteCfe: document.getElementById('tramiteCfe')?.value || '',
+    seguroSistema: document.getElementById('seguroSistema')?.value || '',
+    mantenimiento: document.getElementById('mantenimiento')?.value || '',
+    utilidadPorcentaje: document.getElementById('utilidadPorcentaje')?.value || '',
+    descuentoProyecto: document.getElementById('descuentoProyecto')?.value || ''
+  };
+
+  localStorage.setItem(DEFAULTS_KEY, JSON.stringify(defaults));
+}
+
+function cargarDefaultsInternos() {
+  const raw = localStorage.getItem(DEFAULTS_KEY);
+  if (!raw) return;
+
+  try {
+    const defaults = JSON.parse(raw);
+
+    Object.entries(defaults).forEach(([id, value]) => {
+      const el = document.getElementById(id);
+      if (el && value !== undefined && value !== null && value !== '') {
+        el.value = value;
+      }
+    });
+  } catch (e) {
+    console.warn('No se pudieron cargar los defaults internos', e);
+  }
+}
+
+function renderQuickStats(data) {
+  quickOut.consumo.textContent = `${numberFmt(data.consumoAnual)} kWh`;
+  quickOut.pago.textContent = money(data.pagoAnualActual);
+  quickOut.generacion.textContent = `${numberFmt(data.generacionAnual)} kWh`;
+  quickOut.ahorro.textContent = money(data.ahorroAnual);
+  quickOut.roi.textContent = data.roiYears > 0 ? `${numberFmt(data.roiYears, 1)} años` : 'N/A';
+  quickOut.cobertura.textContent = `${numberFmt(data.cobertura, 1)} %`;
+}
+
+function chartOptions(currency = false) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: '#101828',
+          font: { family: 'Inter', size: 11 }
+        }
+      },
+      datalabels: {
+        color: '#344054',
+        anchor: 'end',
+        align: 'top',
+        offset: 2,
+        clamp: true,
+        font: { size: 10, weight: '700' },
+        formatter: (value) => currency ? money(value) : numberFmt(value),
+        display: (ctx) => ctx.dataset.type !== 'line'
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#667085' },
+        grid: { color: 'rgba(16,24,40,.05)' }
+      },
+      y: {
+        ticks: {
+          color: '#667085',
+          callback: (value) => currency ? money(value) : numberFmt(value)
+        },
+        grid: { color: 'rgba(16,24,40,.05)' }
+      }
+    }
+  };
+}
+
+function renderQuickCharts(data) {
+  if (quickChartConsumo) quickChartConsumo.destroy();
+  if (quickChartCostos) quickChartCostos.destroy();
+
+  const labels = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'];
+  const generacionSerie = labels.map(() => data.generacionBimestral);
+
+  quickChartConsumo = new Chart(document.getElementById('quickChartConsumo'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Consumo',
+          data: data.consumos,
+          borderColor: '#101828',
+          backgroundColor: 'rgba(16,24,40,.08)',
+          borderWidth: 3,
+          pointRadius: 4,
+          tension: 0.28,
+          datalabels: { display: false }
+        },
+        {
+          label: 'Generación',
+          data: generacionSerie,
+          borderColor: '#00C853',
+          backgroundColor: 'rgba(0,200,83,.12)',
+          borderWidth: 3,
+          pointRadius: 4,
+          tension: 0.28,
+          datalabels: { display: false }
+        }
+      ]
+    },
+    options: chartOptions(false)
+  });
+
+  quickChartCostos = new Chart(document.getElementById('quickChartCostos'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Costo actual',
+          data: data.costosActuales,
+          backgroundColor: '#1f2937',
+          borderRadius: 10
+        },
+        {
+          label: 'Costo con paneles',
+          data: data.costosConSolar,
+          backgroundColor: '#00E676',
+          borderRadius: 10
+        }
+      ]
+    },
+    options: chartOptions(true)
+  });
+}
+
+function calcularCotizadorInterno() {
+  const paneles = Number(refs.numMFV.value || 0);
+  const cantidadInversores = Number(document.getElementById('cantidadInversores')?.value || 0);
+  const costoPanelUnitario = Number(document.getElementById('costoPanelUnitario')?.value || 0);
+  const costoInversorUnitario = Number(document.getElementById('costoInversor')?.value || 0);
+  const manoObraPorMFV = Number(document.getElementById('manoObra')?.value || 0);
+  const costoEstructura = Number(document.getElementById('costoEstructura')?.value || 0);
+  const costoProtecciones = Number(document.getElementById('costoProtecciones')?.value || 0);
+  const costoCableado = Number(document.getElementById('costoCableado')?.value || 0);
+  const tramiteCfe = Number(document.getElementById('tramiteCfe')?.value || 0);
+  const seguroSistema = Number(document.getElementById('seguroSistema')?.value || 0);
+  const mantenimiento = Number(document.getElementById('mantenimiento')?.value || 0);
+  const utilidadPorcentaje = Number(document.getElementById('utilidadPorcentaje')?.value || 0);
+  const descuentoProyecto = Number(document.getElementById('descuentoProyecto')?.value || 0);
+
+  const costoPaneles = paneles * costoPanelUnitario;
+  const manoObraTotal = paneles * manoObraPorMFV;
+  const costoInversores = cantidadInversores * costoInversorUnitario;
+
+  const costoReal =
+    costoPaneles +
+    costoInversores +
+    manoObraTotal +
+    costoEstructura +
+    costoProtecciones +
+    costoCableado +
+    tramiteCfe +
+    seguroSistema +
+    mantenimiento;
+
+  const utilidad = costoReal * (utilidadPorcentaje / 100);
+  const subtotalSinIva = Math.max(costoReal + utilidad - descuentoProyecto, 0);
+  const iva = subtotalSinIva * 0.16;
+  const precioFinalConIva = subtotalSinIva + iva;
+
+  const costoPanelesEl = document.getElementById('internoCostoPaneles');
+  const manoObraEl = document.getElementById('internoManoObraTotal');
+  const costoInversoresEl = document.getElementById('internoCostoInversores');
+  const costoRealEl = document.getElementById('internoCostoReal');
+  const utilidadEl = document.getElementById('internoUtilidad');
+  const subtotalSinIvaEl = document.getElementById('internoSubtotalSinIva');
+  const ivaEl = document.getElementById('internoIva');
+  const precioFinalEl = document.getElementById('internoPrecioFinal');
+
+  if (costoPanelesEl) costoPanelesEl.textContent = money(costoPaneles);
+  if (manoObraEl) manoObraEl.textContent = money(manoObraTotal);
+  if (costoInversoresEl) costoInversoresEl.textContent = money(costoInversores);
+  if (costoRealEl) costoRealEl.textContent = money(costoReal);
+  if (utilidadEl) utilidadEl.textContent = money(utilidad);
+  if (subtotalSinIvaEl) subtotalSinIvaEl.textContent = money(subtotalSinIva);
+  if (ivaEl) ivaEl.textContent = money(iva);
+  if (precioFinalEl) precioFinalEl.textContent = money(precioFinalConIva);
+
+  if (precioFinalConIva > 0 && refs.costoSistema) {
+    refs.costoSistema.value = Math.round(precioFinalConIva);
+  }
+
+  return {
+    costoPaneles,
+    manoObraTotal,
+    costoInversores,
+    costoReal,
+    utilidad,
+    subtotalSinIva,
+    iva,
+    precioFinalConIva
+  };
+}
+
+function updateAll() {
+  sincronizarConfiguracionInversor(Number(refs.numMFV.value || 0));
+  const interno = calcularCotizadorInterno();
+  const data = getData();
+  const inversor = sugerirInversor(Number(refs.numMFV.value || 0));
+
+  setInversorSugerido(inversor);
+  saveData({ ...data, interno });
+  renderQuickStats(data);
+  renderQuickCharts(data);
+}
+
+function debounceUpdate() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(updateAll, 180);
+}
+
+function preloadObservaciones() {
+  if (!refs.observacionesProyecto.value.trim()) {
+    refs.observacionesProyecto.value =
+`1. Incluye seguro de Sistema fotovoltaico interconectado por el primer año.
+2. Incluye 1 mantenimiento a los 6 meses.
+3. Incluye capacidad para ampliar el sistema a 10 MFV.`;
+  }
+}
+
+function preloadFromStorage() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+
+  try {
+    const data = JSON.parse(raw);
+    applyCotizacionToForm(data);
+  } catch (e) {
+    console.warn('No se pudo precargar la cotización', e);
+  }
+}
+
+function guardarCliente(data) {
+  const clientes = getClientesGuardados();
+  const clave = buildClientKey(data);
+
+  const nuevoRegistro = {
+    id: data.id || Date.now(),
+    fecha: new Date().toLocaleDateString('es-MX'),
+    estatus: data.estatus || 'nuevo',
+    clave,
+    ...data
+  };
+
+  const indexExistente = clientes.findIndex(cliente => {
+    const claveCliente = cliente?.clave || buildClientKey(cliente || {});
+    return claveCliente && claveCliente === clave && clave !== '||';
+  });
+
+  if (indexExistente >= 0) {
+    clientes[indexExistente] = {
+      ...clientes[indexExistente],
+      ...nuevoRegistro,
+      id: clientes[indexExistente].id
+    };
+  } else {
+    clientes.push(nuevoRegistro);
+  }
+
+  setClientesGuardados(clientes);
+  mostrarClientes();
+  return nuevoRegistro;
+}
+
+function guardarActual() {
+  const interno = calcularCotizadorInterno();
+  const calculo = getData();
+  const inversor = getInversorSugerido();
+  const clienteTelefono = document.getElementById('clienteTelefono')?.value || '';
+
+  const data = {
+    nombre: refs.clienteNombre.value || '',
+    telefono: clienteTelefono,
+    ubicacion: refs.clienteUbicacion.value || '',
+    tipoPropiedad: refs.tipoPropiedad.value || '',
+    tarifa: refs.clienteTarifa.value || '',
+    tipoAnalisis: refs.modoCalculo.value === 'gdmth'
+      ? 'GDMTH 12 meses'
+      : (refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'),
+    fechaCotizacion: refs.clienteFecha.value || '',
+    consumo: `${numberFmt(calculo.consumoAnual)} kWh/año`,
+    paneles: String(refs.numMFV.value || 0),
+    kwp: `${numberFmt(calculo.potenciaSistemaKW, 2)} kW`,
+    inversor,
+    tipoInversor: document.getElementById('tipoInversor')?.value || '',
+    cantidadInversores: String(document.getElementById('cantidadInversores')?.value || ''),
+    capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
+    total: money(interno.precioFinalConIva),
+    ahorroAnual: money(calculo.ahorroAnual),
+    roi: calculo.roiYears > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
+    costoReal: money(interno.costoReal),
+    utilidadInterna: money(interno.utilidad),
+    subtotalSinIva: money(interno.subtotalSinIva),
+    iva: money(interno.iva),
+    precioCliente: money(interno.precioFinalConIva),
+    snapshot: {
+      cotizacion: {
+        ...calculo,
+        clienteTelefono
+      },
+      interno,
+      internoForm: getInternoFormData(),
+      savedAt: new Date().toISOString()
+    }
+  };
+
+  const registro = guardarCliente(data);
+  saveData({ ...calculo, clienteTelefono, interno });
+  guardarDefaultsInternos();
+  alert(`Cliente guardado correctamente: ${registro.nombre || 'Sin nombre'}`);
+}
+
+function eliminarCliente(id) {
+  const clientes = getClientesGuardados();
+  const actualizados = clientes.filter(cliente => cliente.id !== id);
+  setClientesGuardados(actualizados);
+  mostrarClientes();
+}
+
+function cargarCliente(id) {
+  const clientes = getClientesGuardados();
+  const cliente = clientes.find(item => item.id === id);
+  if (!cliente) return;
+
+  const snapshot = cliente.snapshot || {};
+  const cotizacion = snapshot.cotizacion || null;
+
+  if (cotizacion) {
+    applyCotizacionToForm(cotizacion);
+  } else {
+    refs.clienteNombre.value = cliente.nombre || '';
+
+    const tel = document.getElementById('clienteTelefono');
+    if (tel) tel.value = cliente.telefono || '';
+
+    refs.clienteUbicacion.value = cliente.ubicacion || '';
+    refs.tipoPropiedad.value = cliente.tipoPropiedad || '';
+    refs.clienteTarifa.value = cliente.tarifa || refs.clienteTarifa.value;
+    refs.clienteFecha.value = cliente.fechaCotizacion || refs.clienteFecha.value;
+    refs.modoCalculo.value = cliente.tipoAnalisis === 'GDMTH 12 meses'
+      ? 'gdmth'
+      : (cliente.tipoAnalisis === 'Estimado rápido' ? 'estimado' : 'recibos');
+    updateModeUI();
+  }
+
+  if (snapshot.internoForm) {
+    applyInternoFormData(snapshot.internoForm);
+  }
+
+  const tipoInv = document.getElementById('tipoInversor');
+  const cantInv = document.getElementById('cantidadInversores');
+  const capInv = document.getElementById('capacidadInversor');
+
+  if (tipoInv && cliente.tipoInversor) tipoInv.value = cliente.tipoInversor;
+  if (cantInv && cliente.cantidadInversores) cantInv.value = cliente.cantidadInversores;
+  if (capInv && cliente.capacidadInversor) capInv.value = cliente.capacidadInversor;
+
+  setInversorSugerido(cliente.inversor || sugerirInversor(Number(refs.numMFV.value || 0)));
+
+  saveData({ ...(snapshot.cotizacion || getData()), interno: snapshot.interno || calcularCotizadorInterno() });
+  guardarDefaultsInternos();
+  updateAll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mostrarClientes() {
+  const clientes = getClientesGuardados();
+  const contenedor = document.getElementById('clientesLista');
+
+  if (!contenedor) return;
+
+  if (clientes.length === 0) {
+    contenedor.innerHTML = '<p class="crm-empty">No hay clientes guardados todavía.</p>';
+    return;
+  }
+
+  contenedor.innerHTML = clientes.slice().reverse().map(cliente => `
+    <article class="cliente-card">
+      <div class="cliente-card-head">
+        <div>
+          <h3>${cliente.nombre || 'Sin nombre'}</h3>
+          <p>${cliente.ubicacion || 'Ubicación no capturada'}</p>
+        </div>
+        <span class="cliente-status">${cliente.estatus || 'nuevo'}</span>
+      </div>
+      <div class="cliente-card-grid">
+        <p><strong>Teléfono:</strong> ${cliente.telefono || '-'}</p>
+        <p><strong>Fecha:</strong> ${cliente.fechaCotizacion || cliente.fecha || '-'}</p>
+        <p><strong>Propiedad:</strong> ${cliente.tipoPropiedad || '-'}</p>
+        <p><strong>Tarifa:</strong> ${cliente.tarifa || '-'}</p>
+        <p><strong>Análisis:</strong> ${cliente.tipoAnalisis || '-'}</p>
+        <p><strong>Consumo:</strong> ${cliente.consumo || '-'}</p>
+        <p><strong>Paneles:</strong> ${cliente.paneles || '-'}</p>
+        <p><strong>Potencia:</strong> ${cliente.kwp || '-'}</p>
+        <p><strong>Inversor:</strong> ${cliente.inversor || '-'}</p>
+        <p><strong>Configuración:</strong> ${(cliente.cantidadInversores || '-') + ' pza · ' + (cliente.capacidadInversor || '-')}</p>
+        <p><strong>Ahorro anual:</strong> ${cliente.ahorroAnual || '-'}</p>
+        <p><strong>ROI:</strong> ${cliente.roi || '-'}</p>
+        <p><strong>Total:</strong> ${cliente.total || '-'}</p>
+        <p><strong>Respaldo:</strong> ${cliente.snapshot?.savedAt ? new Date(cliente.snapshot.savedAt).toLocaleString('es-MX') : 'Resumen antiguo'}</p>
+      </div>
+      <div class="cliente-card-actions">
+        <button class="btn btn-secondary btn-crm" type="button" onclick="cargarCliente(${cliente.id})">Cargar al cotizador</button>
+        <button class="btn btn-secondary btn-crm btn-crm-danger" type="button" onclick="eliminarCliente(${cliente.id})">Eliminar</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function init() {
+  if (!refs.clienteFecha.value) setToday();
+
+  preloadObservaciones();
+  preloadFromStorage();
+  cargarDefaultsInternos();
+
+  if (!refs.clienteFecha.value) setToday();
+
+  applyTariffPreset();
+  updateModeUI();
+  updateAll();
+
+  refs.clienteTarifa.addEventListener('change', () => {
+    if (refs.clienteTarifa.value === 'GDMTH') {
+      refs.modoCalculo.value = 'gdmth';
+    }
+    applyTariffPreset();
+    updateModeUI();
+    debounceUpdate();
+  });
+
+  refs.modoCalculo.addEventListener('change', () => {
+    updateModeUI();
+    debounceUpdate();
+  });
+
+
+  const cantidadInversoresEl = document.getElementById('cantidadInversores');
+  const capacidadInversorEl = document.getElementById('capacidadInversor');
+  const tipoInversorEl = document.getElementById('tipoInversor');
+
+  if (cantidadInversoresEl) {
+    cantidadInversoresEl.addEventListener('input', () => {
+      cantidadInversoresEl.dataset.manual = 'true';
+    });
+  }
+
+  if (capacidadInversorEl) {
+    capacidadInversorEl.addEventListener('input', () => {
+      capacidadInversorEl.dataset.manual = 'true';
+    });
+  }
+
+  if (tipoInversorEl) {
+    tipoInversorEl.addEventListener('change', () => {
+      if (cantidadInversoresEl) cantidadInversoresEl.dataset.manual = '';
+      if (capacidadInversorEl) capacidadInversorEl.dataset.manual = '';
+      sincronizarConfiguracionInversor(Number(refs.numMFV.value || 0));
+      debounceUpdate();
+    });
+  }
+
+  const inputs = [
+    refs.clienteNombre,
+    refs.clienteFecha,
+    refs.clienteUbicacion,
+    refs.clienteTarifa,
+    refs.tipoPropiedad,
+    refs.limiteBasico,
+    refs.limiteIntermedio,
+    refs.precioBasico,
+    refs.precioIntermedio,
+    refs.precioExcedente,
+    refs.incrementoAnual,
+    refs.numMFV,
+    refs.potenciaModulo,
+    refs.hsp,
+    refs.factorDesempeno,
+    refs.costoSistema,
+    refs.generacionBimestral,
+    refs.observacionesProyecto,
+    refs.consumoBimestralEstimado,
+    refs.costoBimestralEstimado,
+    ...refs.consumos,
+    ...refs.costos,
+    ...refs.consumosGDMTH,
+    ...refs.preciosGDMTH,
+    document.getElementById('costoPanelUnitario'),
+    document.getElementById('tipoInversor'),
+    document.getElementById('cantidadInversores'),
+    document.getElementById('capacidadInversor'),
+    document.getElementById('costoInversor'),
+    document.getElementById('manoObra'),
+    document.getElementById('costoEstructura'),
+    document.getElementById('costoProtecciones'),
+    document.getElementById('costoCableado'),
+    document.getElementById('tramiteCfe'),
+    document.getElementById('seguroSistema'),
+    document.getElementById('mantenimiento'),
+    document.getElementById('utilidadPorcentaje'),
+    document.getElementById('descuentoProyecto')
+  ].filter(Boolean);
+
+  inputs.forEach(el => {
+    el.addEventListener('input', () => {
+      debounceUpdate();
+      guardarDefaultsInternos();
+    });
+    el.addEventListener('change', () => {
+      debounceUpdate();
+      guardarDefaultsInternos();
+    });
+  });
+}
+
+function toggleModo() {
+  modoInterno = !modoInterno;
+  document.body.classList.toggle('modo-cliente', !modoInterno);
+}
+
+init();
+mostrarClientes();
+window.guardarYabrir = guardarYabrir;
+window.guardarActual = guardarActual;
+window.cargarCliente = cargarCliente;
+window.eliminarCliente = eliminarCliente;
+window.toggleModo = toggleModo;
+window.exportarRespaldoClientes = exportarRespaldoClientes;
+window.importarRespaldoClientes = importarRespaldoClientes;
+
+</script>
+
+<script>
+/* Parche v2: asegura guardado/carga del cotizador económico */
+(function(){
+  const originalSaveData = window.saveData;
+  window.saveData = function(data){
+    const payload = {
+      ...(data || {}),
+      interno: (data && data.interno) ? data.interno : (typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : undefined),
+      internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : undefined
+    };
+    localStorage.setItem('solregioProposalData', JSON.stringify(payload));
+    return payload;
+  };
+
+  window.preloadFromStorage = function(){
+    const raw = localStorage.getItem('solregioProposalData');
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      if (typeof applyCotizacionToForm === 'function') applyCotizacionToForm(data);
+      if (data && data.internoForm && typeof applyInternoFormData === 'function') {
+        applyInternoFormData(data.internoForm);
+      }
+      if (typeof calcularCotizadorInterno === 'function') calcularCotizadorInterno();
+    } catch (e) {
+      console.warn('No se pudo precargar la cotización con datos internos', e);
+    }
+  };
+
+  window.guardarYabrir = function(){
+    const data = typeof getData === 'function' ? getData() : {};
+    const tel = document.getElementById('clienteTelefono')?.value || '';
+    const interno = typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : undefined;
+    window.saveData({ ...data, clienteTelefono: tel, interno, internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : undefined });
+    if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
+    window.open('presentacion.html', '_blank');
+  };
+
+  window.guardarActual = function(){
+    const interno = typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : {};
+    const calculo = typeof getData === 'function' ? getData() : {};
+    const inversor = typeof getInversorSugerido === 'function' ? getInversorSugerido() : '-';
+    const clienteTelefono = document.getElementById('clienteTelefono')?.value || '';
+    const data = {
+      nombre: refs.clienteNombre.value || '',
+      telefono: clienteTelefono,
+      ubicacion: refs.clienteUbicacion.value || '',
+      tipoPropiedad: refs.tipoPropiedad.value || '',
+      tarifa: refs.clienteTarifa.value || '',
+      tipoAnalisis: refs.modoCalculo.value === 'gdmth' ? 'GDMTH 12 meses' : (refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'),
+      fechaCotizacion: refs.clienteFecha.value || '',
+      consumo: `${numberFmt(calculo.consumoAnual || 0)} kWh/año`,
+      paneles: String(refs.numMFV.value || 0),
+      kwp: `${numberFmt(calculo.potenciaSistemaKW || 0, 2)} kW`,
+      inversor,
+      tipoInversor: document.getElementById('tipoInversor')?.value || '',
+      cantidadInversores: String(document.getElementById('cantidadInversores')?.value || ''),
+      capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
+      total: money(interno.precioFinalConIva || 0),
+      ahorroAnual: money(calculo.ahorroAnual || 0),
+      roi: (calculo.roiYears || 0) > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
+      costoReal: money(interno.costoReal || 0),
+      utilidadInterna: money(interno.utilidad || 0),
+      subtotalSinIva: money(interno.subtotalSinIva || 0),
+      iva: money(interno.iva || 0),
+      precioCliente: money(interno.precioFinalConIva || 0),
+      snapshot: {
+        cotizacion: { ...calculo, clienteTelefono },
+        interno,
+        internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : {},
+        savedAt: new Date().toISOString()
+      }
+    };
+    const registro = typeof guardarCliente === 'function' ? guardarCliente(data) : data;
+    window.saveData({ ...calculo, clienteTelefono, interno, internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : {} });
+    if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
+    alert(`Cliente guardado correctamente: ${(registro && registro.nombre) || 'Sin nombre'}`);
+  };
+
+  const originalCargarCliente = window.cargarCliente;
+  window.cargarCliente = function(id){
+    if (typeof originalCargarCliente === 'function') originalCargarCliente(id);
+    const clientes = typeof getClientesGuardados === 'function' ? getClientesGuardados() : [];
+    const cliente = clientes.find(item => item.id === id);
+    const internoForm = cliente?.snapshot?.internoForm;
+    if (internoForm && typeof applyInternoFormData === 'function') {
+      applyInternoFormData(internoForm);
+      if (typeof calcularCotizadorInterno === 'function') calcularCotizadorInterno();
+      if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
+    }
+  };
+})();
+</script>
+
 </body>
 </html>

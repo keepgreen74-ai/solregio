@@ -966,6 +966,126 @@ function toggleModo() {
   document.body.classList.toggle('modo-cliente', !modoInterno);
 }
 
+/* ===== 🔥 SOLREGIO CRM EXTENSIÓN (NO BORRAR LO EXISTENTE) ===== */
+
+const STORAGE_CLIENTES = "solregio_clientes_v2";
+
+// ===== GUARDAR CLIENTE COMPLETO =====
+function guardarActual() {
+const data = getData();
+
+let clientes = JSON.parse(localStorage.getItem(STORAGE_CLIENTES)) || [];
+
+const clienteCompleto = {
+id: Date.now(),
+nombre: data.clienteNombre,
+fecha: new Date().toLocaleDateString(),
+dataCompleta: data
+};
+
+clientes.push(clienteCompleto);
+
+localStorage.setItem(STORAGE_CLIENTES, JSON.stringify(clientes));
+
+alert("Cliente guardado COMPLETO ✅");
+}
+
+// ===== LISTAR CLIENTES =====
+function obtenerClientes() {
+return JSON.parse(localStorage.getItem(STORAGE_CLIENTES)) || [];
+}
+
+// ===== CARGAR CLIENTE =====
+function cargarCliente(id) {
+const clientes = obtenerClientes();
+const cliente = clientes.find(c => c.id === id);
+if (!cliente) return;
+
+const data = cliente.dataCompleta;
+
+// datos básicos
+document.getElementById('clienteNombre').value = data.clienteNombre || '';
+document.getElementById('clienteFecha').value = data.clienteFecha || '';
+document.getElementById('clienteUbicacion').value = data.clienteUbicacion || '';
+document.getElementById('clienteTarifa').value = data.clienteTarifa || '';
+document.getElementById('tipoPropiedad').value = data.tipoPropiedad || '';
+document.getElementById('modoCalculo').value = data.modoCalculo || '';
+
+// consumos
+document.querySelectorAll('.consumo-recibo').forEach((el, i) => {
+el.value = data.consumos?.[i] || '';
+});
+
+document.querySelectorAll('.costo-recibo').forEach((el, i) => {
+el.value = data.costosActuales?.[i] || '';
+});
+
+// sistema
+document.getElementById('numMFV').value = data.numMFV || '';
+document.getElementById('potenciaModulo').value = data.potenciaModulo || '';
+document.getElementById('hsp').value = data.hsp || '';
+document.getElementById('factorDesempeno').value = data.factorDesempeno || '';
+document.getElementById('costoSistema').value = data.costoSistema || '';
+document.getElementById('generacionBimestral').value = data.generacionBimestral || '';
+
+alert("Cliente cargado 🚀");
+
+if (typeof updateAll === "function") updateAll();
+}
+
+// ===== EXPORTAR RESPALDO =====
+function exportarRespaldo() {
+const data = localStorage.getItem(STORAGE_CLIENTES);
+
+if (!data) {
+alert("No hay datos para exportar");
+return;
+}
+
+const blob = new Blob([data], { type: "application/json" });
+const url = URL.createObjectURL(blob);
+
+const a = document.createElement("a");
+a.href = url;
+a.download = "solregio_respaldo.json";
+a.click();
+}
+
+// ===== IMPORTAR RESPALDO =====
+function importarRespaldo(input) {
+const file = input.files[0];
+if (!file) return;
+
+const reader = new FileReader();
+
+reader.onload = function(e) {
+localStorage.setItem(STORAGE_CLIENTES, e.target.result);
+alert("Respaldo cargado correctamente ✅");
+};
+
+reader.readAsText(file);
+}
+
+function verClientes() {
+const clientes = obtenerClientes();
+
+if (clientes.length === 0) {
+alert("No hay clientes guardados");
+return;
+}
+
+let lista = "Clientes:\n\n";
+
+clientes.forEach(c => {
+lista += `ID: ${c.id} | ${c.nombre} | ${c.fecha}\n`;
+});
+
+const id = prompt(lista + "\nEscribe el ID para cargar:");
+
+if (id) cargarCliente(Number(id));
+}
+
+
 init();
 mostrarClientes();
 window.guardarYabrir = guardarYabrir;
