@@ -875,6 +875,11 @@ input:focus,select:focus,textarea:focus{
   .cliente-card-head {
     gap: 10px;
   }
+
+  .crm-scenario-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
 }
 
 
@@ -897,6 +902,178 @@ input:focus,select:focus,textarea:focus{
 .btn-crm-danger:hover{
   border-color:#fca5a5;
   background:#ffeaea;
+}
+.btn-crm-whatsapp{
+  background:rgba(0,230,118,.10);
+  border-color:rgba(0,200,83,.28);
+  color:#0e7a45;
+}
+.btn-crm-whatsapp:hover{
+  background:rgba(0,230,118,.16);
+  border-color:rgba(0,200,83,.38);
+}
+.crm-hint{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.crm-topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+.crm-topbar-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.crm-sub{
+  margin:8px 0 0;
+  color:var(--muted);
+  line-height:1.6;
+}
+.crm-stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+.crm-stat-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px 18px;
+}
+.crm-stat-card span{
+  display:block;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:8px;
+}
+.crm-stat-card strong{
+  font-size:1.05rem;
+  line-height:1.35;
+}
+.crm-toolbar{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(220px,1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+.crm-search-field input{
+  background:#fff;
+}
+.cliente-card{
+  position:relative;
+}
+.cliente-card.is-active{
+  border-color:rgba(0,200,83,.55);
+  box-shadow:0 16px 34px rgba(0,200,83,.12);
+}
+.cliente-card-head-main{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.cliente-card-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.cliente-mini-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border-radius:999px;
+  background:#f8fafc;
+  border:1px solid var(--line);
+  color:#475467;
+  font-size:.74rem;
+  font-weight:700;
+}
+.cliente-mini-badge.is-scenario{
+  background:rgba(0,230,118,.10);
+  border-color:rgba(0,200,83,.25);
+  color:#0e7a45;
+}
+.crm-scenario-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.crm-scenario-row select{
+  min-width:150px;
+}
+.crm-sibling-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.btn-crm-mini{
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  font-size:.78rem;
+}
+.cliente-card-kpis{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:14px;
+}
+.cliente-kpi{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+}
+.cliente-kpi span{
+  display:block;
+  color:var(--muted);
+  font-size:.74rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin-bottom:6px;
+}
+.cliente-kpi strong{
+  display:block;
+  font-size:.98rem;
+}
+.cliente-status-select{
+  min-height:38px;
+  width:auto;
+  min-width:150px;
+  border-radius:999px;
+  padding:8px 14px;
+}
+.btn-crm-soft{
+  background:#f8fafc;
+}
+.btn-crm-primary{
+  background:linear-gradient(135deg,var(--green),var(--green-deep));
+  color:#062111;
+  border-color:transparent;
+}
+@media (max-width:980px){
+  .crm-topbar,
+  .crm-toolbar,
+  .crm-stats,
+  .cliente-card-kpis{
+    grid-template-columns:1fr;
+    display:grid;
+  }
+  .crm-topbar-actions{
+    width:100%;
+  }
 }
 
 .internal-summary {
@@ -1607,6 +1784,95 @@ input:focus,select:focus,textarea:focus{
   }
 }
 
+
+
+.crm-followup-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin:12px 0 18px;
+}
+.crm-followup-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:12px;
+}
+.crm-followup-head h3{
+  margin:0 0 6px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.crm-followup-head p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.65;
+}
+.crm-followup-chip{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:0 12px;
+  border-radius:999px;
+  background:#f5f7fa;
+  border:1px solid var(--line);
+  font-size:.78rem;
+  font-weight:700;
+  color:#475467;
+  margin-right:8px;
+  margin-bottom:8px;
+}
+
+
+.crm-stat-card.is-danger{border-color:rgba(217,45,32,.25);background:linear-gradient(180deg,rgba(254,243,242,.9),#fff)}
+.crm-stat-card.is-warning{border-color:rgba(245,158,11,.25);background:linear-gradient(180deg,rgba(255,251,235,.95),#fff)}
+.crm-stat-card.is-success{border-color:rgba(18,183,106,.20);background:linear-gradient(180deg,rgba(236,253,243,.95),#fff)}
+.cliente-card.followup-overdue{border-color:rgba(217,45,32,.25);box-shadow:0 18px 40px rgba(217,45,32,.08)}
+.cliente-card.followup-today{border-color:rgba(245,158,11,.28);box-shadow:0 18px 40px rgba(245,158,11,.10)}
+.cliente-card.followup-upcoming{border-color:rgba(18,183,106,.22);box-shadow:0 18px 40px rgba(18,183,106,.08)}
+.crm-priority-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.crm-priority-badge{
+  display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:999px;
+  border:1px solid var(--line);font-size:.78rem;font-weight:800;letter-spacing:.03em;background:#fff
+}
+.crm-priority-badge.is-danger{color:#b42318;background:#fff5f4;border-color:rgba(217,45,32,.22)}
+.crm-priority-badge.is-warning{color:#b54708;background:#fffaeb;border-color:rgba(245,158,11,.25)}
+.crm-priority-badge.is-success{color:#027a48;background:#ecfdf3;border-color:rgba(18,183,106,.22)}
+.crm-priority-badge.is-muted{color:#475467;background:#f8fafc}
+.crm-followup-note{margin-top:10px}
+.crm-temp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.crm-temp-chip{
+  display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 12px;
+  border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:800;color:#344054
+}
+.crm-temp-chip.is-hot{background:#fff1f3;border-color:rgba(217,45,32,.18);color:#b42318}
+.crm-temp-chip.is-warm{background:#fffaeb;border-color:rgba(245,158,11,.22);color:#b54708}
+.crm-temp-chip.is-cold{background:#eff8ff;border-color:rgba(46,144,250,.18);color:#175cd3}
+.crm-temp-badge{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--line);font-size:.78rem;font-weight:800}
+.crm-temp-badge.is-hot{background:#fff1f3;border-color:rgba(217,45,32,.18);color:#b42318}
+.crm-temp-badge.is-warm{background:#fffaeb;border-color:rgba(245,158,11,.22);color:#b54708}
+.crm-temp-badge.is-cold{background:#eff8ff;border-color:rgba(46,144,250,.18);color:#175cd3}
+
+.crm-alert-shell{
+  margin:14px 0 18px;padding:18px 20px;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,250,252,.96))
+}
+.crm-alert-shell.is-danger{border-color:rgba(217,45,32,.18);background:linear-gradient(180deg,#fff5f4,#fff)}
+.crm-alert-shell.is-warning{border-color:rgba(245,158,11,.24);background:linear-gradient(180deg,#fffaeb,#fff)}
+.crm-alert-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.crm-alert-title h3{margin:0;font-size:1.05rem;letter-spacing:-.02em}
+.crm-alert-list{display:grid;gap:10px;margin-top:12px}
+.crm-alert-item{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:14px;
+  background:#fff;border:1px solid var(--line)
+}
+.crm-alert-item strong{display:block}
+.crm-alert-item span{color:var(--muted);font-size:.92rem}
+
+
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
@@ -1619,7 +1885,7 @@ input:focus,select:focus,textarea:focus{
       </a>
       <div class="nav-actions">
         <div class="top-actions">
-  <button class="btn btn-secondary" type="button" onclick="guardarActual()">Guardar cliente</button>
+  <button class="btn btn-secondary" type="button" data-save-label="1" onclick="guardarActual()">Guardar cliente</button>
   <button class="btn btn-secondary" type="button" onclick="exportarRespaldoClientes()">Exportar respaldo</button>
   <button class="btn btn-secondary" type="button" onclick="document.getElementById('importarRespaldoInput').click()">Importar respaldo</button>
   <button class="btn btn-secondary" type="button" onclick="toggleModo()">Vista limpia</button>
@@ -1924,7 +2190,7 @@ input:focus,select:focus,textarea:focus{
             <div class="eyebrow">Vista rápida</div>
             <h2>Resumen del cálculo</h2>
           </div>
-          <button class="btn btn-secondary btn-save" type="button" onclick="guardarActual()">Guardar cliente</button>
+          <button class="btn btn-secondary btn-save" type="button" data-save-label="1" onclick="guardarActual()">Guardar cliente</button>
           <button class="btn btn-secondary btn-save" type="button" onclick="exportarRespaldoClientes()">Exportar respaldo</button>
           <button class="btn btn-primary" type="button" onclick="guardarYabrir()">Generar propuesta</button>
         </div>
@@ -1958,7 +2224,125 @@ input:focus,select:focus,textarea:focus{
     </div>
     
 <section class="crm-panel">
-  <h2>Clientes guardados</h2>
+  <div class="crm-topbar">
+    <div>
+      <div class="eyebrow">CRM visual</div>
+      <h2>Clientes guardados</h2>
+      <p class="crm-sub">Busca, filtra, abre, actualiza, duplica o elimina propuestas sin perder el contexto.</p>
+    </div>
+    <div class="crm-topbar-actions">
+      <button class="btn btn-secondary btn-crm" type="button" onclick="nuevoCliente()">Nuevo cliente</button>
+      <button class="btn btn-secondary btn-crm" type="button" onclick="abrirPropuestaClienteActivo()">Abrir propuesta cliente activo</button>
+      <button class="btn btn-secondary btn-crm btn-crm-whatsapp" type="button" onclick="enviarWhatsAppClienteActivo()">WhatsApp cliente activo</button>
+      <button class="btn btn-primary btn-crm" type="button" onclick="guardarActual()">Guardar / actualizar</button>
+    </div>
+  </div>
+
+  <div id="crmAlertShell" class="crm-alert-shell hidden">
+    <div class="crm-alert-title">
+      <h3 id="crmAlertTitle">Seguimientos urgentes</h3>
+      <button class="btn btn-secondary btn-crm" type="button" onclick="cerrarRecordatorioCRM()">Ocultar</button>
+    </div>
+    <p id="crmAlertSubtitle" class="crm-sub">Aquí verás los clientes que deberías mover primero hoy.</p>
+    <div id="crmAlertList" class="crm-alert-list"></div>
+  </div>
+
+  <div class="crm-stats">
+    <div class="crm-stat-card">
+      <span>Total guardados</span>
+      <strong id="crmTotalClientes">0</strong>
+    </div>
+    <div class="crm-stat-card">
+      <span>Resultados visibles</span>
+      <strong id="crmResultadosVisibles">0</strong>
+    </div>
+    <div class="crm-stat-card is-danger">
+      <span>Seguimiento vencido</span>
+      <strong id="crmVencidos">0</strong>
+    </div>
+    <div class="crm-stat-card is-warning">
+      <span>Seguimiento hoy</span>
+      <strong id="crmHoy">0</strong>
+    </div>
+    <div class="crm-stat-card is-success">
+      <span>Próximos 7 días</span>
+      <strong id="crmProximos">0</strong>
+    </div>
+    <div class="crm-stat-card">
+      <span>Cliente en edición</span>
+      <strong id="crmClienteActivo">Nuevo registro</strong>
+    </div>
+  </div>
+
+  <div class="crm-toolbar">
+    <label class="field crm-search-field">
+      <span>Buscar cliente</span>
+      <input id="crmSearch" type="text" placeholder="Nombre, teléfono, ubicación, tarifa...">
+    </label>
+
+    <label class="field">
+      <span>Filtrar por estatus</span>
+      <select id="crmFilterStatus">
+        <option value="todos">Todos</option>
+        <option value="nuevo">Nuevo</option>
+        <option value="seguimiento">Seguimiento</option>
+        <option value="cerrado">Cerrado</option>
+      </select>
+    </label>
+  </div>
+  <p class="crm-hint">Tip: al abrir un cliente, el botón guardar pasa a actualizar. Usa también la temperatura comercial para saber a quién empujar primero.</p>
+
+  <div class="crm-followup-box">
+    <div class="crm-followup-head">
+      <div>
+        <h3>Seguimiento comercial</h3>
+        <p>Estos datos se guardan con cada cliente para que no pierdas el contexto de la negociación.</p>
+      </div>
+      <button class="btn btn-secondary btn-crm" type="button" onclick="marcarContactoHoy()">Registrar contacto hoy</button>
+    </div>
+    <div class="form-grid two">
+      <label class="field">
+        <span>Próximo seguimiento</span>
+        <input id="crmProximoSeguimiento" type="date">
+      </label>
+      <label class="field">
+        <span>Último contacto</span>
+        <input id="crmUltimoContacto" type="date">
+      </label>
+      <label class="field wide">
+        <span>Nota comercial breve</span>
+        <textarea id="crmNotaSeguimiento" placeholder="Ej. Le interesó, quiere revisar otra opción de paneles, volver a contactar el viernes..."></textarea>
+      </label>
+      <label class="field">
+        <span>Temperatura comercial</span>
+        <select id="crmTemperatura">
+          <option value="tibio">Tibio</option>
+          <option value="caliente">Caliente</option>
+          <option value="frio">Frío</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Escenario</span>
+        <div class="crm-scenario-row">
+          <select id="crmEscenario">
+            <option value="A">Escenario A</option>
+            <option value="B">Escenario B</option>
+            <option value="C">Escenario C</option>
+          </select>
+          <button class="btn btn-secondary btn-crm" type="button" onclick="duplicarAlSiguienteEscenario()">Duplicar al siguiente escenario</button>
+        </div>
+      </label>
+      <div class="field wide">
+        <span>Lectura rápida</span>
+        <div class="crm-temp-grid">
+          <div class="crm-temp-chip is-hot">Caliente = listo para mover</div>
+          <div class="crm-temp-chip is-warm">Tibio = sí hay interés</div>
+          <div class="crm-temp-chip is-cold">Frío = pausar o nutrir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="clientesLista"></div>
 </section>
 
@@ -2394,9 +2778,36 @@ function normalizeText(value) {
 }
 
 function buildClientKey(data) {
-  return [data.nombre, data.telefono, data.ubicacion]
+  return [data.nombre, data.telefono, data.ubicacion, data.escenario || 'A']
     .map(normalizeText)
     .join('|');
+}
+
+function getScenarioValue(value = 'A') {
+  const safe = String(value || 'A').toUpperCase();
+  return ['A', 'B', 'C'].includes(safe) ? safe : 'A';
+}
+
+function getNextScenario(value = 'A') {
+  const current = getScenarioValue(value);
+  return current === 'A' ? 'B' : (current === 'B' ? 'C' : null);
+}
+
+function getScenarioLabel(value = 'A') {
+  return `Escenario ${getScenarioValue(value)}`;
+}
+
+function buildScenarioFamilyKey(data = {}) {
+  return String(data.familiaId || [data.nombre, data.telefono, data.ubicacion]
+    .map(normalizeText)
+    .join('|'));
+}
+
+function getScenarioSiblings(cliente) {
+  const familyKey = buildScenarioFamilyKey(cliente);
+  return getClientesGuardados()
+    .filter((item) => buildScenarioFamilyKey(item) === familyKey)
+    .sort((a, b) => getScenarioValue(a.escenario).localeCompare(getScenarioValue(b.escenario)));
 }
 
 function getInternoFormData() {
@@ -2525,7 +2936,68 @@ function importarRespaldoClientes(event) {
   reader.onload = () => {
     try {
       const payload = JSON.parse(reader.result);
-      const importados = Array.isArray(payload?.clientes) ? payload.clientes : [];
+
+      let importados = [];
+      let borradorActual = null;
+      let defaultsInternos = null;
+
+      if (Array.isArray(payload)) {
+        importados = payload;
+      } else if (Array.isArray(payload?.clientes)) {
+        importados = payload.clientes;
+        borradorActual = payload?.borradorActual || null;
+        defaultsInternos = payload?.defaultsInternos || null;
+      } else if (typeof payload === 'object' && payload !== null) {
+        if (Array.isArray(payload?.items)) {
+          importados = payload.items;
+        } else if (Array.isArray(payload?.records)) {
+          importados = payload.records;
+        } else if (typeof payload?.clientes === 'string') {
+          try {
+            const parsedClientes = JSON.parse(payload.clientes);
+            if (Array.isArray(parsedClientes)) importados = parsedClientes;
+          } catch (_) {}
+        } else if (typeof payload?.[CLIENTS_KEY] === 'string') {
+          try {
+            const parsedClientes = JSON.parse(payload[CLIENTS_KEY]);
+            if (Array.isArray(parsedClientes)) importados = parsedClientes;
+          } catch (_) {}
+        } else if (Array.isArray(payload?.[CLIENTS_KEY])) {
+          importados = payload[CLIENTS_KEY];
+        } else if (payload?.id || payload?.nombre || payload?.telefono || payload?.snapshot) {
+          importados = [payload];
+        } else {
+          const values = Object.values(payload);
+          if (values.every((item) => item && typeof item === 'object')) {
+            importados = values.filter((item) => item?.id || item?.nombre || item?.telefono || item?.snapshot);
+          }
+        }
+
+        if (!borradorActual && payload?.borradorActual) borradorActual = payload.borradorActual;
+        if (!defaultsInternos && payload?.defaultsInternos) defaultsInternos = payload.defaultsInternos;
+      }
+
+      importados = (Array.isArray(importados) ? importados : [])
+        .filter(Boolean)
+        .map((cliente) => {
+          const safe = { ...cliente };
+          if (!safe.id) safe.id = Date.now() + Math.floor(Math.random() * 100000);
+          if (!safe.estatus) safe.estatus = 'nuevo';
+          safe.escenario = getScenarioValue(safe.escenario || safe.snapshot?.cotizacion?.escenario || 'A');
+          safe.familiaId = buildScenarioFamilyKey(safe);
+          if (!safe.clave || safe.clave === '||' || safe.clave === '|||a') {
+            safe.clave = buildClientKey({ ...(safe || {}), escenario: safe.escenario });
+          }
+          if (safe.snapshot?.cotizacion?.internoForm && !safe.snapshot?.internoForm) {
+            safe.snapshot.internoForm = safe.snapshot.cotizacion.internoForm;
+          }
+          return safe;
+        });
+
+      if (!importados.length) {
+        throw new Error('No se encontraron clientes válidos en el archivo.');
+      }
+
       const actuales = getClientesGuardados();
       const mapa = new Map();
 
@@ -2537,24 +3009,20 @@ function importarRespaldoClientes(event) {
 
       setClientesGuardados(Array.from(mapa.values()));
 
-      if (payload?.defaultsInternos) {
-        localStorage.setItem(DEFAULTS_KEY, JSON.stringify(payload.defaultsInternos));
-        cargarDefaultsInternos();
+      if (borradorActual) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(borradorActual));
       }
-
-      if (payload?.borradorActual) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload.borradorActual));
-        applyCotizacionToForm(payload.borradorActual);
+      if (defaultsInternos) {
+        localStorage.setItem(DEFAULTS_KEY, JSON.stringify(defaultsInternos));
       }
 
       mostrarClientes();
-      updateAll();
-      alert(`Respaldo importado correctamente. Clientes cargados: ${importados.length}.`);
+      alert(`Respaldo importado correctamente. Clientes cargados: ${importados.length}`);
     } catch (error) {
-      console.error(error);
+      console.error('Error al importar respaldo', error);
       alert('No se pudo importar el respaldo. Revisa que sea un archivo JSON válido de SolRegio.');
     } finally {
-      event.target.value = '';
+      if (event?.target) event.target.value = '';
     }
   };
 
@@ -2816,20 +3284,32 @@ function preloadFromStorage() {
 
 function guardarCliente(data) {
   const clientes = getClientesGuardados();
-  const clave = buildClientKey(data);
+  const escenario = getScenarioValue(data.escenario || 'A');
+  const familiaId = buildScenarioFamilyKey(data);
+  const clave = buildClientKey({ ...data, escenario });
 
   const nuevoRegistro = {
     id: data.id || Date.now(),
     fecha: new Date().toLocaleDateString('es-MX'),
     estatus: data.estatus || 'nuevo',
+    familiaId,
+    escenario,
     clave,
     ...data
   };
 
-  const indexExistente = clientes.findIndex(cliente => {
-    const claveCliente = cliente?.clave || buildClientKey(cliente || {});
-    return claveCliente && claveCliente === clave && clave !== '||';
-  });
+  let indexExistente = -1;
+
+  if (data.id) {
+    indexExistente = clientes.findIndex(cliente => String(cliente.id) === String(data.id));
+  }
+
+  if (indexExistente < 0) {
+    indexExistente = clientes.findIndex(cliente => {
+      const claveCliente = cliente?.clave || buildClientKey(cliente || {});
+      return claveCliente && claveCliente === clave && clave !== '|||a';
+    });
+  }
 
   if (indexExistente >= 0) {
     clientes[indexExistente] = {
@@ -2843,61 +3323,446 @@ function guardarCliente(data) {
 
   setClientesGuardados(clientes);
   mostrarClientes();
-  return nuevoRegistro;
+  return indexExistente >= 0 ? clientes[indexExistente] : nuevoRegistro;
+}
+
+
+let currentClientId = null;
+
+function getEditorLabel() {
+  const el = document.getElementById('crmClienteActivo');
+  return el;
+}
+
+function setEditorState(cliente = null) {
+  currentClientId = cliente?.id || null;
+
+  const activos = document.querySelectorAll('.cliente-card');
+  activos.forEach(card => {
+    card.classList.toggle('is-active', String(card.dataset.id || '') === String(currentClientId || ''));
+  });
+
+  const label = getEditorLabel();
+  if (label) {
+    label.textContent = cliente ? `${cliente.nombre || 'Sin nombre'} · ${getScenarioLabel(cliente.escenario || 'A')}` : 'Nuevo registro';
+  }
+
+  document.querySelectorAll('[data-save-label]').forEach((btn) => {
+    btn.textContent = currentClientId ? 'Actualizar cliente' : 'Guardar cliente';
+  });
+}
+
+function limpiarFormularioCompleto() {
+  refs.clienteNombre.value = '';
+  const tel = document.getElementById('clienteTelefono');
+  if (tel) tel.value = '';
+  refs.clienteUbicacion.value = '';
+  refs.tipoPropiedad.value = '';
+  refs.clienteTarifa.value = '1C';
+  refs.modoCalculo.value = 'recibos';
+  refs.observacionesProyecto.value = '';
+  refs.consumos.forEach((input) => input.value = '');
+  refs.costos.forEach((input) => input.value = '');
+  refs.consumosGDMTH.forEach((input) => input.value = '');
+  refs.preciosGDMTH.forEach((input) => input.value = '');
+  if (refs.consumoBimestralEstimado) refs.consumoBimestralEstimado.value = '';
+  if (refs.costoBimestralEstimado) refs.costoBimestralEstimado.value = '';
+  refs.numMFV.value = '';
+  refs.generacionBimestral.value = '';
+  refs.costoSistema.value = '';
+  document.getElementById('cantidadInversores')?.setAttribute('data-manual','');
+  document.getElementById('capacidadInversor')?.setAttribute('data-manual','');
+  applySeguimientoData({ escenario: 'A' });
+  applyTariffPreset();
+  cargarDefaultsInternos();
+  if (!refs.clienteFecha.value) setToday();
+  updateModeUI();
+  setEditorState(null);
+  updateAll();
+}
+
+function nuevoCliente() {
+  limpiarFormularioCompleto();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function duplicarCliente(id) {
+  const clientes = getClientesGuardados();
+  const cliente = clientes.find(item => item.id === id);
+  if (!cliente) return;
+
+  const copia = JSON.parse(JSON.stringify(cliente));
+  copia.id = Date.now();
+  copia.nombre = (cliente.nombre || 'Cliente') + ' (copia)';
+  copia.estatus = 'nuevo';
+  copia.clave = buildClientKey(copia);
+  if (copia.snapshot?.savedAt) copia.snapshot.savedAt = new Date().toISOString();
+
+  clientes.push(copia);
+  setClientesGuardados(clientes);
+  mostrarClientes();
+}
+
+function duplicarAlSiguienteEscenario(id = currentClientId) {
+  const clientes = getClientesGuardados();
+  const cliente = clientes.find(item => String(item.id) === String(id || ''));
+  if (!cliente) {
+    alert('Primero abre o guarda un cliente para generar el siguiente escenario.');
+    return;
+  }
+
+  const siguiente = getNextScenario(cliente.escenario || document.getElementById('crmEscenario')?.value || 'A');
+  if (!siguiente) {
+    alert('Ese cliente ya está en el último escenario disponible.');
+    return;
+  }
+
+  const existente = clientes.find(item => buildScenarioFamilyKey(item) === buildScenarioFamilyKey(cliente) && getScenarioValue(item.escenario) === siguiente);
+  if (existente) {
+    cargarCliente(existente.id);
+    alert(`Ya existía ${getScenarioLabel(siguiente)}. Lo abrí para que lo ajustes.`);
+    return;
+  }
+
+  const copia = JSON.parse(JSON.stringify(cliente));
+  copia.id = Date.now();
+  copia.escenario = siguiente;
+  copia.clave = buildClientKey({ ...copia, escenario: siguiente });
+  copia.estatus = 'seguimiento';
+  if (copia.snapshot?.savedAt) copia.snapshot.savedAt = new Date().toISOString();
+
+  clientes.push(copia);
+  setClientesGuardados(clientes);
+  mostrarClientes();
+  cargarCliente(copia.id);
+}
+
+function actualizarEstatusCliente(id, estatus) {
+  const clientes = getClientesGuardados();
+  const index = clientes.findIndex(item => item.id === id);
+  if (index < 0) return;
+  clientes[index].estatus = estatus;
+  setClientesGuardados(clientes);
+
+  if (String(currentClientId || '') === String(id)) {
+    setEditorState(clientes[index]);
+  }
+
+  mostrarClientes();
+}
+
+
+function parseLocalDate(value) {
+  if (!value) return null;
+  const [yyyy, mm, dd] = String(value).split('-').map(Number);
+  if (!yyyy || !mm || !dd) return null;
+  return new Date(yyyy, mm - 1, dd, 12, 0, 0, 0);
+}
+
+function diffDaysFromToday(value) {
+  const target = parseLocalDate(value);
+  if (!target) return null;
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0);
+  return Math.round((target - today) / 86400000);
+}
+
+function getSeguimientoEstado(cliente) {
+  const diff = diffDaysFromToday(cliente?.proximoSeguimiento || '');
+  if (diff === null) {
+    return { key: 'sin-fecha', label: 'Sin fecha', className: 'is-muted', priority: 4 };
+  }
+  if (diff < 0) {
+    return { key: 'vencido', label: `Vencido ${Math.abs(diff)} día${Math.abs(diff) === 1 ? '' : 's'}`, className: 'is-danger', priority: 0 };
+  }
+  if (diff === 0) {
+    return { key: 'hoy', label: 'Toca hoy', className: 'is-warning', priority: 1 };
+  }
+  if (diff <= 7) {
+    return { key: 'proximo', label: `En ${diff} día${diff === 1 ? '' : 's'}`, className: 'is-success', priority: 2 };
+  }
+  return { key: 'futuro', label: `En ${diff} días`, className: 'is-muted', priority: 3 };
+}
+
+function getTemperaturaMeta(value = 'tibio') {
+  const key = String(value || 'tibio').toLowerCase();
+  const map = {
+    caliente: { key: 'caliente', label: 'Caliente', priority: 0, className: 'is-danger' },
+    tibio: { key: 'tibio', label: 'Tibio', priority: 1, className: 'is-warning' },
+    frio: { key: 'frio', label: 'Frío', priority: 2, className: 'is-muted' }
+  };
+  return map[key] || map.tibio;
+}
+
+function renderRecordatorioCRM(showAlert = false) {
+  const clientes = getClientesGuardados();
+  const urgentes = getClientesOrdenados(clientes).filter((cliente) => {
+    const estado = getSeguimientoEstado(cliente);
+    return estado.key === 'vencido' || estado.key === 'hoy';
+  });
+
+  let box = document.getElementById('crmRecordatorio');
+  if (!box) return;
+
+  if (!urgentes.length) {
+    box.innerHTML = '<strong>Todo al día.</strong><span>No tienes seguimientos urgentes por ahora.</span>';
+    box.className = 'crm-recordatorio crm-recordatorio-ok';
+    return;
+  }
+
+  const top = urgentes.slice(0, 3).map((cliente) => {
+    const estado = getSeguimientoEstado(cliente);
+    const temp = getTemperaturaMeta(cliente.temperatura);
+    return `<li><strong>${cliente.nombre || 'Sin nombre'}</strong> · ${estado.label} · ${temp.label}</li>`;
+  }).join('');
+
+  box.innerHTML = `<strong>Seguimientos urgentes: ${urgentes.length}</strong><span>Prioriza estos clientes primero.</span><ul>${top}</ul>`;
+  box.className = 'crm-recordatorio crm-recordatorio-alert';
+
+  if (showAlert) {
+    alert(`Tienes ${urgentes.length} seguimiento(s) urgente(s) en el CRM.`);
+  }
+}
+
+function getClientesOrdenados(clientes) {
+  return clientes.slice().sort((a, b) => {
+    const sa = getSeguimientoEstado(a);
+    const sb = getSeguimientoEstado(b);
+    if (sa.priority !== sb.priority) return sa.priority - sb.priority;
+
+    const taMeta = getTemperaturaMeta(a?.temperatura);
+    const tbMeta = getTemperaturaMeta(b?.temperatura);
+    if (taMeta.priority !== tbMeta.priority) return taMeta.priority - tbMeta.priority;
+
+    const da = parseLocalDate(a?.proximoSeguimiento || '')?.getTime() || Number.MAX_SAFE_INTEGER;
+    const db = parseLocalDate(b?.proximoSeguimiento || '')?.getTime() || Number.MAX_SAFE_INTEGER;
+    if (da !== db) return da - db;
+
+    const famA = buildScenarioFamilyKey(a);
+    const famB = buildScenarioFamilyKey(b);
+    if (famA === famB) {
+      return getScenarioValue(a?.escenario).localeCompare(getScenarioValue(b?.escenario));
+    }
+
+    const ta = new Date(a?.snapshot?.savedAt || 0).getTime();
+    const tb = new Date(b?.snapshot?.savedAt || 0).getTime();
+    return tb - ta;
+  });
+}
+
+function getFilteredClientes() {
+  const clientes = getClientesGuardados();
+  const q = normalizeText(document.getElementById('crmSearch')?.value || '');
+  const status = document.getElementById('crmFilterStatus')?.value || 'todos';
+
+  return clientes.filter((cliente) => {
+    const matchesStatus = status === 'todos' || (cliente.estatus || 'nuevo') === status;
+    if (!matchesStatus) return false;
+    if (!q) return true;
+
+    const haystack = normalizeText([
+      cliente.nombre,
+      cliente.telefono,
+      cliente.ubicacion,
+      cliente.tipoPropiedad,
+      cliente.tarifa,
+      cliente.tipoAnalisis,
+      cliente.total,
+      cliente.ahorroAnual,
+      cliente.roi,
+      cliente.notaSeguimiento,
+      cliente.proximoSeguimiento,
+      cliente.escenario
+    ].join(' '));
+
+    return haystack.includes(q);
+  });
+}
+
+function getClienteById(id) {
+  const clientes = getClientesGuardados();
+  return clientes.find(item => String(item.id) === String(id)) || null;
+}
+
+function sanitizePhone(phone) {
+  return String(phone || '').replace(/\D+/g, '');
+}
+
+function getSeguimientoData() {
+  return {
+    proximoSeguimiento: document.getElementById('crmProximoSeguimiento')?.value || '',
+    ultimoContacto: document.getElementById('crmUltimoContacto')?.value || '',
+    notaSeguimiento: document.getElementById('crmNotaSeguimiento')?.value || '',
+    temperatura: document.getElementById('crmTemperatura')?.value || 'tibio',
+    escenario: getScenarioValue(document.getElementById('crmEscenario')?.value || 'A')
+  };
+}
+
+function applySeguimientoData(values = {}) {
+  const proximo = document.getElementById('crmProximoSeguimiento');
+  const ultimo = document.getElementById('crmUltimoContacto');
+  const nota = document.getElementById('crmNotaSeguimiento');
+  const temperatura = document.getElementById('crmTemperatura');
+  const escenario = document.getElementById('crmEscenario');
+  if (proximo) proximo.value = values.proximoSeguimiento || '';
+  if (ultimo) ultimo.value = values.ultimoContacto || '';
+  if (nota) nota.value = values.notaSeguimiento || '';
+  if (temperatura) temperatura.value = values.temperatura || 'tibio';
+  if (escenario) escenario.value = getScenarioValue(values.escenario || 'A');
+}
+
+function marcarContactoHoy() {
+  const ultimo = document.getElementById('crmUltimoContacto');
+  if (!ultimo) return;
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  ultimo.value = `${yyyy}-${mm}-${dd}`;
+}
+
+function buildWhatsAppMessage(cliente) {
+  const nombre = cliente?.nombre || 'cliente';
+  const total = cliente?.precioCliente || cliente?.total || '-';
+  const ahorro = cliente?.ahorroAnual || '-';
+  const roi = cliente?.roi || '-';
+  const proximo = cliente?.proximoSeguimiento ? `%0A• Próximo seguimiento sugerido: ${cliente.proximoSeguimiento}` : '';
+  const temperatura = cliente?.temperatura ? `%0A• Estatus comercial: ${getTemperaturaMeta(cliente.temperatura).label}` : '';
+  const escenario = cliente?.escenario ? `%0A• ${getScenarioLabel(cliente.escenario)}` : '';
+  return `Hola ${nombre}, te comparto el seguimiento de tu propuesta solar.${escenario}%0A%0AResumen rápido:%0A• Inversión estimada: ${total}%0A• Ahorro anual estimado: ${ahorro}%0A• Retorno estimado: ${roi}${temperatura}${proximo}%0A%0ASi quieres, revisamos dudas y ajustamos la propuesta.`;
+}
+
+function abrirWhatsAppCliente(id) {
+  const cliente = getClienteById(id);
+  if (!cliente) {
+    alert('No encontré ese cliente.');
+    return;
+  }
+
+  const phone = sanitizePhone(cliente.telefono);
+  if (!phone) {
+    alert('Ese cliente no tiene teléfono capturado todavía.');
+    return;
+  }
+
+  const message = buildWhatsAppMessage(cliente);
+  const url = `https://wa.me/${phone}?text=${message}`;
+  window.open(url, '_blank');
+}
+
+function enviarWhatsAppClienteActivo() {
+  if (!currentClientId) {
+    alert('Primero abre un cliente del CRM para enviarle WhatsApp.');
+    return;
+  }
+  abrirWhatsAppCliente(currentClientId);
+}
+
+function abrirPropuestaCliente(id) {
+  const cliente = getClienteById(id);
+  if (!cliente) {
+    alert('No encontré ese cliente.');
+    return;
+  }
+
+  const snapshot = cliente.snapshot || {};
+  const cotizacion = snapshot.cotizacion || getData();
+  const interno = snapshot.interno || calcularCotizadorInterno();
+
+  saveData({ ...cotizacion, interno });
+  localStorage.setItem(DEFAULTS_KEY, JSON.stringify({
+    ...(snapshot.internoForm || getInternoFormData()),
+    tipoInversor: cliente.tipoInversor || document.getElementById('tipoInversor')?.value || '',
+    cantidadInversores: cliente.cantidadInversores || document.getElementById('cantidadInversores')?.value || '',
+    capacidadInversor: cliente.capacidadInversor || document.getElementById('capacidadInversor')?.value || ''
+  }));
+
+  window.open('presentacion.html', '_blank');
+}
+
+function abrirPropuestaClienteActivo() {
+  if (!currentClientId) {
+    alert('Primero abre un cliente del CRM para ver su propuesta.');
+    return;
+  }
+  abrirPropuestaCliente(currentClientId);
 }
 
 function guardarActual() {
-  const interno = calcularCotizadorInterno();
-  const calculo = getData();
-  const inversor = getInversorSugerido();
-  const clienteTelefono = document.getElementById('clienteTelefono')?.value || '';
+  try {
+    const interno = calcularCotizadorInterno();
+    const calculo = getData();
+    const inversor = getInversorSugerido();
+    const clienteTelefono = document.getElementById('clienteTelefono')?.value || '';
 
-  const data = {
-    nombre: refs.clienteNombre.value || '',
-    telefono: clienteTelefono,
-    ubicacion: refs.clienteUbicacion.value || '',
-    tipoPropiedad: refs.tipoPropiedad.value || '',
-    tarifa: refs.clienteTarifa.value || '',
-    tipoAnalisis: refs.modoCalculo.value === 'gdmth'
-      ? 'GDMTH 12 meses'
-      : (refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'),
-    fechaCotizacion: refs.clienteFecha.value || '',
-    consumo: `${numberFmt(calculo.consumoAnual)} kWh/año`,
-    paneles: String(refs.numMFV.value || 0),
-    kwp: `${numberFmt(calculo.potenciaSistemaKW, 2)} kW`,
-    inversor,
-    tipoInversor: document.getElementById('tipoInversor')?.value || '',
-    cantidadInversores: String(document.getElementById('cantidadInversores')?.value || ''),
-    capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
-    total: money(interno.precioFinalConIva),
-    ahorroAnual: money(calculo.ahorroAnual),
-    roi: calculo.roiYears > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
-    costoReal: money(interno.costoReal),
-    utilidadInterna: money(interno.utilidad),
-    subtotalSinIva: money(interno.subtotalSinIva),
-    iva: money(interno.iva),
-    precioCliente: money(interno.precioFinalConIva),
-    snapshot: {
-      cotizacion: {
-        ...calculo,
-        clienteTelefono
-      },
-      interno,
-      internoForm: getInternoFormData(),
-      savedAt: new Date().toISOString()
-    }
-  };
+    const actualRegistro = (() => {
+      const actuales = getClientesGuardados();
+      return actuales.find(item => item.id === currentClientId) || null;
+    })();
+    const seguimiento = getSeguimientoData();
 
-  const registro = guardarCliente(data);
-  saveData({ ...calculo, clienteTelefono, interno });
-  guardarDefaultsInternos();
-  alert(`Cliente guardado correctamente: ${registro.nombre || 'Sin nombre'}`);
+    const data = {
+      id: currentClientId || undefined,
+      estatus: actualRegistro?.estatus || 'nuevo',
+      familiaId: actualRegistro?.familiaId || buildScenarioFamilyKey({
+        nombre: refs.clienteNombre.value || '',
+        telefono: clienteTelefono,
+        ubicacion: refs.clienteUbicacion.value || ''
+      }),
+      nombre: refs.clienteNombre.value || '',
+      telefono: clienteTelefono,
+      ubicacion: refs.clienteUbicacion.value || '',
+      tipoPropiedad: refs.tipoPropiedad.value || '',
+      tarifa: refs.clienteTarifa.value || '',
+      tipoAnalisis: refs.modoCalculo.value === 'gdmth'
+        ? 'GDMTH 12 meses'
+        : (refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'),
+      fechaCotizacion: refs.clienteFecha.value || '',
+      consumo: `${numberFmt(calculo.consumoAnual)} kWh/año`,
+      paneles: String(refs.numMFV.value || 0),
+      kwp: `${numberFmt(calculo.potenciaSistemaKW, 2)} kW`,
+      inversor,
+      tipoInversor: document.getElementById('tipoInversor')?.value || '',
+      cantidadInversores: String(document.getElementById('cantidadInversores')?.value || ''),
+      capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
+      total: money(interno.precioFinalConIva),
+      ahorroAnual: money(calculo.ahorroAnual),
+      roi: calculo.roiYears > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
+      costoReal: money(interno.costoReal),
+      utilidadInterna: money(interno.utilidad),
+      subtotalSinIva: money(interno.subtotalSinIva),
+      iva: money(interno.iva),
+      precioCliente: money(interno.precioFinalConIva),
+      ...seguimiento,
+      snapshot: {
+        cotizacion: {
+          ...calculo,
+          clienteTelefono,
+          escenario: seguimiento.escenario,
+          internoForm: getInternoFormData()
+        },
+        interno,
+        internoForm: getInternoFormData(),
+        savedAt: new Date().toISOString()
+      }
+    };
+
+    const registro = guardarCliente(data);
+    setEditorState(registro);
+    saveData({ ...calculo, clienteTelefono, interno, internoForm: getInternoFormData() });
+    guardarDefaultsInternos();
+    alert(`${currentClientId ? 'Cliente actualizado' : 'Cliente guardado'}: ${registro.nombre || 'Sin nombre'}`);
+  } catch (error) {
+    console.error('Error al guardar cliente', error);
+    alert('No se pudo guardar el cliente. Revisa que el archivo sea la versión corregida y vuelve a intentar.');
+  }
 }
 
 function eliminarCliente(id) {
   const clientes = getClientesGuardados();
   const actualizados = clientes.filter(cliente => cliente.id !== id);
   setClientesGuardados(actualizados);
+  if (currentClientId === id) setEditorState(null);
   mostrarClientes();
 }
 
@@ -2927,6 +3792,14 @@ function cargarCliente(id) {
     updateModeUI();
   }
 
+  applySeguimientoData({
+    proximoSeguimiento: cliente.proximoSeguimiento || '',
+    ultimoContacto: cliente.ultimoContacto || '',
+    notaSeguimiento: cliente.notaSeguimiento || '',
+    temperatura: cliente.temperatura || 'tibio',
+    escenario: cliente.escenario || 'A'
+  });
+
   if (snapshot.internoForm) {
     applyInternoFormData(snapshot.internoForm);
   }
@@ -2943,52 +3816,113 @@ function cargarCliente(id) {
 
   saveData({ ...(snapshot.cotizacion || getData()), interno: snapshot.interno || calcularCotizadorInterno() });
   guardarDefaultsInternos();
+  setEditorState(cliente);
   updateAll();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function mostrarClientes() {
   const clientes = getClientesGuardados();
+  const filtrados = getClientesOrdenados(getFilteredClientes());
   const contenedor = document.getElementById('clientesLista');
+
+  const totalEl = document.getElementById('crmTotalClientes');
+  const visiblesEl = document.getElementById('crmResultadosVisibles');
+  const vencidosEl = document.getElementById('crmVencidos');
+  const hoyEl = document.getElementById('crmHoy');
+  const proximosEl = document.getElementById('crmProximos');
+  if (totalEl) totalEl.textContent = String(clientes.length);
+  if (visiblesEl) visiblesEl.textContent = String(filtrados.length);
+  const estadosGlobales = clientes.map(getSeguimientoEstado);
+  if (vencidosEl) vencidosEl.textContent = String(estadosGlobales.filter(e => e.key === 'vencido').length);
+  if (hoyEl) hoyEl.textContent = String(estadosGlobales.filter(e => e.key === 'hoy').length);
+  if (proximosEl) proximosEl.textContent = String(estadosGlobales.filter(e => e.key === 'proximo').length);
+
+  renderRecordatorioCRM(false);
 
   if (!contenedor) return;
 
-  if (clientes.length === 0) {
-    contenedor.innerHTML = '<p class="crm-empty">No hay clientes guardados todavía.</p>';
+  if (filtrados.length === 0) {
+    contenedor.innerHTML = '<p class="crm-empty">No hay clientes que coincidan con tu búsqueda.</p>';
     return;
   }
 
-  contenedor.innerHTML = clientes.slice().reverse().map(cliente => `
-    <article class="cliente-card">
+  contenedor.innerHTML = filtrados.map(cliente => {
+    const estadoSeguimiento = getSeguimientoEstado(cliente);
+    const temperaturaMeta = getTemperaturaMeta(cliente.temperatura);
+    const siblings = getScenarioSiblings(cliente);
+    const followupClass = estadoSeguimiento.key === 'vencido'
+      ? 'followup-overdue'
+      : (estadoSeguimiento.key === 'hoy'
+        ? 'followup-today'
+        : (estadoSeguimiento.key === 'proximo' ? 'followup-upcoming' : ''));
+    const siblingsHtml = siblings.length > 1
+      ? `<div class="crm-sibling-actions">${siblings.map((sib) => `<button class="btn btn-secondary btn-crm btn-crm-mini ${String(sib.id) === String(cliente.id) ? 'btn-crm-primary' : ''}" type="button" onclick="cargarCliente(${sib.id})">${getScenarioLabel(sib.escenario)}</button>`).join('')}</div>`
+      : '';
+    return `
+    <article class="cliente-card ${String(cliente.id) === String(currentClientId || '') ? 'is-active' : ''} ${followupClass}" data-id="${cliente.id}">
       <div class="cliente-card-head">
-        <div>
-          <h3>${cliente.nombre || 'Sin nombre'}</h3>
-          <p>${cliente.ubicacion || 'Ubicación no capturada'}</p>
+        <div class="cliente-card-head-main">
+          <div>
+            <h3>${cliente.nombre || 'Sin nombre'}</h3>
+            <p>${cliente.ubicacion || 'Ubicación no capturada'}</p>
+          </div>
+          <div class="cliente-card-meta">
+            <span class="cliente-mini-badge is-scenario">${getScenarioLabel(cliente.escenario || 'A')}</span>
+            <span class="cliente-mini-badge">${cliente.tipoPropiedad || 'Sin propiedad'}</span>
+            <span class="cliente-mini-badge">${cliente.tarifa || 'Sin tarifa'}</span>
+            <span class="cliente-mini-badge">${cliente.tipoAnalisis || 'Sin análisis'}</span>
+            <span class="cliente-mini-badge">${siblings.length} escenario${siblings.length === 1 ? '' : 's'}</span>
+          </div>
         </div>
-        <span class="cliente-status">${cliente.estatus || 'nuevo'}</span>
+        <select class="cliente-status cliente-status-select" onchange="actualizarEstatusCliente(${cliente.id}, this.value)">
+          <option value="nuevo" ${(cliente.estatus || 'nuevo') === 'nuevo' ? 'selected' : ''}>Nuevo</option>
+          <option value="seguimiento" ${(cliente.estatus || 'nuevo') === 'seguimiento' ? 'selected' : ''}>Seguimiento</option>
+          <option value="cerrado" ${(cliente.estatus || 'nuevo') === 'cerrado' ? 'selected' : ''}>Cerrado</option>
+        </select>
       </div>
+
+      <div class="cliente-card-kpis">
+        <div class="cliente-kpi"><span>Total</span><strong>${cliente.total || '-'}</strong></div>
+        <div class="cliente-kpi"><span>Ahorro anual</span><strong>${cliente.ahorroAnual || '-'}</strong></div>
+        <div class="cliente-kpi"><span>ROI</span><strong>${cliente.roi || '-'}</strong></div>
+        <div class="cliente-kpi"><span>Paneles</span><strong>${cliente.paneles || '-'}</strong></div>
+      </div>
+
       <div class="cliente-card-grid">
         <p><strong>Teléfono:</strong> ${cliente.telefono || '-'}</p>
         <p><strong>Fecha:</strong> ${cliente.fechaCotizacion || cliente.fecha || '-'}</p>
-        <p><strong>Propiedad:</strong> ${cliente.tipoPropiedad || '-'}</p>
-        <p><strong>Tarifa:</strong> ${cliente.tarifa || '-'}</p>
-        <p><strong>Análisis:</strong> ${cliente.tipoAnalisis || '-'}</p>
         <p><strong>Consumo:</strong> ${cliente.consumo || '-'}</p>
-        <p><strong>Paneles:</strong> ${cliente.paneles || '-'}</p>
         <p><strong>Potencia:</strong> ${cliente.kwp || '-'}</p>
         <p><strong>Inversor:</strong> ${cliente.inversor || '-'}</p>
         <p><strong>Configuración:</strong> ${(cliente.cantidadInversores || '-') + ' pza · ' + (cliente.capacidadInversor || '-')}</p>
-        <p><strong>Ahorro anual:</strong> ${cliente.ahorroAnual || '-'}</p>
-        <p><strong>ROI:</strong> ${cliente.roi || '-'}</p>
-        <p><strong>Total:</strong> ${cliente.total || '-'}</p>
-        <p><strong>Respaldo:</strong> ${cliente.snapshot?.savedAt ? new Date(cliente.snapshot.savedAt).toLocaleString('es-MX') : 'Resumen antiguo'}</p>
+        <p><strong>Costo real:</strong> ${cliente.costoReal || '-'}</p>
+        <p><strong>Precio cliente:</strong> ${cliente.precioCliente || '-'}</p>
       </div>
+
+      <div class="cliente-card-followup">
+        <div class="crm-priority-row">
+          <span class="crm-priority-badge ${estadoSeguimiento.className}">${estadoSeguimiento.label}</span>
+          <span class="crm-temp-badge ${temperaturaMeta.className}">${temperaturaMeta.label}</span>
+          <span class="crm-followup-chip">${getScenarioLabel(cliente.escenario || 'A')}</span>
+          <span class="crm-followup-chip">Próximo: ${cliente.proximoSeguimiento || '-'}</span>
+          <span class="crm-followup-chip">Último contacto: ${cliente.ultimoContacto || '-'}</span>
+        </div>
+        <p class="crm-followup-note"><strong>Nota:</strong> ${cliente.notaSeguimiento || 'Sin nota comercial todavía.'}</p>
+        ${siblingsHtml}
+      </div>
+
       <div class="cliente-card-actions">
-        <button class="btn btn-secondary btn-crm" type="button" onclick="cargarCliente(${cliente.id})">Cargar al cotizador</button>
+        <button class="btn btn-secondary btn-crm btn-crm-primary" type="button" onclick="cargarCliente(${cliente.id})">Abrir</button>
+        <button class="btn btn-secondary btn-crm" type="button" onclick="abrirPropuestaCliente(${cliente.id})">Propuesta</button>
+        <button class="btn btn-secondary btn-crm btn-crm-whatsapp" type="button" onclick="abrirWhatsAppCliente(${cliente.id})">WhatsApp</button>
+        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick="duplicarCliente(${cliente.id})">Duplicar</button>
+        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick="duplicarAlSiguienteEscenario(${cliente.id})">Sig. escenario</button>
         <button class="btn btn-secondary btn-crm btn-crm-danger" type="button" onclick="eliminarCliente(${cliente.id})">Eliminar</button>
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function init() {
@@ -3103,7 +4037,11 @@ function toggleModo() {
 }
 
 init();
+document.getElementById('crmSearch')?.addEventListener('input', mostrarClientes);
+document.getElementById('crmFilterStatus')?.addEventListener('change', mostrarClientes);
+setEditorState(null);
 mostrarClientes();
+renderRecordatorioCRM(true);
 window.guardarYabrir = guardarYabrir;
 window.guardarActual = guardarActual;
 window.cargarCliente = cargarCliente;
@@ -3111,102 +4049,14 @@ window.eliminarCliente = eliminarCliente;
 window.toggleModo = toggleModo;
 window.exportarRespaldoClientes = exportarRespaldoClientes;
 window.importarRespaldoClientes = importarRespaldoClientes;
+window.nuevoCliente = nuevoCliente;
+window.duplicarCliente = duplicarCliente;
+window.duplicarAlSiguienteEscenario = duplicarAlSiguienteEscenario;
+window.actualizarEstatusCliente = actualizarEstatusCliente;
+window.cerrarRecordatorioCRM = cerrarRecordatorioCRM;
 
 </script>
 
-<script>
-/* Parche v2: asegura guardado/carga del cotizador económico */
-(function(){
-  const originalSaveData = window.saveData;
-  window.saveData = function(data){
-    const payload = {
-      ...(data || {}),
-      interno: (data && data.interno) ? data.interno : (typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : undefined),
-      internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : undefined
-    };
-    localStorage.setItem('solregioProposalData', JSON.stringify(payload));
-    return payload;
-  };
-
-  window.preloadFromStorage = function(){
-    const raw = localStorage.getItem('solregioProposalData');
-    if (!raw) return;
-    try {
-      const data = JSON.parse(raw);
-      if (typeof applyCotizacionToForm === 'function') applyCotizacionToForm(data);
-      if (data && data.internoForm && typeof applyInternoFormData === 'function') {
-        applyInternoFormData(data.internoForm);
-      }
-      if (typeof calcularCotizadorInterno === 'function') calcularCotizadorInterno();
-    } catch (e) {
-      console.warn('No se pudo precargar la cotización con datos internos', e);
-    }
-  };
-
-  window.guardarYabrir = function(){
-    const data = typeof getData === 'function' ? getData() : {};
-    const tel = document.getElementById('clienteTelefono')?.value || '';
-    const interno = typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : undefined;
-    window.saveData({ ...data, clienteTelefono: tel, interno, internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : undefined });
-    if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
-    window.open('presentacion.html', '_blank');
-  };
-
-  window.guardarActual = function(){
-    const interno = typeof calcularCotizadorInterno === 'function' ? calcularCotizadorInterno() : {};
-    const calculo = typeof getData === 'function' ? getData() : {};
-    const inversor = typeof getInversorSugerido === 'function' ? getInversorSugerido() : '-';
-    const clienteTelefono = document.getElementById('clienteTelefono')?.value || '';
-    const data = {
-      nombre: refs.clienteNombre.value || '',
-      telefono: clienteTelefono,
-      ubicacion: refs.clienteUbicacion.value || '',
-      tipoPropiedad: refs.tipoPropiedad.value || '',
-      tarifa: refs.clienteTarifa.value || '',
-      tipoAnalisis: refs.modoCalculo.value === 'gdmth' ? 'GDMTH 12 meses' : (refs.modoCalculo.value === 'recibos' ? 'Con 6 recibos' : 'Estimado rápido'),
-      fechaCotizacion: refs.clienteFecha.value || '',
-      consumo: `${numberFmt(calculo.consumoAnual || 0)} kWh/año`,
-      paneles: String(refs.numMFV.value || 0),
-      kwp: `${numberFmt(calculo.potenciaSistemaKW || 0, 2)} kW`,
-      inversor,
-      tipoInversor: document.getElementById('tipoInversor')?.value || '',
-      cantidadInversores: String(document.getElementById('cantidadInversores')?.value || ''),
-      capacidadInversor: document.getElementById('capacidadInversor')?.value || '',
-      total: money(interno.precioFinalConIva || 0),
-      ahorroAnual: money(calculo.ahorroAnual || 0),
-      roi: (calculo.roiYears || 0) > 0 ? `${numberFmt(calculo.roiYears, 1)} años` : 'N/A',
-      costoReal: money(interno.costoReal || 0),
-      utilidadInterna: money(interno.utilidad || 0),
-      subtotalSinIva: money(interno.subtotalSinIva || 0),
-      iva: money(interno.iva || 0),
-      precioCliente: money(interno.precioFinalConIva || 0),
-      snapshot: {
-        cotizacion: { ...calculo, clienteTelefono },
-        interno,
-        internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : {},
-        savedAt: new Date().toISOString()
-      }
-    };
-    const registro = typeof guardarCliente === 'function' ? guardarCliente(data) : data;
-    window.saveData({ ...calculo, clienteTelefono, interno, internoForm: typeof getInternoFormData === 'function' ? getInternoFormData() : {} });
-    if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
-    alert(`Cliente guardado correctamente: ${(registro && registro.nombre) || 'Sin nombre'}`);
-  };
-
-  const originalCargarCliente = window.cargarCliente;
-  window.cargarCliente = function(id){
-    if (typeof originalCargarCliente === 'function') originalCargarCliente(id);
-    const clientes = typeof getClientesGuardados === 'function' ? getClientesGuardados() : [];
-    const cliente = clientes.find(item => item.id === id);
-    const internoForm = cliente?.snapshot?.internoForm;
-    if (internoForm && typeof applyInternoFormData === 'function') {
-      applyInternoFormData(internoForm);
-      if (typeof calcularCotizadorInterno === 'function') calcularCotizadorInterno();
-      if (typeof guardarDefaultsInternos === 'function') guardarDefaultsInternos();
-    }
-  };
-})();
-</script>
 
 </body>
 </html>
