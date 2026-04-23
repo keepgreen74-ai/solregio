@@ -17,6 +17,7 @@
         <img src="logo-solregio-claro.jpg" alt="SolRegio" class="brand-logo">
       </a>
       <nav class="nav-links">
+        <a href="#simulador">Simulador</a>
         <a href="#beneficios">Beneficios</a>
         <a href="#proceso">Proceso</a>
         <a href="#casos">Casos</a>
@@ -36,7 +37,7 @@
           <h1>Descubre si realmente te conviene instalar paneles solares antes de invertir.</h1>
           <p>
             Analizamos tu consumo, te explicamos si el proyecto hace sentido y te entregamos una propuesta clara con ahorro estimado,
-            inversión y retorno. Sin simuladores públicos, sin presión y con acompañamiento real para después cerrar con seguridad.
+            inversión y retorno. Con un simulador inicial para orientarte, sin exponer precios internos y con acompañamiento real para después cerrar con seguridad.
           </p>
 
           <p class="filter-text">Solo trabajamos propuestas serias basadas en consumo real.</p>
@@ -47,9 +48,9 @@
           </div>
 
           <div class="hero-points">
+            <span>• Simulador público de ahorro</span>
             <span>• Propuesta personalizada en PDF</span>
             <span>• Casa, negocio y proyectos especiales</span>
-            <span>• Enfoque en ahorro real y retorno</span>
           </div>
         </div>
 
@@ -59,6 +60,128 @@
             <h2>Primero claridad. Después decisión.</h2>
             <p>Te mostramos cuánto podrías ahorrar, qué sistema te conviene y cuál sería la inversión estimada con una presentación profesional y fácil de entender.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulador" class="section section-soft simulador-section">
+      <div class="container">
+        <div class="section-head simulador-head">
+          <div class="eyebrow">Simulador de ahorro solar</div>
+          <h2>Obtén una estimación rápida antes de enviarnos tu recibo.</h2>
+          <p>No mostramos precios internos ni un cotizador abierto. Aquí solo te damos una proyección útil para saber si vale la pena avanzar.</p>
+        </div>
+
+        <div class="simulador-layout">
+          <article class="sim-card sim-card-form">
+            <h3>Llena estos datos</h3>
+            <p class="sim-card-sub">Con esto calculamos una proyección inicial basada en panel estándar de 620 W, ahorro, cobertura y retorno estimado.</p>
+
+            <div class="sim-form-grid">
+              <label class="sim-field">
+                <span>Pago bimestral aproximado</span>
+                <input type="number" id="simPago" min="500" step="100" placeholder="Ej. 2500">
+              </label>
+
+              <label class="sim-field">
+                <span>Tipo de propiedad</span>
+                <select id="simTipo">
+                  <option value="casa">Casa</option>
+                  <option value="negocio">Negocio</option>
+                </select>
+              </label>
+
+              <label class="sim-field">
+                <span>Zona</span>
+                <select id="simZona">
+                  <option value="monterrey">Monterrey / área metropolitana</option>
+                  <option value="noreste">Noreste con buen sol</option>
+                  <option value="otra">Otra zona</option>
+                </select>
+              </label>
+
+              <label class="sim-field">
+                <span>¿Tu recibo suele mantenerse parecido?</span>
+                <select id="simEstabilidad">
+                  <option value="estable">Sí, casi siempre</option>
+                  <option value="variable">Varía a veces</option>
+                  <option value="muy-variable">Cambia mucho</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="sim-actions">
+              <button class="btn btn-primary" id="btnSimular" type="button">Calcular simulación</button>
+              <p class="sim-disclaimer">Estimación comercial inicial con panel estándar de 620 W. La propuesta real se valida con recibo, tarifa y condiciones del sitio.</p>
+            </div>
+          </article>
+
+          <article class="sim-card sim-card-results" id="simResultados">
+            <div class="sim-empty" id="simEmpty">
+              <div class="visual-kicker">Estimación inicial</div>
+              <h3>Aquí verás tu resultado</h3>
+              <p>Te mostraremos paneles estimados, generación anual, cobertura, ahorro y retorno. Después podrás enviarnos tu caso por WhatsApp para confirmarlo.</p>
+            </div>
+
+            <div class="sim-output hidden" id="simOutput">
+              <div class="sim-output-head">
+                <div>
+                  <div class="visual-kicker">Resultado estimado</div>
+                  <h3 id="simTituloResultado">Proyecto con buen potencial de ahorro</h3>
+                </div>
+                <div class="sim-badge" id="simBadge">Evaluación inicial</div>
+              </div>
+
+              <div class="sim-kpis">
+                <div class="sim-kpi">
+                  <span>Paneles estimados</span>
+                  <strong id="simPaneles">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Potencia estimada</span>
+                  <strong id="simPotencia">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Generación anual</span>
+                  <strong id="simGeneracion">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Cobertura estimada</span>
+                  <strong id="simCobertura">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Ahorro bimestral</span>
+                  <strong id="simAhorroBim">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Ahorro anual</span>
+                  <strong id="simAhorroAnual">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>ROI estimado</span>
+                  <strong id="simRoi">-</strong>
+                </div>
+                <div class="sim-kpi sim-kpi-wide">
+                  <span>Inversión estimada del sistema</span>
+                  <strong id="simInversion">-</strong>
+                </div>
+                <div class="sim-kpi">
+                  <span>Siguiente paso</span>
+                  <strong id="simPaso">-</strong>
+                </div>
+              </div>
+
+              <div class="sim-reading">
+                <h4>Lectura rápida</h4>
+                <p id="simLectura">-</p>
+              </div>
+
+              <div class="cta-buttons sim-cta">
+                <a href="#" id="simWhatsApp" class="btn-whatsapp-main" target="_blank" rel="noopener noreferrer">Enviar mi resultado por WhatsApp</a>
+                <a href="https://wa.me/528118103610?text=Hola,%20quiero%20que%20revises%20mi%20recibo%20de%20luz%20para%20ver%20si%20me%20conviene%20instalar%20paneles%20solares." class="btn-whatsapp-secondary" target="_blank" rel="noopener noreferrer">Prefiero mandar mi recibo directo</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
