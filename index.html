@@ -120,7 +120,46 @@
             <div class="sim-empty" id="simEmpty">
               <div class="visual-kicker">Estimación inicial</div>
               <h3>Aquí verás tu resultado</h3>
-              <p>Te mostraremos paneles estimados, generación anual, cobertura, ahorro y retorno. Después podrás enviarnos tu caso por WhatsApp para confirmarlo.</p>
+              <p>Primero calculamos tu caso. Te mostraremos gratis el sistema estimado y el potencial de ahorro. Para ver inversión, ROI, ahorro anual y recomendación personalizada, te pediremos tu WhatsApp.</p>
+            </div>
+
+            <div class="sim-teaser hidden" id="simTeaser">
+              <div class="visual-kicker">Resultado inicial gratis</div>
+              <h3>Tu sistema estimado ya está listo</h3>
+              <div class="sim-free-grid">
+                <div class="sim-kpi sim-kpi-highlight">
+                  <span>Tu sistema estimado</span>
+                  <strong id="simFreePaneles">-</strong>
+                </div>
+                <div class="sim-kpi sim-kpi-highlight">
+                  <span>Ahorro potencial</span>
+                  <strong id="simFreePotencial">-</strong>
+                </div>
+              </div>
+              <p class="sim-card-sub" id="simFreeMensaje">Para ver el resultado completo, deja tu WhatsApp y te lo mando junto con recomendaciones.</p>
+            </div>
+
+            <div class="sim-lead-gate hidden" id="simLeadGate">
+              <div class="visual-kicker">Desbloquea tu resultado completo</div>
+              <h3>Déjame tu WhatsApp y te muestro inversión, ROI, ahorro anual y recomendación.</h3>
+              <p class="sim-card-sub">Así recibes el resumen con números y yo puedo ayudarte a confirmar si aplica con tu recibo real.</p>
+
+              <div class="sim-form-grid lead-form-grid">
+                <label class="sim-field">
+                  <span>Nombre</span>
+                  <input type="text" id="leadNombre" placeholder="Tu nombre">
+                </label>
+
+                <label class="sim-field">
+                  <span>WhatsApp</span>
+                  <input type="tel" id="leadWhatsapp" placeholder="Ej. 8118103610">
+                </label>
+              </div>
+
+              <div class="sim-actions">
+                <button class="btn btn-primary" id="btnEnviarLead" type="button">Ver mi resultado y enviarlo por WhatsApp</button>
+                <p class="sim-disclaimer" id="leadStatus">Tus datos se usan solo para dar seguimiento a esta simulación.</p>
+              </div>
             </div>
 
             <div class="sim-output hidden" id="simOutput">

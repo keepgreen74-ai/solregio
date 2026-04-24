@@ -1,3 +1,12 @@
+const WHATSAPP_NUMBER = '528118103610';
+
+// Para guardar leads en Google Sheets:
+// 1) Crea el Apps Script con el archivo google-apps-script.gs incluido en este paquete.
+// 2) Publica como Web App.
+// 3) Pega aquí la URL que termina en /exec.
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwljTGMB5BId_7FTR66Sfn2Iu66JeA61VBlohrsdJagVkXvYlhUcbYXq7y0_piwduU9Fg/exec'; // Ejemplo: 'https://script.google.com/macros/s/AKfycb.../exec'
+
+let pendingSimulation = null;
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -9,20 +18,18 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
-function guardarCliente(data) {
 
-  let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+function guardarCliente(data) {
+  let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
 
   clientes.push({
     id: Date.now(),
     fecha: new Date().toLocaleDateString(),
     ...data,
-    estatus: "nuevo"
+    estatus: 'nuevo'
   });
 
-  localStorage.setItem("clientes", JSON.stringify(clientes));
-
-  alert("Cliente guardado correctamente");
+  localStorage.setItem('clientes', JSON.stringify(clientes));
 }
 
 function moneyMXN(value) {
@@ -43,21 +50,39 @@ function redondearMiles(value, base = 5000) {
   return Math.round(Number(value || 0) / base) * base;
 }
 
-function calcularSimuladorSolar() {
+function limpiarTelefono(value) {
+  return String(value || '').replace(/\D/g, '');
+}
+
+function zonaTexto(zona) {
+  if (zona === 'monterrey') return 'Monterrey / área metropolitana';
+  if (zona === 'noreste') return 'Noreste con buen sol';
+  return 'Otra zona';
+}
+
+function tipoTexto(tipo) {
+  return tipo === 'negocio' ? 'Negocio' : 'Casa';
+}
+
+function estabilidadTexto(estabilidad) {
+  if (estabilidad === 'estable') return 'Sí, casi siempre';
+  if (estabilidad === 'variable') return 'Varía a veces';
+  return 'Cambia mucho';
+}
+
+function calcularDatosSimulacion() {
   const pagoEl = document.getElementById('simPago');
   const tipoEl = document.getElementById('simTipo');
   const zonaEl = document.getElementById('simZona');
   const estabilidadEl = document.getElementById('simEstabilidad');
-  const outputEl = document.getElementById('simOutput');
-  const emptyEl = document.getElementById('simEmpty');
 
-  if (!pagoEl || !tipoEl || !zonaEl || !estabilidadEl || !outputEl || !emptyEl) return;
+  if (!pagoEl || !tipoEl || !zonaEl || !estabilidadEl) return null;
 
   const pago = Number(pagoEl.value || 0);
   if (!pago || pago < 500) {
     alert('Ingresa un pago bimestral aproximado válido.');
     pagoEl.focus();
-    return;
+    return null;
   }
 
   const tipo = tipoEl.value;
@@ -113,40 +138,241 @@ function calcularSimuladorSolar() {
     siguientePaso = 'Solicitar propuesta';
   }
 
-  document.getElementById('simTituloResultado').textContent = titulo;
-  document.getElementById('simBadge').textContent = badge;
-  document.getElementById('simPaneles').textContent = `${numberMX(paneles)} paneles`;
-  document.getElementById('simPotencia').textContent = `${numberMX(potenciaSistema, 2)} kWp`;
-  document.getElementById('simGeneracion').textContent = `${numberMX(generacionAnual)} kWh/año`;
-  document.getElementById('simCobertura').textContent = `${numberMX(cobertura, 0)}%`;
-  document.getElementById('simAhorroBim').textContent = moneyMXN(ahorroBimestral);
-  document.getElementById('simAhorroAnual').textContent = moneyMXN(ahorroAnual);
-  document.getElementById('simRoi').textContent = `${numberMX(roiMin, 1)} a ${numberMX(roiMax, 1)} años`;
-  document.getElementById('simInversion').textContent = `${moneyMXN(inversionMin)} a ${moneyMXN(inversionMax)}`;
-  document.getElementById('simPaso').textContent = siguientePaso;
-  document.getElementById('simLectura').textContent = lectura;
+  return {
+    fecha: new Date().toLocaleString('es-MX'),
+    pago,
+    tipo,
+    zona,
+    estabilidad,
+    tipoTexto: tipoTexto(tipo),
+    zonaTexto: zonaTexto(zona),
+    estabilidadTexto: estabilidadTexto(estabilidad),
+    potenciaPanelKw,
+    hsp,
+    factorDesempeno,
+    tarifaPromedioKwh,
+    consumoBimestralEstimado,
+    consumoAnualEstimado,
+    paneles,
+    potenciaSistema,
+    generacionAnual,
+    cobertura,
+    ahorroBimestral,
+    ahorroAnual,
+    inversionMin,
+    inversionMax,
+    roiMin,
+    roiMax,
+    titulo,
+    badge,
+    lectura,
+    siguientePaso
+  };
+}
 
-  const mensaje = encodeURIComponent(
-    `Hola, hice la simulación en SolRegio.%0A%0A` +
-    `Pago bimestral aproximado: ${moneyMXN(pago)}%0A` +
-    `Tipo de propiedad: ${tipo === 'negocio' ? 'Negocio' : 'Casa'}%0A` +
-    `Zona: ${zona === 'monterrey' ? 'Monterrey / área metropolitana' : zona === 'noreste' ? 'Noreste con buen sol' : 'Otra zona'}%0A` +
-    `Paneles estimados: ${numberMX(paneles)}%0A` +
-    `Potencia estimada: ${numberMX(potenciaSistema, 2)} kWp%0A` +
-    `Generación anual estimada: ${numberMX(generacionAnual)} kWh/año%0A` +
-    `Cobertura estimada: ${numberMX(cobertura, 0)}%25%0A` +
-    `Ahorro bimestral estimado: ${moneyMXN(ahorroBimestral)}%0A` +
-    `Ahorro anual estimado: ${moneyMXN(ahorroAnual)}%0A` +
-    `Inversión estimada: ${moneyMXN(inversionMin)} a ${moneyMXN(inversionMax)}%0A` +
-    `ROI estimado: ${numberMX(roiMin, 1)} a ${numberMX(roiMax, 1)} años%0A%0A` +
-    `¿Me ayudas a confirmar esta simulación con mi recibo real?`
+function calcularPotencialAhorro(data) {
+  if (!data) return '-';
+  if (data.pago >= 3000 || data.ahorroBimestral >= 2200) return 'Alto';
+  if (data.pago >= 1500 || data.ahorroBimestral >= 1100) return 'Medio';
+  return 'Por revisar';
+}
+
+function renderTeaser(data) {
+  if (!data) return;
+
+  const potencial = calcularPotencialAhorro(data);
+  const freePaneles = document.getElementById('simFreePaneles');
+  const freePotencial = document.getElementById('simFreePotencial');
+  const freeMensaje = document.getElementById('simFreeMensaje');
+
+  if (freePaneles) freePaneles.textContent = `${numberMX(data.paneles)} paneles`;
+  if (freePotencial) freePotencial.textContent = potencial;
+  if (freeMensaje) {
+    freeMensaje.textContent = 'Para ver inversión estimada, ROI, ahorro anual y recomendación personalizada, deja tu WhatsApp y te lo muestro aquí mismo.';
+  }
+}
+
+function calcularSimuladorSolar() {
+  const data = calcularDatosSimulacion();
+  if (!data) return;
+
+  pendingSimulation = data;
+
+  const emptyEl = document.getElementById('simEmpty');
+  const teaserEl = document.getElementById('simTeaser');
+  const leadGateEl = document.getElementById('simLeadGate');
+  const outputEl = document.getElementById('simOutput');
+  const statusEl = document.getElementById('leadStatus');
+
+  renderTeaser(data);
+
+  emptyEl?.classList.add('hidden');
+  outputEl?.classList.add('hidden');
+  teaserEl?.classList.remove('hidden');
+  leadGateEl?.classList.remove('hidden');
+
+  if (statusEl) {
+    statusEl.textContent = 'Tus datos se usan solo para dar seguimiento a esta simulación.';
+  }
+
+  setTimeout(() => {
+    document.getElementById('leadNombre')?.focus();
+  }, 100);
+}
+
+function renderResultado(data) {
+  if (!data) return;
+
+  document.getElementById('simTituloResultado').textContent = data.titulo;
+  document.getElementById('simBadge').textContent = data.badge;
+  document.getElementById('simPaneles').textContent = `${numberMX(data.paneles)} paneles`;
+  document.getElementById('simPotencia').textContent = `${numberMX(data.potenciaSistema, 2)} kWp`;
+  document.getElementById('simGeneracion').textContent = `${numberMX(data.generacionAnual)} kWh/año`;
+  document.getElementById('simCobertura').textContent = `${numberMX(data.cobertura, 0)}%`;
+  document.getElementById('simAhorroBim').textContent = moneyMXN(data.ahorroBimestral);
+  document.getElementById('simAhorroAnual').textContent = moneyMXN(data.ahorroAnual);
+  document.getElementById('simRoi').textContent = `${numberMX(data.roiMin, 1)} a ${numberMX(data.roiMax, 1)} años`;
+  document.getElementById('simInversion').textContent = `${moneyMXN(data.inversionMin)} a ${moneyMXN(data.inversionMax)}`;
+  document.getElementById('simPaso').textContent = data.siguientePaso;
+  document.getElementById('simLectura').textContent = data.lectura;
+
+  document.getElementById('simLeadGate')?.classList.add('hidden');
+  document.getElementById('simTeaser')?.classList.add('hidden');
+  document.getElementById('simEmpty')?.classList.add('hidden');
+  document.getElementById('simOutput')?.classList.remove('hidden');
+}
+
+function construirMensajeWhatsApp(data, lead) {
+  return (
+`Hola, hice la simulación en SolRegio.
+
+Nombre: ${lead.nombre}
+WhatsApp: ${lead.whatsapp}
+
+Pago bimestral aproximado: ${moneyMXN(data.pago)}
+Tipo de propiedad: ${data.tipoTexto}
+Zona: ${data.zonaTexto}
+Recibo: ${data.estabilidadTexto}
+
+Paneles estimados: ${numberMX(data.paneles)}
+Potencia estimada: ${numberMX(data.potenciaSistema, 2)} kWp
+Generación anual estimada: ${numberMX(data.generacionAnual)} kWh/año
+Cobertura estimada: ${numberMX(data.cobertura, 0)}%
+Ahorro bimestral estimado: ${moneyMXN(data.ahorroBimestral)}
+Ahorro anual estimado: ${moneyMXN(data.ahorroAnual)}
+Inversión estimada: ${moneyMXN(data.inversionMin)} a ${moneyMXN(data.inversionMax)}
+ROI estimado: ${numberMX(data.roiMin, 1)} a ${numberMX(data.roiMax, 1)} años
+
+¿Me ayudas a confirmar esta simulación con mi recibo real?`
   );
+}
+
+function guardarLeadLocal(payload) {
+  const leads = JSON.parse(localStorage.getItem('solregioLeadsSimulador')) || [];
+  leads.push({
+    id: Date.now(),
+    ...payload
+  });
+  localStorage.setItem('solregioLeadsSimulador', JSON.stringify(leads));
+}
+
+function guardarLeadGoogle(payload) {
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('PEGA') || !GOOGLE_SCRIPT_URL.startsWith('http')) {
+    return;
+  }
+
+  const formData = new URLSearchParams();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+
+  // Se envía en segundo plano para no frenar el WhatsApp.
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    },
+    body: formData.toString()
+  }).catch(() => {
+    // Si falla internet o la URL todavía no está configurada, el lead queda guardado localmente.
+  });
+}
+
+function enviarLeadSimulador() {
+  if (!pendingSimulation) {
+    calcularSimuladorSolar();
+    return;
+  }
+
+  const nombreEl = document.getElementById('leadNombre');
+  const whatsappEl = document.getElementById('leadWhatsapp');
+  const statusEl = document.getElementById('leadStatus');
+
+  const nombre = String(nombreEl?.value || '').trim();
+  const whatsapp = limpiarTelefono(whatsappEl?.value || '');
+
+  if (nombre.length < 2) {
+    alert('Escribe tu nombre para enviarte la simulación.');
+    nombreEl?.focus();
+    return;
+  }
+
+  if (whatsapp.length < 10) {
+    alert('Escribe un WhatsApp válido a 10 dígitos.');
+    whatsappEl?.focus();
+    return;
+  }
+
+  const data = pendingSimulation;
+  const lead = { nombre, whatsapp };
+
+  const payload = {
+    fecha: data.fecha,
+    nombre,
+    whatsapp,
+    pago_bimestral: moneyMXN(data.pago),
+    tipo_propiedad: data.tipoTexto,
+    zona: data.zonaTexto,
+    estabilidad_recibo: data.estabilidadTexto,
+    paneles_estimados: numberMX(data.paneles),
+    potencia_kwp: numberMX(data.potenciaSistema, 2),
+    generacion_anual_kwh: numberMX(data.generacionAnual),
+    cobertura_estimada: `${numberMX(data.cobertura, 0)}%`,
+    ahorro_bimestral: moneyMXN(data.ahorroBimestral),
+    ahorro_anual: moneyMXN(data.ahorroAnual),
+    inversion_estimada: `${moneyMXN(data.inversionMin)} a ${moneyMXN(data.inversionMax)}`,
+    roi_estimado: `${numberMX(data.roiMin, 1)} a ${numberMX(data.roiMax, 1)} años`,
+    lectura: data.lectura,
+    origen: 'Simulador web SolRegio'
+  };
+
+  guardarLeadLocal(payload);
+  guardarLeadGoogle(payload);
+
+  renderResultado(data);
+
+  const mensaje = construirMensajeWhatsApp(data, lead);
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
 
   const wa = document.getElementById('simWhatsApp');
-  if (wa) wa.href = `https://wa.me/528118103610?text=${mensaje}`;
+  if (wa) wa.href = waUrl;
 
-  emptyEl.classList.add('hidden');
-  outputEl.classList.remove('hidden');
+  if (statusEl) {
+    statusEl.textContent = 'Listo. Te estamos abriendo WhatsApp con tu simulación.';
+  }
+
+  window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
 document.getElementById('btnSimular')?.addEventListener('click', calcularSimuladorSolar);
+document.getElementById('btnEnviarLead')?.addEventListener('click', enviarLeadSimulador);
+
+['leadNombre', 'leadWhatsapp'].forEach((id) => {
+  document.getElementById(id)?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      enviarLeadSimulador();
+    }
+  });
+});

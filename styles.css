@@ -1769,3 +1769,54 @@ input:focus,select:focus,textarea:focus{
     grid-column: auto;
   }
 }
+
+
+/* Lead gate del simulador */
+.sim-lead-gate {
+  display: grid;
+  gap: 16px;
+}
+
+.sim-lead-gate h3 {
+  margin: 10px 0 0;
+  font-size: 1.45rem;
+  letter-spacing: -.04em;
+}
+
+.lead-form-grid {
+  margin-top: 8px;
+}
+
+#leadStatus {
+  margin-top: 10px;
+}
+
+.sim-card-results .sim-output.hidden,
+.sim-card-results .sim-lead-gate.hidden,
+.sim-card-results .sim-empty.hidden {
+  display: none !important;
+}
+
+.sim-teaser{
+  margin-bottom:18px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.sim-free-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:16px 0 14px;
+}
+
+.sim-kpi-highlight{
+  border-color:rgba(0,200,83,.30);
+  background:linear-gradient(180deg, rgba(0,230,118,.08), #fff);
+}
+
+@media (max-width:700px){
+  .sim-free-grid{
+    grid-template-columns:1fr;
+  }
+}

@@ -1,0 +1,25 @@
+CÓMO ACTIVAR EL GUARDADO EN GOOGLE SHEETS
+
+1. Entra a https://sheets.google.com y crea una hoja nueva.
+2. Ponle nombre, por ejemplo: Leads SolRegio.
+3. En la hoja, ve a Extensiones > Apps Script.
+4. Borra lo que aparezca y pega el contenido del archivo: google-apps-script.gs
+5. Guarda el proyecto.
+6. Da clic en Implementar > Nueva implementación.
+7. Tipo: Aplicación web.
+8. Ejecutar como: Tú.
+9. Quién tiene acceso: Cualquiera.
+10. Da clic en Implementar y autoriza permisos.
+11. Copia la URL de la aplicación web; debe terminar en /exec.
+12. Abre app.js y pega esa URL aquí:
+
+const GOOGLE_SCRIPT_URL = '';
+
+Debe quedar algo así:
+
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxxxxxxx/exec';
+
+IMPORTANTE:
+- Sin esa URL, el simulador sí funciona y abre WhatsApp, pero no guarda en Google Sheets.
+- Con esa URL, cada lead se guarda en la pestaña "Leads".
+- La página también guarda una copia local en el navegador por seguridad.
