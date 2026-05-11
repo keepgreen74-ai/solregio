@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SolRegio | Presentación ejecutiva</title>
+  <title>SolRegio | Propuesta solar premium</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,95 +14,75 @@
 <body class="theme-light">
   <header class="site-header operator-only">
     <div class="container nav">
-      <a href="index.html" class="brand">
-        <img src="logo-solregio-claro.jpg" alt="SolRegio" class="brand-logo">
-      </a>
+      <a href="index.html" class="brand"><img src="logo-solregio-claro.png" alt="SolRegio" class="brand-logo"></a>
       <div class="nav-actions">
         <a class="btn btn-secondary" href="cotizador.html">Volver al cotizador</a>
+        <a class="btn btn-secondary" href="crm.html">CRM</a>
         <button class="btn btn-primary" id="btnPrint" type="button">Exportar PDF</button>
       </div>
     </div>
   </header>
 
-  <main class="presentation-shell proposal-pro">
+  <main class="presentation-shell proposal-pro premium-v11">
+    <!-- 1. Portada premium -->
     <article class="pdf-page cover-page cover-pro-page">
       <div class="cover-pro-grid">
         <section class="cover-copy-block">
           <div class="cover-top-pro">
-            <img src="logo-solregio-claro.jpg" alt="SolRegio" class="cover-logo">
+            <img src="logo-solregio-claro.png" alt="SolRegio" class="cover-logo">
             <div class="cover-badge">Propuesta ejecutiva</div>
           </div>
 
           <div class="cover-copy-main">
-            <h1 class="cover-title">Propuesta de Sistema Fotovoltaico</h1>
-            <p class="cover-sub">Análisis personalizado de ahorro, generación y retorno de inversión para su propiedad.</p>
-            <p class="impact-copy">Este sistema está diseñado para reducir su gasto eléctrico desde el primer recibo y darle mayor estabilidad frente a incrementos futuros.</p>
+            <div class="premium-kicker">Inversión solar inteligente</div>
+            <h1 class="cover-title">Sistema Fotovoltaico Premium</h1>
+            <p class="cover-sub">Ahorro, estabilidad y retorno en una solución diseñada para reducir el gasto eléctrico de su propiedad.</p>
+            <div class="premium-line">
+              <div class="premium-pill">Ahorro visible</div>
+              <div class="premium-pill">Proyecto claro</div>
+              <div class="premium-pill">Instalación profesional</div>
+            </div>
           </div>
 
           <div class="cover-meta-layout">
-            <div class="info-card info-wide" id="cardCliente">
-              <span class="label">Cliente</span>
-              <span class="value value-name" id="outCliente">-</span>
-            </div>
-            <div class="info-card info-small">
-              <span class="label">Fecha</span>
-              <span class="value" id="outFecha">-</span>
-            </div>
-
-            <div class="info-card info-full">
-              <span class="label">Ubicación</span>
-              <span class="value" id="outUbicacion">-</span>
-            </div>
-
+            <div class="info-card info-wide" id="cardCliente"><span class="label">Cliente</span><span class="value value-name" id="outCliente">-</span></div>
+            <div class="info-card info-small"><span class="label">Fecha</span><span class="value" id="outFecha">-</span></div>
+            <div class="info-card info-full"><span class="label">Ubicación</span><span class="value" id="outUbicacion">-</span></div>
             <div class="triple-meta-row">
-              <div class="info-card">
-                <span class="label">Tarifa CFE</span>
-                <span class="value" id="outTarifa">-</span>
-              </div>
-              <div class="info-card">
-                <span class="label">Tipo de propiedad</span>
-                <span class="value" id="outPropiedad">-</span>
-              </div>
-              <div class="info-card">
-                <span class="label">Tipo de análisis</span>
-                <span class="value" id="outModo">-</span>
-              </div>
+              <div class="info-card"><span class="label">Tarifa CFE</span><span class="value" id="outTarifa">-</span></div>
+              <div class="info-card"><span class="label">Propiedad</span><span class="value" id="outPropiedad">-</span></div>
+              <div class="info-card"><span class="label">Análisis</span><span class="value" id="outModo">-</span></div>
             </div>
           </div>
         </section>
 
         <section class="cover-visual-block">
-          <div class="cover-main-frame">
-            <img src="portada-corporativa.jpg" alt="Imagen corporativa" class="cover-main-image">
-          </div>
+          <div class="cover-main-frame"><img src="portada-corporativa.jpg" alt="Imagen corporativa SolRegio" class="cover-main-image"></div>
         </section>
       </div>
     </article>
 
+    <!-- 2. Cierre económico -->
     <article class="pdf-page compact-page page-balanced">
       <section class="page-section-tight">
         <h2 class="page-title">Resumen ejecutivo</h2>
-        <p class="page-sub">Resumen general del consumo actual del cliente y de la propuesta solar estimada.</p>
-        <div class="metrics-grid compact-metrics-grid metrics-grid-tight">
-          <div class="metric-card"><span class="label">Consumo anual</span><span class="value" id="metricConsumo">-</span></div>
-          <div class="metric-card"><span class="label">Pago anual actual</span><span class="value" id="metricPago">-</span></div>
-          <div class="metric-card"><span class="label">Generación anual estimada</span><span class="value" id="metricGeneracion">-</span></div>
-          <div class="metric-card"><span class="label">Potencia del sistema</span><span class="value" id="metricPotencia">-</span></div>
-          <div class="metric-card"><span class="label">Número de paneles</span><span class="value" id="metricPaneles">-</span></div>
-          <div class="metric-card"><span class="label">Cobertura estimada</span><span class="value" id="metricCobertura">-</span></div>
-          <div class="metric-card"><span class="label">Ahorro anual estimado</span><span class="value" id="metricAhorro">-</span></div>
-          <div class="metric-card"><span class="label">Retorno de inversión</span><span class="value" id="metricRoi">-</span></div>
+        <p class="page-sub">Los números clave para tomar una decisión clara: inversión, ahorro proyectado, cobertura y recuperación estimada.</p>
+        <div class="hero-metrics-grid">
+          <div class="hero-metric primary">
+            <div><span class="label">Ahorro anual estimado</span><span class="value" id="metricAhorro">-</span></div>
+            <small>Ahorro proyectado después de la interconexión y según consumo analizado.</small>
+          </div>
+          <div class="hero-metric"><span class="label">Total inversión</span><span class="value" id="pdfTotal">-</span><small>Proyecto llave en mano sujeto a validación final.</small></div>
+          <div class="hero-metric"><span class="label">Cobertura estimada</span><span class="value" id="metricCobertura">-</span><small>Generación anual comparada contra consumo actual.</small></div>
         </div>
       </section>
 
-      <section class="page-section-tight financial-section-combined">
-        <div>
-          <h2 class="section-mini-title">Proyección financiera</h2>
-          <p class="section-mini-sub">Ahorro acumulado estimado y resumen de inversión.</p>
+      <section class="executive-summary-grid">
+        <div class="premium-table-card">
+          <h3>Proyección de ahorro</h3>
+          <p>Estimación acumulada considerando el escenario capturado en el cotizador.</p>
           <table class="projection-table compact-table compact-table-tight">
-            <thead>
-              <tr><th>Horizonte</th><th>Ahorro estimado</th></tr>
-            </thead>
+            <thead><tr><th>Horizonte</th><th>Ahorro estimado</th></tr></thead>
             <tbody>
               <tr><td>5 años</td><td id="sum5">-</td></tr>
               <tr><td>10 años</td><td id="sum10">-</td></tr>
@@ -113,29 +93,23 @@
           </table>
         </div>
 
-        <div class="projection-side compact-side-stack">
-          <div class="financial-card">
-            <h3>Resumen financiero</h3>
-            <div class="financial-lines">
-              <div class="financial-line"><span>Subtotal</span><strong id="pdfSubtotal">-</strong></div>
-              <div class="financial-line"><span>IVA (16%)</span><strong id="pdfIva">-</strong></div>
-              <div class="financial-divider"></div>
-              <div class="financial-line total"><span>Total inversión</span><strong id="pdfTotal">-</strong></div>
-            </div>
-          </div>
-          <div class="summary-card summary-card-compact"><span class="label">Ahorro anual estimado</span><span class="value" id="invAhorro">-</span></div>
-          <div class="summary-card summary-card-compact"><span class="label">Retorno estimado</span><span class="value" id="invRoi">-</span></div>
-          <div class="summary-card summary-card-compact emphasis-card">
-            <span class="label">Lectura comercial</span>
-            <span class="value" id="decisionText">-</span>
+        <div class="premium-table-card">
+          <h3>Evaluación ejecutiva</h3>
+          <p id="decisionText">Proyecto solar con potencial de ahorro y recuperación estimada.</p>
+          <div class="premium-mini-grid">
+            <div class="premium-mini-card"><span>Pago anual actual</span><strong id="metricPago">-</strong></div>
+            <div class="premium-mini-card"><span>Generación anual</span><strong id="metricGeneracion">-</strong></div>
+            <div class="premium-mini-card"><span>Potencia sistema</span><strong id="metricPotencia">-</strong></div>
+            <div class="premium-mini-card is-roi"><span>Retorno estimado</span><strong id="metricRoi">-</strong></div>
           </div>
         </div>
       </section>
     </article>
 
+    <!-- 3. Gráficas -->
     <article class="pdf-page compact-page charts-page chart-page-balanced">
       <h2 class="page-title">Análisis visual</h2>
-      <p class="page-sub">Comparativo entre consumo actual, costo sin sistema, costo con sistema y evolución del retorno de inversión.</p>
+      <p class="page-sub">Comparativo visual del consumo, la generación y el comportamiento financiero proyectado del sistema.</p>
       <div class="graphs-grid charts-tight">
         <div class="graph-card">
           <h3>Consumo vs generación</h3>
@@ -146,102 +120,78 @@
           <div class="chart-box compact-chart"><canvas id="presChartCostos"></canvas></div>
         </div>
         <div class="graph-card wide">
-          <h3>Retorno de inversión</h3>
+          <h3>Recuperación estimada de inversión</h3>
           <div class="chart-box chart-tall compact-chart-tall"><canvas id="presChartRoi"></canvas></div>
         </div>
       </div>
     </article>
 
-    <article class="pdf-page compact-page page-balanced final-page-grid-shell final-page-tech">
+    <!-- 4. Sistema + cierre -->
+    <article class="pdf-page compact-page page-balanced">
       <section class="page-section-tight">
-        <h2 class="page-title">Propuesta técnica</h2>
-        <p class="page-sub">Configuración general del sistema planteado para alcanzar una cobertura estimada del consumo.</p>
-        <div class="tech-layout compact-tech-layout tech-layout-tight">
-          <div class="tech-card">
-            <div class="tech-stack compact-tech-stack">
-              <div class="tech-item"><strong>Potencia total del sistema</strong><span id="techPotencia">-</span></div>
-              <div class="tech-item"><strong>Número de módulos</strong><span id="techMfvs">-</span></div>
-              <div class="tech-item"><strong>Potencia por módulo</strong><span id="techPotenciaModulo">-</span></div>
-              <div class="tech-item"><strong>Consumo anual actual</strong><span id="techConsumoAnual">-</span></div>
-              <div class="tech-item"><strong>Producción anual estimada</strong><span id="techProduccionAnual">-</span></div>
-            </div>
-          </div>
-          <div class="tech-card">
-            <strong class="label label-block">Sistema incluye</strong>
-            <ul class="clean-list compact-list-tight compact-list-sm">
-              <li>Paneles fotovoltaicos</li>
-              <li>Inversor / microinversores</li>
-              <li>Estructura K2 o similar</li>
-              <li>Cableado y protecciones</li>
-              <li>Instalación</li>
-              <li>Trámite ante CFE</li>
-              <li>Mantenimiento a los 6 meses</li>
-              <li>Seguro del sistema durante el primer año</li>
-            </ul>
-          </div>
-        </div>
-        <div class="note-box compact-note-box note-box-tight">
-          <h3>Observaciones del proyecto</h3>
-          <p id="techObservaciones">-</p>
+        <h2 class="page-title">Solución propuesta</h2>
+        <p class="page-sub">Sistema fotovoltaico diseñado para cubrir una parte significativa del consumo y proteger la economía de la propiedad ante aumentos futuros.</p>
+        <div class="premium-config-strip">
+          <div class="config-chip"><span>Consumo anual</span><strong id="metricConsumo">-</strong></div>
+          <div class="config-chip"><span>Número de paneles</span><strong id="metricPaneles">-</strong></div>
+          <div class="config-chip"><span>Producción anual</span><strong id="techProduccionAnual">-</strong></div>
         </div>
       </section>
-    </article>
 
-    <article class="pdf-page compact-page page-balanced final-page-grid-shell final-page-close">
-      <section class="final-two-column-grid benefits-next-grid">
-        <div class="summary-card compact-card-block">
+      <section class="premium-final-grid">
+        <div class="summary-card premium-close-card accent">
+          <span class="label">¿Qué incluye?</span>
+          <ul class="premium-clean-list">
+            <li>Paneles solares de alta eficiencia.</li>
+            <li>Inversor o microinversores según diseño.</li>
+            <li>Estructura, cableado y protecciones.</li>
+            <li>Instalación profesional y puesta en marcha.</li>
+            <li>Gestión de trámite ante CFE.</li>
+            <li>Mantenimiento inicial y acompañamiento.</li>
+          </ul>
+        </div>
+
+        <div class="summary-card premium-close-card">
           <span class="label">Beneficios clave</span>
-          <ul class="clean-list compact-list compact-list-sm">
-            <li>Ahorro desde el inicio tras la interconexión.</li>
-            <li>Mayor control del gasto eléctrico a largo plazo.</li>
-            <li>Mejor percepción y plusvalía de la propiedad.</li>
-            <li>Menor impacto ante futuros aumentos de tarifa.</li>
+          <ul class="premium-clean-list">
+            <li>Reduce dependencia de aumentos de CFE.</li>
+            <li>Protege el flujo de efectivo de la propiedad.</li>
+            <li>Incrementa percepción y valor del inmueble.</li>
+            <li>Ahorro visible desde los primeros recibos.</li>
           </ul>
         </div>
 
-        <div class="summary-card compact-card-block">
+        <div class="summary-card premium-close-card dark">
           <span class="label">Siguiente paso</span>
-          <ul class="clean-list compact-list compact-list-sm">
-            <li>Validar datos en sitio o con recibo real.</li>
-            <li>Confirmar configuración final del sistema.</li>
-            <li>Programar instalación y trámite correspondiente.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="final-two-column-grid terms-grid-tight close-top-grid">
-        <div class="summary-card compact-card-block">
-          <span class="label">Condiciones comerciales</span>
-          <ul class="clean-list compact-list compact-list-sm">
-            <li>Vigencia de la cotización por 15 días naturales.</li>
-            <li>Precios sujetos a validación final por levantamiento técnico y disponibilidad.</li>
-            <li>Tiempo de instalación e interconexión sujeto a agenda y proceso de CFE.</li>
-            <li>Garantías conforme a fabricante e instalación contratada.</li>
+          <h3>Listo para avanzar</h3>
+          <ul class="premium-clean-list">
+            <li>Validación final en sitio.</li>
+            <li>Confirmación de configuración.</li>
+            <li>Programación de instalación.</li>
+            <li>Inicio de trámite ante CFE.</li>
           </ul>
         </div>
 
-        <div class="summary-card compact-card-block">
-          <span class="label">Alcance general</span>
-          <ul class="clean-list compact-list compact-list-sm">
-            <li>Suministro e instalación del sistema fotovoltaico.</li>
-            <li>Estructura, protecciones, cableado y puesta en marcha.</li>
-            <li>Gestión de trámite de interconexión ante CFE según paquete contratado.</li>
-            <li>No incluye conceptos extraordinarios no contemplados en levantamiento.</li>
-          </ul>
+        <div class="summary-card premium-close-card">
+          <span class="label">Condiciones</span>
+          <p class="premium-terms">Vigencia de 15 días naturales. Precio sujeto a validación final en sitio, disponibilidad de componentes y condiciones reales de instalación. Garantías conforme a fabricante e instalación contratada.</p>
+          <div class="hidden">
+            <span id="pdfSubtotal">-</span><span id="pdfIva">-</span><span id="invAhorro">-</span><span id="invRoi">-</span>
+            <span id="techPotencia">-</span><span id="techMfvs">-</span><span id="techPotenciaModulo">-</span><span id="techConsumoAnual">-</span><span id="techObservaciones">-</span>
+          </div>
         </div>
-      </section>
 
-      <section class="contact-strip-pro compact-contact-strip contact-strip-pro-final">
-        <div>
-          <div class="contact-badge">SolRegio</div>
-          <h3>Estamos listos para ayudarte</h3>
-          <p>Solicita ajustes, agenda una visita o confirma tu propuesta para avanzar al siguiente paso.</p>
-        </div>
-        <div class="contact-lines compact-contact-lines">
-          <div><strong>WhatsApp:</strong> 81 1810 3610</div>
-          <div><strong>Teléfono:</strong> 81 1810 3610</div>
-          <div><strong>Correo:</strong> keepgreen74@gmail.com</div>
-          <div><strong>Ubicación:</strong> Monterrey, Nuevo León</div>
+        <div class="premium-contact-card">
+          <div>
+            <div class="contact-badge">SolRegio</div>
+            <h3>Confirmemos tu proyecto</h3>
+            <p>Agenda la visita, solicita contrato o pide ajustes para avanzar con seguridad.</p>
+          </div>
+          <div class="premium-contact-lines">
+            <div><strong>WhatsApp:</strong> 81 1810 3610</div>
+            <div><strong>Correo:</strong> keepgreen74@gmail.com</div>
+            <div><strong>Ubicación:</strong> Monterrey, Nuevo León</div>
+          </div>
         </div>
       </section>
     </article>

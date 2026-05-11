@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolRegio | CRM visual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-light crm-page-body">
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand"><img src="logo-solregio-claro.png" alt="SolRegio" class="brand-logo"></a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="cotizador.html">Cotizador</a>
+        <a class="btn btn-secondary" href="index.html">Sitio</a>
+        <button class="btn btn-primary" type="button" id="btnNuevoLead">Nuevo prospecto</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="crm-shell">
+    <section class="crm-hero">
+      <div>
+        <div class="eyebrow">SolRegio CRM</div>
+        <h1>Pipeline comercial</h1>
+        <p>Control simple de prospectos, seguimientos y cierres. La idea es que ningún recibo, llamada o propuesta se te pierda.</p>
+      </div>
+      <div class="crm-hero-actions">
+        <button class="btn btn-secondary" type="button" id="btnExportarCrm">Exportar CRM</button>
+        <button class="btn btn-secondary" type="button" id="btnImportarCrm">Importar CRM</button>
+        <input type="file" id="inputImportarCrm" class="hidden" accept="application/json">
+      </div>
+    </section>
+
+    <section class="crm-stats-row" id="crmStats"></section>
+
+    <section class="crm-toolbar-v2">
+      <input id="crmSearch" type="search" placeholder="Buscar por nombre, teléfono, etapa, ubicación...">
+      <select id="crmFiltroTemp">
+        <option value="">Todos</option>
+        <option value="caliente">Calientes</option>
+        <option value="tibio">Tibios</option>
+        <option value="frio">Fríos</option>
+      </select>
+      <select id="crmFiltroVence">
+        <option value="">Todos los seguimientos</option>
+        <option value="hoy">Seguimiento hoy</option>
+        <option value="vencido">Vencidos</option>
+      </select>
+    </section>
+
+    <section class="crm-board" id="crmBoard"></section>
+  </main>
+
+  <div class="crm-modal-backdrop hidden" id="crmModal">
+    <article class="crm-modal-card">
+      <div class="crm-modal-head">
+        <div>
+          <h2 id="crmModalTitle">Nuevo prospecto</h2>
+          <p>Captura solo lo necesario. Lo demás se completa conforme avance el cliente.</p>
+        </div>
+        <button class="crm-icon-btn" type="button" id="btnCerrarModal">×</button>
+      </div>
+
+      <form id="crmForm" class="crm-form">
+        <input type="hidden" id="crmId">
+        <label><span>Nombre</span><input id="crmNombre" required placeholder="Ej. Israel Díaz"></label>
+        <label><span>WhatsApp</span><input id="crmTelefono" placeholder="Ej. 8118103610"></label>
+        <label><span>Ubicación</span><input id="crmUbicacion" placeholder="Colonia / municipio"></label>
+        <label><span>Origen</span>
+          <select id="crmOrigen">
+            <option>WhatsApp conocido</option>
+            <option>Grupo WhatsApp</option>
+            <option>Facebook</option>
+            <option>Recomendado</option>
+            <option>Iglesia / conocido</option>
+            <option>Otro</option>
+          </select>
+        </label>
+        <label><span>Etapa</span><select id="crmEtapa"></select></label>
+        <label><span>Temperatura</span>
+          <select id="crmTemperatura">
+            <option value="tibio">Tibio</option>
+            <option value="caliente">Caliente</option>
+            <option value="frio">Frío</option>
+          </select>
+        </label>
+        <label><span>Próximo seguimiento</span><input id="crmProximo" type="date"></label>
+        <label><span>Valor / total estimado</span><input id="crmTotal" placeholder="Ej. $65,337"></label>
+        <label class="crm-wide"><span>Notas</span><textarea id="crmNotas" placeholder="Ej. Dijo que le interesa pero no tiene presupuesto por ahora..."></textarea></label>
+
+        <div class="crm-modal-actions">
+          <button class="btn btn-secondary" type="button" id="btnEliminarLead">Eliminar</button>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
+      </form>
+    </article>
+  </div>
+
+  <script src="crm.js"></script>
+</body>
+</html>
