@@ -216,6 +216,8 @@ function getDecisionText(data) {
 }
 
 function render(data) {
+  const clienteTitulo = String(data.clienteNombre || '').trim();
+  document.title = clienteTitulo ? `SolRegio | Propuesta ${clienteTitulo}` : 'SolRegio | Propuesta solar premium';
   setText('outCliente', data.clienteNombre || '-');
   setText('outUbicacion', data.clienteUbicacion || '-');
   setText('outFecha', formatDate(data.clienteFecha));

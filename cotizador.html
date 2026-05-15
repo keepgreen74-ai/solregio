@@ -2224,54 +2224,17 @@ input:focus,select:focus,textarea:focus{
       </section>
     </div>
     
-<section class="crm-panel">
+<section class="crm-panel clientes-panel">
   <div class="crm-topbar">
     <div>
-      <div class="eyebrow">CRM visual</div>
+      <div class="eyebrow">Clientes del cotizador</div>
       <h2>Clientes guardados</h2>
-      <p class="crm-sub">Busca, filtra, abre, actualiza, duplica o elimina propuestas sin perder el contexto.</p>
+      <p class="crm-sub">Aquí quedan las propuestas y escenarios ya trabajados en el cotizador. El seguimiento comercial vive en el CRM visual.</p>
     </div>
     <div class="crm-topbar-actions">
       <button class="btn btn-secondary btn-crm" type="button" onclick="nuevoCliente()">Nuevo cliente</button>
       <button class="btn btn-secondary btn-crm" type="button" onclick="abrirPropuestaClienteActivo()">Abrir propuesta cliente activo</button>
-      <button class="btn btn-secondary btn-crm btn-crm-whatsapp" type="button" onclick="enviarWhatsAppClienteActivo()">WhatsApp cliente activo</button>
       <button class="btn btn-primary btn-crm" type="button" onclick="guardarActual()">Guardar / actualizar</button>
-    </div>
-  </div>
-
-  <div id="crmAlertShell" class="crm-alert-shell hidden">
-    <div class="crm-alert-title">
-      <h3 id="crmAlertTitle">Seguimientos urgentes</h3>
-      <button class="btn btn-secondary btn-crm" type="button" onclick="cerrarRecordatorioCRM()">Ocultar</button>
-    </div>
-    <p id="crmAlertSubtitle" class="crm-sub">Aquí verás los clientes que deberías mover primero hoy.</p>
-    <div id="crmAlertList" class="crm-alert-list"></div>
-  </div>
-
-  <div class="crm-stats">
-    <div class="crm-stat-card">
-      <span>Total guardados</span>
-      <strong id="crmTotalClientes">0</strong>
-    </div>
-    <div class="crm-stat-card">
-      <span>Resultados visibles</span>
-      <strong id="crmResultadosVisibles">0</strong>
-    </div>
-    <div class="crm-stat-card is-danger">
-      <span>Seguimiento vencido</span>
-      <strong id="crmVencidos">0</strong>
-    </div>
-    <div class="crm-stat-card is-warning">
-      <span>Seguimiento hoy</span>
-      <strong id="crmHoy">0</strong>
-    </div>
-    <div class="crm-stat-card is-success">
-      <span>Próximos 7 días</span>
-      <strong id="crmProximos">0</strong>
-    </div>
-    <div class="crm-stat-card">
-      <span>Cliente en edición</span>
-      <strong id="crmClienteActivo">Nuevo registro</strong>
     </div>
   </div>
 
@@ -2291,58 +2254,8 @@ input:focus,select:focus,textarea:focus{
       </select>
     </label>
   </div>
-  <p class="crm-hint">Tip: al abrir un cliente, el botón guardar pasa a actualizar. Usa también la temperatura comercial para saber a quién empujar primero.</p>
 
-  <div class="crm-followup-box">
-    <div class="crm-followup-head">
-      <div>
-        <h3>Seguimiento comercial</h3>
-        <p>Estos datos se guardan con cada cliente para que no pierdas el contexto de la negociación.</p>
-      </div>
-      <button class="btn btn-secondary btn-crm" type="button" onclick="marcarContactoHoy()">Registrar contacto hoy</button>
-    </div>
-    <div class="form-grid two">
-      <label class="field">
-        <span>Próximo seguimiento</span>
-        <input id="crmProximoSeguimiento" type="date">
-      </label>
-      <label class="field">
-        <span>Último contacto</span>
-        <input id="crmUltimoContacto" type="date">
-      </label>
-      <label class="field wide">
-        <span>Nota comercial breve</span>
-        <textarea id="crmNotaSeguimiento" placeholder="Ej. Le interesó, quiere revisar otra opción de paneles, volver a contactar el viernes..."></textarea>
-      </label>
-      <label class="field">
-        <span>Temperatura comercial</span>
-        <select id="crmTemperatura">
-          <option value="tibio">Tibio</option>
-          <option value="caliente">Caliente</option>
-          <option value="frio">Frío</option>
-        </select>
-      </label>
-      <label class="field">
-        <span>Escenario</span>
-        <div class="crm-scenario-row">
-          <select id="crmEscenario">
-            <option value="A">Escenario A</option>
-            <option value="B">Escenario B</option>
-            <option value="C">Escenario C</option>
-          </select>
-          <button class="btn btn-secondary btn-crm" type="button" onclick="duplicarAlSiguienteEscenario()">Duplicar al siguiente escenario</button>
-        </div>
-      </label>
-      <div class="field wide">
-        <span>Lectura rápida</span>
-        <div class="crm-temp-grid">
-          <div class="crm-temp-chip is-hot">Caliente = listo para mover</div>
-          <div class="crm-temp-chip is-warm">Tibio = sí hay interés</div>
-          <div class="crm-temp-chip is-cold">Frío = pausar o nutrir</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <p class="crm-hint">Tip: usa esta sección solo para propuestas guardadas. Para prospectos sin propuesta o seguimiento comercial, usa el CRM visual.</p>
 
   <div id="clientesLista"></div>
 </section>
@@ -2526,10 +2439,14 @@ function calcularGeneracion() {
   const hsp = Number(refs.hsp.value || 0);
   const factor = Number(refs.factorDesempeno.value || 0);
 
-  if (!mfv || !potenciaKW || !hsp || !factor) return;
+  if (!mfv || !potenciaKW || !hsp || !factor) {
+    return Number(refs.generacionBimestral.value || 0);
+  }
 
   const generacionDiaria = mfv * potenciaKW * hsp * factor;
-  refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
+  const generacion = Math.round(generacionDiaria * 60);
+  refs.generacionBimestral.value = generacion;
+  return generacion;
 }
 
 function calcularCostoEscalonado(kwh) {
@@ -2649,7 +2566,7 @@ function calcularMFVautomatico() {
 
 function getData() {
   const modo = refs.modoCalculo.value;
-  const generacionBimestral = Number(refs.generacionBimestral.value || 0);
+  const generacionBimestral = calcularGeneracion();
   const costoSistema = Number(refs.costoSistema.value || 0);
   const incrementoAnual = Number(refs.incrementoAnual.value || 4) / 100;
 
@@ -3246,6 +3163,7 @@ function calcularCotizadorInterno() {
 }
 
 function updateAll() {
+  calcularGeneracion();
   sincronizarConfiguracionInversor(Number(refs.numMFV.value || 0));
   const interno = calcularCotizadorInterno();
   const data = getData();
@@ -3329,11 +3247,108 @@ function guardarCliente(data) {
 
 
 let currentClientId = null;
+let currentCrmLeadId = null;
 
 function getEditorLabel() {
   const el = document.getElementById('crmClienteActivo');
   return el;
 }
+
+
+function parseMoneyNumber(value) {
+  const cleaned = String(value || '').replace(/[^0-9.]/g, '');
+  return Number(cleaned || 0);
+}
+
+function cargarProspectoDesdeCRM() {
+  const raw = localStorage.getItem('solregio_crm_to_cotizador');
+  if (!raw) return;
+
+  try {
+    const lead = JSON.parse(raw);
+    currentCrmLeadId = lead.crmId || null;
+
+    if (lead.dataCompleta) {
+      applyCotizacionToForm(lead.dataCompleta);
+    }
+
+    if (refs.clienteNombre && lead.nombre) refs.clienteNombre.value = lead.nombre;
+    const tel = document.getElementById('clienteTelefono');
+    if (tel && lead.telefono) tel.value = lead.telefono;
+    if (refs.clienteUbicacion && lead.ubicacion) refs.clienteUbicacion.value = lead.ubicacion;
+
+    const total = parseMoneyNumber(lead.total);
+    if (total && refs.costoSistema && !refs.costoSistema.value) refs.costoSistema.value = total;
+
+    if (refs.observacionesProyecto && lead.notas && !refs.observacionesProyecto.value) {
+      refs.observacionesProyecto.value = `Contexto CRM: ${lead.notas}`;
+    }
+
+    localStorage.removeItem('solregio_crm_to_cotizador');
+  } catch (err) {
+    console.warn('No se pudo cargar prospecto desde CRM', err);
+  }
+}
+
+function actualizarLeadCRMDesdeCotizador(registro) {
+  if (!registro) return;
+
+  try {
+    const key = 'solregio_crm_v1';
+    const crm = JSON.parse(localStorage.getItem(key)) || [];
+    const today = new Date().toISOString().slice(0, 10);
+    const clienteId = registro.id || currentClientId || Date.now();
+    const syncKey = `cotizador-${clienteId}`;
+    const phone = String(registro.telefono || '').replace(/\D/g, '');
+    const nombreKey = String(registro.nombre || '').trim().toLowerCase();
+    const ubicacionKey = String(registro.ubicacion || '').trim().toLowerCase();
+
+    let idx = crm.findIndex(item => String(item.id) === String(currentCrmLeadId || ''));
+
+    if (idx < 0) {
+      idx = crm.findIndex(item => item.syncKey === syncKey || String(item.clienteCotizadorId || '') === String(clienteId));
+    }
+
+    if (idx < 0) {
+      idx = crm.findIndex(item => {
+        const itemPhone = String(item.telefono || '').replace(/\D/g, '');
+        const itemNombre = String(item.nombre || '').trim().toLowerCase();
+        const itemUbicacion = String(item.ubicacion || '').trim().toLowerCase();
+        return (phone && itemPhone === phone) || (nombreKey && itemNombre === nombreKey && ubicacionKey && itemUbicacion === ubicacionKey);
+      });
+    }
+
+    const baseLead = idx >= 0 ? crm[idx] : {};
+    const actualizado = {
+      ...baseLead,
+      id: baseLead.id || currentCrmLeadId || `cotizador-${clienteId}`,
+      syncKey,
+      clienteCotizadorId: clienteId,
+      nombre: registro.nombre || baseLead.nombre || 'Sin nombre',
+      telefono: registro.telefono || baseLead.telefono || '',
+      ubicacion: registro.ubicacion || baseLead.ubicacion || '',
+      origen: baseLead.origen || 'Cotizador',
+      total: registro.total || registro.precioCliente || baseLead.total || '',
+      etapa: baseLead.etapa || 'recibo',
+      temperatura: baseLead.temperatura || registro.temperatura || 'tibio',
+      proximo: baseLead.proximo || registro.proximoSeguimiento || '',
+      notas: baseLead.notas || registro.notaSeguimiento || '',
+      fechaAlta: baseLead.fechaAlta || today,
+      ultimoContacto: today,
+      dataCompleta: registro.snapshot?.cotizacion || baseLead.dataCompleta || null,
+      creadoDesde: baseLead.creadoDesde || 'cotizador'
+    };
+
+    if (idx >= 0) crm[idx] = actualizado;
+    else crm.push(actualizado);
+
+    currentCrmLeadId = actualizado.id;
+    localStorage.setItem(key, JSON.stringify(crm));
+  } catch (err) {
+    console.warn('No se pudo actualizar el CRM desde cotizador', err);
+  }
+}
+
 
 function setEditorState(cliente = null) {
   currentClientId = cliente?.id || null;
@@ -3389,7 +3404,7 @@ function nuevoCliente() {
 
 function duplicarCliente(id) {
   const clientes = getClientesGuardados();
-  const cliente = clientes.find(item => item.id === id);
+  const cliente = clientes.find(item => String(item.id) === String(id));
   if (!cliente) return;
 
   const copia = JSON.parse(JSON.stringify(cliente));
@@ -3698,7 +3713,7 @@ function guardarActual() {
 
     const actualRegistro = (() => {
       const actuales = getClientesGuardados();
-      return actuales.find(item => item.id === currentClientId) || null;
+      return actuales.find(item => String(item.id) === String(currentClientId)) || null;
     })();
     const seguimiento = getSeguimientoData();
 
@@ -3749,6 +3764,7 @@ function guardarActual() {
     };
 
     const registro = guardarCliente(data);
+    actualizarLeadCRMDesdeCotizador(registro);
     setEditorState(registro);
     saveData({ ...calculo, clienteTelefono, interno, internoForm: getInternoFormData() });
     guardarDefaultsInternos();
@@ -3761,15 +3777,15 @@ function guardarActual() {
 
 function eliminarCliente(id) {
   const clientes = getClientesGuardados();
-  const actualizados = clientes.filter(cliente => cliente.id !== id);
+  const actualizados = clientes.filter(cliente => String(cliente.id) !== String(id));
   setClientesGuardados(actualizados);
-  if (currentClientId === id) setEditorState(null);
+  if (String(currentClientId) === String(id)) setEditorState(null);
   mostrarClientes();
 }
 
 function cargarCliente(id) {
   const clientes = getClientesGuardados();
-  const cliente = clientes.find(item => item.id === id);
+  const cliente = clientes.find(item => String(item.id) === String(id));
   if (!cliente) return;
 
   const snapshot = cliente.snapshot || {};
@@ -3858,7 +3874,7 @@ function mostrarClientes() {
         ? 'followup-today'
         : (estadoSeguimiento.key === 'proximo' ? 'followup-upcoming' : ''));
     const siblingsHtml = siblings.length > 1
-      ? `<div class="crm-sibling-actions">${siblings.map((sib) => `<button class="btn btn-secondary btn-crm btn-crm-mini ${String(sib.id) === String(cliente.id) ? 'btn-crm-primary' : ''}" type="button" onclick="cargarCliente(${sib.id})">${getScenarioLabel(sib.escenario)}</button>`).join('')}</div>`
+      ? `<div class="crm-sibling-actions">${siblings.map((sib) => `<button class="btn btn-secondary btn-crm btn-crm-mini ${String(sib.id) === String(cliente.id) ? 'btn-crm-primary' : ''}" type="button" onclick='cargarCliente(${JSON.stringify(String(sib.id))})'>${getScenarioLabel(sib.escenario)}</button>`).join('')}</div>`
       : '';
     return `
     <article class="cliente-card ${String(cliente.id) === String(currentClientId || '') ? 'is-active' : ''} ${followupClass}" data-id="${cliente.id}">
@@ -3876,7 +3892,7 @@ function mostrarClientes() {
             <span class="cliente-mini-badge">${siblings.length} escenario${siblings.length === 1 ? '' : 's'}</span>
           </div>
         </div>
-        <select class="cliente-status cliente-status-select" onchange="actualizarEstatusCliente(${cliente.id}, this.value)">
+        <select class="cliente-status cliente-status-select" onchange="actualizarEstatusCliente(${JSON.stringify(String(cliente.id))}, this.value)">
           <option value="nuevo" ${(cliente.estatus || 'nuevo') === 'nuevo' ? 'selected' : ''}>Nuevo</option>
           <option value="seguimiento" ${(cliente.estatus || 'nuevo') === 'seguimiento' ? 'selected' : ''}>Seguimiento</option>
           <option value="cerrado" ${(cliente.estatus || 'nuevo') === 'cerrado' ? 'selected' : ''}>Cerrado</option>
@@ -3914,12 +3930,12 @@ function mostrarClientes() {
       </div>
 
       <div class="cliente-card-actions">
-        <button class="btn btn-secondary btn-crm btn-crm-primary" type="button" onclick="cargarCliente(${cliente.id})">Abrir</button>
-        <button class="btn btn-secondary btn-crm" type="button" onclick="abrirPropuestaCliente(${cliente.id})">Propuesta</button>
-        <button class="btn btn-secondary btn-crm btn-crm-whatsapp" type="button" onclick="abrirWhatsAppCliente(${cliente.id})">WhatsApp</button>
-        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick="duplicarCliente(${cliente.id})">Duplicar</button>
-        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick="duplicarAlSiguienteEscenario(${cliente.id})">Sig. escenario</button>
-        <button class="btn btn-secondary btn-crm btn-crm-danger" type="button" onclick="eliminarCliente(${cliente.id})">Eliminar</button>
+        <button class="btn btn-secondary btn-crm btn-crm-primary" type="button" onclick='cargarCliente(${JSON.stringify(String(cliente.id))})'>Abrir</button>
+        <button class="btn btn-secondary btn-crm" type="button" onclick='abrirPropuestaCliente(${JSON.stringify(String(cliente.id))})'>Propuesta</button>
+        <button class="btn btn-secondary btn-crm btn-crm-whatsapp" type="button" onclick='abrirWhatsAppCliente(${JSON.stringify(String(cliente.id))})'>WhatsApp</button>
+        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick='duplicarCliente(${JSON.stringify(String(cliente.id))})'>Duplicar</button>
+        <button class="btn btn-secondary btn-crm btn-crm-soft" type="button" onclick='duplicarAlSiguienteEscenario(${JSON.stringify(String(cliente.id))})'>Sig. escenario</button>
+        <button class="btn btn-secondary btn-crm btn-crm-danger" type="button" onclick='eliminarCliente(${JSON.stringify(String(cliente.id))})'>Eliminar</button>
       </div>
     </article>
   `;
@@ -3932,6 +3948,7 @@ function init() {
   preloadObservaciones();
   preloadFromStorage();
   cargarDefaultsInternos();
+  cargarProspectoDesdeCRM();
 
   if (!refs.clienteFecha.value) setToday();
 
@@ -4037,6 +4054,241 @@ function toggleModo() {
   document.body.classList.toggle('modo-cliente', !modoInterno);
 }
 
+
+/* ===== SOLREGIO V13.7: FIX ESTRUCTURAL ID + ESCENARIOS ===== */
+function solUid(prefix = 'cliente') {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function solNormalizeKey(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .toLowerCase();
+}
+
+function solFamilyKeyFrom(data = {}) {
+  return String(data.familiaId || [data.nombre || data.clienteNombre, data.telefono || data.clienteTelefono, data.ubicacion || data.clienteUbicacion]
+    .map(solNormalizeKey)
+    .join('|'));
+}
+
+function solScenarioKey(data = {}) {
+  return [data.nombre || data.clienteNombre, data.telefono || data.clienteTelefono, data.ubicacion || data.clienteUbicacion, getScenarioValue(data.escenario || 'A')]
+    .map(solNormalizeKey)
+    .join('|');
+}
+
+function solEnsureSnapshotScenario(registro) {
+  if (!registro) return registro;
+  registro.escenario = getScenarioValue(registro.escenario || 'A');
+  registro.familiaId = solFamilyKeyFrom(registro);
+  registro.clave = solScenarioKey(registro);
+  if (registro.snapshot && registro.snapshot.cotizacion) {
+    registro.snapshot.cotizacion.escenario = registro.escenario;
+    registro.snapshot.cotizacion.clienteTelefono = registro.telefono || registro.snapshot.cotizacion.clienteTelefono || '';
+  }
+  return registro;
+}
+
+function guardarCliente(data) {
+  const clientes = getClientesGuardados().map(solEnsureSnapshotScenario);
+  const escenario = getScenarioValue(data.escenario || 'A');
+  const familiaId = data.familiaId || solFamilyKeyFrom(data);
+  const clave = solScenarioKey({ ...data, familiaId, escenario });
+  const existingById = data.id ? clientes.findIndex(c => String(c.id) === String(data.id)) : -1;
+  const existingByKey = clientes.findIndex(c => solScenarioKey(c) === clave);
+  const indexExistente = existingById >= 0 ? existingById : existingByKey;
+  const idFinal = indexExistente >= 0 ? clientes[indexExistente].id : (data.id || currentClientId || solUid('cliente'));
+
+  const nuevoRegistro = solEnsureSnapshotScenario({
+    ...(indexExistente >= 0 ? clientes[indexExistente] : {}),
+    ...data,
+    id: idFinal,
+    fecha: data.fecha || new Date().toLocaleDateString('es-MX'),
+    estatus: data.estatus || (indexExistente >= 0 ? clientes[indexExistente].estatus : 'nuevo'),
+    familiaId,
+    escenario,
+    clave
+  });
+
+  if (indexExistente >= 0) clientes[indexExistente] = nuevoRegistro;
+  else clientes.push(nuevoRegistro);
+
+  setClientesGuardados(clientes);
+  currentClientId = nuevoRegistro.id;
+  mostrarClientes();
+  return nuevoRegistro;
+}
+
+function cargarCliente(id) {
+  const clientes = getClientesGuardados().map(solEnsureSnapshotScenario);
+  setClientesGuardados(clientes);
+  const cliente = clientes.find(item => String(item.id) === String(id));
+  if (!cliente) {
+    alert('No encontré ese cliente. Prueba sincronizar o importar el respaldo correcto.');
+    return;
+  }
+
+  const snapshot = cliente.snapshot || {};
+  const cotizacion = snapshot.cotizacion || cliente.dataCompleta || null;
+
+  if (cotizacion) {
+    applyCotizacionToForm({ ...cotizacion, escenario: cliente.escenario || cotizacion.escenario || 'A' });
+  } else {
+    refs.clienteNombre.value = cliente.nombre || '';
+    const tel = document.getElementById('clienteTelefono');
+    if (tel) tel.value = cliente.telefono || '';
+    refs.clienteUbicacion.value = cliente.ubicacion || '';
+    refs.tipoPropiedad.value = cliente.tipoPropiedad || '';
+    refs.clienteTarifa.value = cliente.tarifa || refs.clienteTarifa.value;
+    refs.clienteFecha.value = cliente.fechaCotizacion || refs.clienteFecha.value;
+    refs.modoCalculo.value = cliente.tipoAnalisis === 'GDMTH 12 meses'
+      ? 'gdmth'
+      : (cliente.tipoAnalisis === 'Estimado rápido' ? 'estimado' : 'recibos');
+    updateModeUI();
+  }
+
+  applySeguimientoData({
+    proximoSeguimiento: cliente.proximoSeguimiento || '',
+    ultimoContacto: cliente.ultimoContacto || '',
+    notaSeguimiento: cliente.notaSeguimiento || '',
+    temperatura: cliente.temperatura || 'tibio',
+    escenario: cliente.escenario || 'A'
+  });
+
+  if (snapshot.internoForm) applyInternoFormData(snapshot.internoForm);
+
+  const tipoInv = document.getElementById('tipoInversor');
+  const cantInv = document.getElementById('cantidadInversores');
+  const capInv = document.getElementById('capacidadInversor');
+  if (tipoInv && cliente.tipoInversor) tipoInv.value = cliente.tipoInversor;
+  if (cantInv && cliente.cantidadInversores) cantInv.value = cliente.cantidadInversores;
+  if (capInv && cliente.capacidadInversor) capInv.value = cliente.capacidadInversor;
+
+  setInversorSugerido(cliente.inversor || sugerirInversor(Number(refs.numMFV.value || 0)));
+  currentClientId = cliente.id;
+  saveData({ ...(cotizacion || getData()), escenario: cliente.escenario || 'A', interno: snapshot.interno || calcularCotizadorInterno() });
+  guardarDefaultsInternos();
+  setEditorState(cliente);
+  updateAll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function duplicarAlSiguienteEscenario(id = currentClientId) {
+  const clientes = getClientesGuardados().map(solEnsureSnapshotScenario);
+  const cliente = clientes.find(item => String(item.id) === String(id || currentClientId || ''));
+  if (!cliente) {
+    alert('Primero abre o guarda un cliente para generar el siguiente escenario.');
+    return;
+  }
+
+  const escenarioActual = getScenarioValue(cliente.escenario || 'A');
+  const siguiente = getNextScenario(escenarioActual);
+  if (!siguiente) {
+    alert('Ese cliente ya está en el último escenario disponible.');
+    return;
+  }
+
+  const familiaId = solFamilyKeyFrom(cliente);
+  const existente = clientes.find(item => solFamilyKeyFrom(item) === familiaId && getScenarioValue(item.escenario) === siguiente);
+  if (existente) {
+    setClientesGuardados(clientes);
+    cargarCliente(existente.id);
+    alert(`Ya existía ${getScenarioLabel(siguiente)}. Lo abrí para que lo ajustes.`);
+    return;
+  }
+
+  const copia = JSON.parse(JSON.stringify(cliente));
+  copia.id = solUid('cliente');
+  copia.familiaId = familiaId;
+  copia.escenario = siguiente;
+  copia.clave = solScenarioKey(copia);
+  copia.estatus = 'seguimiento';
+  copia.fecha = new Date().toLocaleDateString('es-MX');
+  copia.fechaAlta = copia.fechaAlta || new Date().toISOString().slice(0, 10);
+  if (copia.snapshot?.cotizacion) {
+    copia.snapshot.cotizacion.escenario = siguiente;
+    copia.snapshot.cotizacion.clienteTelefono = copia.telefono || copia.snapshot.cotizacion.clienteTelefono || '';
+  }
+  if (copia.snapshot) copia.snapshot.savedAt = new Date().toISOString();
+
+  clientes.push(solEnsureSnapshotScenario(copia));
+  setClientesGuardados(clientes);
+  mostrarClientes();
+  cargarCliente(copia.id);
+}
+
+function actualizarLeadCRMDesdeCotizador(registro) {
+  if (!registro) return;
+  try {
+    const key = 'solregio_crm_v1';
+    const crm = JSON.parse(localStorage.getItem(key)) || [];
+    const today = new Date().toISOString().slice(0, 10);
+    const normalized = solEnsureSnapshotScenario({ ...registro });
+    const syncKey = `cotizador-${normalized.id}`;
+    const clienteCotizadorId = normalized.id;
+    const phone = String(normalized.telefono || '').replace(/\D/g, '');
+    const fingerprint = solScenarioKey(normalized);
+
+    let idx = crm.findIndex(item => String(item.clienteCotizadorId || '') === String(clienteCotizadorId));
+    if (idx < 0) idx = crm.findIndex(item => String(item.syncKey || '') === syncKey);
+    if (idx < 0 && currentCrmLeadId) idx = crm.findIndex(item => String(item.id) === String(currentCrmLeadId));
+    if (idx < 0) {
+      idx = crm.findIndex(item => {
+        const itemPhone = String(item.telefono || '').replace(/\D/g, '');
+        const itemFingerprint = solScenarioKey({
+          nombre: item.nombre,
+          telefono: item.telefono,
+          ubicacion: item.ubicacion,
+          escenario: item.escenario || normalized.escenario
+        });
+        return (phone && itemPhone === phone && solNormalizeKey(item.ubicacion) === solNormalizeKey(normalized.ubicacion)) || itemFingerprint === fingerprint;
+      });
+    }
+
+    const baseLead = idx >= 0 ? crm[idx] : {};
+    const actualizado = {
+      ...baseLead,
+      id: baseLead.id || currentCrmLeadId || syncKey,
+      syncKey,
+      clienteCotizadorId,
+      nombre: normalized.nombre || baseLead.nombre || 'Sin nombre',
+      telefono: normalized.telefono || baseLead.telefono || '',
+      ubicacion: normalized.ubicacion || baseLead.ubicacion || '',
+      origen: baseLead.origen || 'Cotizador',
+      total: normalized.total || normalized.precioCliente || baseLead.total || '',
+      etapa: baseLead.etapa || 'recibo',
+      temperatura: baseLead.temperatura || normalized.temperatura || 'tibio',
+      proximo: baseLead.proximo || normalized.proximoSeguimiento || '',
+      notas: baseLead.notas || normalized.notaSeguimiento || '',
+      fechaAlta: baseLead.fechaAlta || today,
+      ultimoContacto: today,
+      escenario: normalized.escenario || baseLead.escenario || 'A',
+      dataCompleta: normalized.snapshot?.cotizacion || normalized.dataCompleta || baseLead.dataCompleta || null,
+      creadoDesde: baseLead.creadoDesde || 'cotizador'
+    };
+
+    if (idx >= 0) crm[idx] = actualizado;
+    else crm.push(actualizado);
+    currentCrmLeadId = actualizado.id;
+    localStorage.setItem(key, JSON.stringify(crm));
+  } catch (err) {
+    console.warn('No se pudo actualizar el CRM desde cotizador', err);
+  }
+}
+
+function actualizarEstatusCliente(id, estatus) {
+  const clientes = getClientesGuardados().map(solEnsureSnapshotScenario);
+  const index = clientes.findIndex(item => String(item.id) === String(id));
+  if (index < 0) return;
+  clientes[index].estatus = estatus;
+  setClientesGuardados(clientes);
+  if (String(currentClientId || '') === String(id)) setEditorState(clientes[index]);
+  mostrarClientes();
+}
+
 init();
 document.getElementById('crmSearch')?.addEventListener('input', mostrarClientes);
 document.getElementById('crmFilterStatus')?.addEventListener('change', mostrarClientes);
@@ -4061,3 +4313,71 @@ window.cerrarRecordatorioCRM = cerrarRecordatorioCRM;
 
 </body>
 </html>
+
+<script>
+/* ===== SOLREGIO V13.8: FIX ETIQUETAS DE ESCENARIO + CRM 1 TARJETA ===== */
+(function(){
+  function v(value){
+    const s = String(value || 'A').trim().toUpperCase();
+    if (['A','B','C'].includes(s)) return s;
+    const m = s.match(/ESCENARIO\s*([ABC])$/) || s.match(/\b([ABC])$/);
+    return m ? m[1] : 'A';
+  }
+
+  window.getScenarioValue = v;
+  window.getScenarioLabel = function(value = 'A'){
+    return `Escenario ${v(value)}`;
+  };
+
+  function scenarioFromClient(cliente = {}){
+    return v(
+      cliente.escenario ||
+      cliente.snapshot?.cotizacion?.escenario ||
+      cliente.dataCompleta?.escenario ||
+      'A'
+    );
+  }
+
+  window.getSeguimientoData = function(){
+    const escenarioEl = document.getElementById('crmEscenario');
+    const actual = typeof getClienteById === 'function' ? getClienteById(currentClientId) : null;
+    return {
+      proximoSeguimiento: document.getElementById('crmProximoSeguimiento')?.value || '',
+      ultimoContacto: document.getElementById('crmUltimoContacto')?.value || '',
+      notaSeguimiento: document.getElementById('crmNotaSeguimiento')?.value || '',
+      temperatura: document.getElementById('crmTemperatura')?.value || 'tibio',
+      escenario: v(escenarioEl?.value || actual?.escenario || actual?.snapshot?.cotizacion?.escenario || 'A')
+    };
+  };
+
+  window.applySeguimientoData = function(values = {}){
+    const proximo = document.getElementById('crmProximoSeguimiento');
+    const ultimo = document.getElementById('crmUltimoContacto');
+    const nota = document.getElementById('crmNotaSeguimiento');
+    const temperatura = document.getElementById('crmTemperatura');
+    const escenario = document.getElementById('crmEscenario');
+    if (proximo) proximo.value = values.proximoSeguimiento || '';
+    if (ultimo) ultimo.value = values.ultimoContacto || '';
+    if (nota) nota.value = values.notaSeguimiento || '';
+    if (temperatura) temperatura.value = values.temperatura || 'tibio';
+    if (escenario) escenario.value = v(values.escenario || 'A');
+  };
+
+  const oldEnsure = window.solEnsureSnapshotScenario;
+  window.solEnsureSnapshotScenario = function(registro){
+    if (!registro) return registro;
+    const fixed = oldEnsure ? oldEnsure(registro) : registro;
+    fixed.escenario = scenarioFromClient(fixed);
+    if (fixed.snapshot?.cotizacion) fixed.snapshot.cotizacion.escenario = fixed.escenario;
+    if (fixed.dataCompleta) fixed.dataCompleta.escenario = fixed.escenario;
+    return fixed;
+  };
+
+  const oldGuardar = window.guardarCliente;
+  window.guardarCliente = function(data){
+    const actual = typeof getClienteById === 'function' ? getClienteById(currentClientId) : null;
+    const scenario = v(data?.escenario || actual?.escenario || actual?.snapshot?.cotizacion?.escenario || 'A');
+    return oldGuardar({ ...(data || {}), escenario: scenario });
+  };
+})();
+</script>

@@ -172,10 +172,14 @@ function calcularGeneracion() {
   const hsp = Number(refs.hsp.value || 0);
   const factor = Number(refs.factorDesempeno.value || 0);
 
-  if (!mfv || !potenciaKW || !hsp || !factor) return;
+  if (!mfv || !potenciaKW || !hsp || !factor) {
+    return Number(refs.generacionBimestral.value || 0);
+  }
 
   const generacionDiaria = mfv * potenciaKW * hsp * factor;
-  refs.generacionBimestral.value = Math.round(generacionDiaria * 60);
+  const generacion = Math.round(generacionDiaria * 60);
+  refs.generacionBimestral.value = generacion;
+  return generacion;
 }
 
 function calcularCostoEscalonado(kwh) {
@@ -295,7 +299,7 @@ function calcularMFVautomatico() {
 
 function getData() {
   const modo = refs.modoCalculo.value;
-  const generacionBimestral = Number(refs.generacionBimestral.value || 0);
+  const generacionBimestral = calcularGeneracion();
   const costoSistema = Number(refs.costoSistema.value || 0);
   const incrementoAnual = Number(refs.incrementoAnual.value || 4) / 100;
 
@@ -618,6 +622,7 @@ function calcularCotizadorInterno() {
 }
 
 function updateAll() {
+  calcularGeneracion();
   sincronizarConfiguracionInversor(Number(refs.numMFV.value || 0));
   const interno = calcularCotizadorInterno();
   const data = getData();
